@@ -1,14 +1,15 @@
 # README
 
 ## Orbit Simulator
+
 ## CSE 231 — BYU-I
-## Labs 7-13
+Labs 7-13
 
 ### Source code author: James Helfrich
 ### Instructor: 
-### Eli Jukes + Elijah Harrison
+## Eli Jukes + Elijah Harrison
 
-### tab spaces: 3
+tab spaces: 3
 
 Configured to run via XCode or Visual Studio IDEs.
 
