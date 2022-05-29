@@ -7,7 +7,6 @@
  *    All the unit tests for Position
  ************************************************************************/
 
-
 #pragma once
 
 #include <iostream>

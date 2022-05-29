@@ -61,9 +61,9 @@
 		C11C7E8D2578098A00EA4B2E = {
 			isa = PBXGroup;
 			children = (
+				C11C7EA625780B5C00EA4B2E /* Lab07.cpp */,
 				C179C6C227E375D600E3E514 /* position.h */,
 				C179C6C027E375AF00E3E514 /* position.cpp */,
-				C11C7EA625780B5C00EA4B2E /* Lab07.cpp */,
 				C11C7EA725780B5C00EA4B2E /* test.cpp */,
 				C11C7EAC25780B6000EA4B2E /* test.h */,
 				C11C7EAF25780B6500EA4B2E /* testPosition.h */,
