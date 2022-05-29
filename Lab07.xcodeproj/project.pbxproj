@@ -29,6 +29,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		141E3F4828442E8000C81352 /* README.md */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; tabWidth = 3; };
 		C11C7E962578098A00EA4B2E /* Lab07 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab07; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C11C7EA325780B2100EA4B2E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -70,6 +71,7 @@
 				C11C7EB025780B6500EA4B2E /* uiDraw.h */,
 				C11C7EA925780B5E00EA4B2E /* uiInteract.cpp */,
 				C11C7EA825780B5C00EA4B2E /* uiInteract.h */,
+				141E3F4828442E8000C81352 /* README.md */,
 				C11C7E972578098A00EA4B2E /* Products */,
 				C11C7EA125780B2000EA4B2E /* Frameworks */,
 			);
