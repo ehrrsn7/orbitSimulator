@@ -186,6 +186,12 @@ void Interface::keyEvent(int key, bool fDown)
       case ' ':
          isSpacePress = fDown;
          break;
+      case 27: // escape key
+         isEscapePress = fDown;
+         break;
+      default:
+         std::cout << key << std::endl;
+         break;
    }
 }
 
@@ -245,25 +251,18 @@ void Interface::setFramesPerSecond(double value)
  * All the static member variables need to be initialized
  * Somewhere globally.  This is a good spot
  **************************************************/
-int          Interface::isDownPress  = 0;
-int          Interface::isUpPress    = 0;
-int          Interface::isLeftPress  = 0;
-int          Interface::isRightPress = 0;
-bool         Interface::isSpacePress = false;
-bool         Interface::initialized  = false;
-double       Interface::timePeriod   = 1.0 / 30; // default to 30 frames/second
-unsigned long Interface::nextTick     = 0;        // redraw now please
-void *       Interface::p            = NULL;
+int             Interface::isDownPress      = 0;
+int             Interface::isUpPress        = 0;
+int             Interface::isLeftPress      = 0;
+int             Interface::isRightPress     = 0;
+bool            Interface::isSpacePress     = false;
+bool            Interface::isEscapePress    = false;
+bool            Interface::initialized      = false;
+double          Interface::timePeriod       = 1.0 / 30; // 30 frames/s default
+unsigned long   Interface::nextTick         = 0;        // redraw now please
+void *          Interface::p                = NULL;
 void (*Interface::callBack)(const Interface *, void *) = NULL;
 
-
-/************************************************************************
- * INTERFACE : DESTRUCTOR
- * Nothing here!
- ***********************************************************************/
-Interface::~Interface()
-{
-}
 
 /************************************************************************
  * INTEFACE : INITIALIZE

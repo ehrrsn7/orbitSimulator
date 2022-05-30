@@ -11,6 +11,8 @@
  *      ??
  *****************************************************************/
 
+#define YEET 0
+
 #include "simulator.h"  // for Simulator
 #include "position.h"   // for Point
 #include "uiInteract.h" // for Interface
@@ -96,6 +98,8 @@ void callBack(const Interface* pUI, void* p)
       pDemo->ptShip.addPixelsX(-1.0);
    if (pUI->isRight())
       pDemo->ptShip.addPixelsX(1.0);
+   if (pUI->isEscape())
+      exit(YEET);
 
 
    //
@@ -155,5 +159,5 @@ int main(int argc, char** argv)
    ui.run(callBack, &demo);
 
 
-   return 0;
+   return YEET;
 }

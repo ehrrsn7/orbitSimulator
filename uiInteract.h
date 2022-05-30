@@ -41,7 +41,7 @@ public:
    }
    
    // Destructor, in case any housecleaning needs to occur
-   ~Interface();
+   ~Interface() { }
 
    // This will set the game in motion
    void run(void (*callBack)(const Interface *, void *), void *p);
@@ -67,11 +67,12 @@ public:
    double frameRate() const { return timePeriod;   };
    
    // Get various key events
-   int  isDown()      const { return isDownPress;  };
-   int  isUp()        const { return isUpPress;    };
-   int  isLeft()      const { return isLeftPress;  };
-   int  isRight()     const { return isRightPress; };
-   bool isSpace()     const { return isSpacePress; };
+   int  isDown()     const { return isDownPress;   };
+   int  isUp()       const { return isUpPress;     };
+   int  isLeft()     const { return isLeftPress;   };
+   int  isRight()    const { return isRightPress;  };
+   bool isSpace()    const { return isSpacePress;  };
+   bool isEscape()   const { return isEscapePress; };
    
    static void *p;                   // for client
    static void (*callBack)(const Interface *, void *);
@@ -88,6 +89,7 @@ private:
    static int  isLeftPress;          //    "   left       "
    static int  isRightPress;         //    "   right      "
    static bool isSpacePress;         //    "   space      "
+   static bool isEscapePress;        //    "   escape     "
 };
 
 
