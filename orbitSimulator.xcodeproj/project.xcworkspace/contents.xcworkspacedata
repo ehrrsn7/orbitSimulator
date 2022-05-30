@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/ehrrsn7/Documents/Code/CSE-231/orbitSimulator/orbitSimulator.xcodeproj">
    </FileRef>
 </Workspace>

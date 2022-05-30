@@ -8,23 +8,16 @@
  ************************************************************************/
 
 #include "position.h"
-#include <cassert>
 
-
-Position::Position(double x, double y) : x(0.0), y(0.0)
-{
-   setMetersX(x);
-   setMetersY(y);
-}
 
 /******************************************
- * POINT : ASSIGNMENT
- * Assign a point
+ * operator =
+ * class: Position
+ * Assign a Point
+ * Note: overrides Vector operator=
  *****************************************/
-Position& Position::operator = (const Position& pt)
-{
-   x = pt.x;
-   y = pt.y;
+Position & Position::operator = (const Position & rhs) {
+   setMeters(rhs.getMetersX(), rhs.getMetersY());
    return *this;
 }
 
@@ -32,9 +25,9 @@ Position& Position::operator = (const Position& pt)
  * POSITION insertion
  *       Display coordinates on the screen
  *****************************************/
-std::ostream& operator << (std::ostream& out, const Position& pt)
+std::ostream& operator << (std::ostream& out, const Position& rhs)
 {
-   out << "(" << pt.getMetersX() << "m , " << pt.getMetersY() << "m)";
+   out << "(" << rhs.getMetersX() << "m , " << rhs.getMetersY() << "m)";
    return out;
 }
    
@@ -42,14 +35,14 @@ std::ostream& operator << (std::ostream& out, const Position& pt)
 * POSITION extraction
 *       Prompt for coordinates
 ******************************************/
-std::istream& operator >> (std::istream& in, Position& pt)
+std::istream& operator >> (std::istream& in, Position& rhs)
 {
    double x;
    double y;
    in >> x >> y;
 
-   pt.setMetersX(x);
-   pt.setMetersY(y);
+   rhs.setMetersX(x);
+   rhs.setMetersY(y);
 
    return in;
 }

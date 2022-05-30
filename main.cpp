@@ -11,10 +11,12 @@
  *      ??
  *****************************************************************/
 
+#include "simulator.h"  // for Simulator
+#include "position.h"   // for Point
+#include "uiInteract.h" // for Interface
+#include "uiDraw.h"     // for Random and draw*
+
 #include <cassert>      // for ASSERT
-#include "uiInteract.h" // for INTERFACE
-#include "uiDraw.h"     // for RANDOM and DRAW*
-#include "position.h"      // for POINT
 using namespace std;
 
 /*************************************************************************
@@ -110,14 +112,15 @@ void callBack(const Interface* pUI, void* p)
    //
 
    drawCrewDragon(pDemo->ptCrewDragon, pDemo->angleShip);
-   drawHubble(pDemo->ptHubble, pDemo->angleShip);
-   drawSputnik(pDemo->ptSputnik, pDemo->angleShip);
-   drawStarlink(pDemo->ptStarlink, pDemo->angleShip);
-   drawShip(pDemo->ptShip, pDemo->angleShip, pUI->isSpace());
-   drawGPS(pDemo->ptGPS, pDemo->angleShip);
-   drawStar(pDemo->ptStar, pDemo->phaseStar);
+   drawHubble(    pDemo->ptHubble,     pDemo->angleShip);
+   drawSputnik(   pDemo->ptSputnik,    pDemo->angleShip);
+   drawStarlink(  pDemo->ptStarlink,   pDemo->angleShip);
+   drawShip(      pDemo->ptShip,       pDemo->angleShip,    pUI->isSpace());
+   drawGPS(       pDemo->ptGPS,        pDemo->angleShip);
+   drawStar(      pDemo->ptStar,       pDemo->phaseStar);
+   
    Position pt;
-   drawEarth(pt, pDemo->angleEarth);
+   drawEarth(       pt, pDemo->angleEarth);
 }
 
 double Position::metersFromPixels = 40.0;
@@ -142,7 +145,7 @@ int main(int argc, char** argv)
    ptUpperRight.setPixelsX(1000.0);
    ptUpperRight.setPixelsY(1000.0);
    Interface ui(0, NULL,
-      "Demo",   /* name on the window */
+      "Demo", // name on the window
       ptUpperRight);
 
    // Initialize the demo
