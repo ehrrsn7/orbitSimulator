@@ -190,7 +190,7 @@ void Interface::keyEvent(int key, bool fDown)
          isEscapePress = fDown;
          break;
       default:
-         std::cout << key << std::endl;
+         std::cout << "unregistered key[" << key << "]\n";
          break;
    }
 }

@@ -83,48 +83,53 @@ void callBack(const Interface* pUI, void* p)
 {
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
-   Demo* pDemo = (Demo*)p;
+//   Demo* pDemo = (Demo*)p;
+   
+   Simulator* pSim = (Simulator*)p;
+   
+   pSim->update(pUI);
+   pSim->display();
 
    //
    // accept input
    //
 
-   // move by a little
-   if (pUI->isUp())
-      pDemo->ptShip.addPixelsY(1.0);
-   if (pUI->isDown())
-      pDemo->ptShip.addPixelsY(-1.0);
-   if (pUI->isLeft())
-      pDemo->ptShip.addPixelsX(-1.0);
-   if (pUI->isRight())
-      pDemo->ptShip.addPixelsX(1.0);
-   if (pUI->isEscape())
-      exit(YEET);
-
-
-   //
-   // perform all the game logic
-   //
-
-   // rotate the earth
-   pDemo->angleEarth += 0.01;
-   pDemo->angleShip += 0.02;
-   pDemo->phaseStar++;
-
-   //
-   // draw everything
-   //
-
-   drawCrewDragon(pDemo->ptCrewDragon, pDemo->angleShip);
-   drawHubble(    pDemo->ptHubble,     pDemo->angleShip);
-   drawSputnik(   pDemo->ptSputnik,    pDemo->angleShip);
-   drawStarlink(  pDemo->ptStarlink,   pDemo->angleShip);
-   drawShip(      pDemo->ptShip,       pDemo->angleShip,    pUI->isSpace());
-   drawGPS(       pDemo->ptGPS,        pDemo->angleShip);
-   drawStar(      pDemo->ptStar,       pDemo->phaseStar);
-   
-   Position pt;
-   drawEarth(       pt, pDemo->angleEarth);
+//   // move by a little
+//   if (pUI->isUp())
+//      pDemo->ptShip.addPixelsY(1.0);
+//   if (pUI->isDown())
+//      pDemo->ptShip.addPixelsY(-1.0);
+//   if (pUI->isLeft())
+//      pDemo->ptShip.addPixelsX(-1.0);
+//   if (pUI->isRight())
+//      pDemo->ptShip.addPixelsX(1.0);
+//   if (pUI->isEscape())
+//      exit(YEET);
+//
+//
+//   //
+//   // perform all the game logic
+//   //
+//
+//   // rotate the earth
+//   pDemo->angleEarth += 0.01;
+//   pDemo->angleShip += 0.02;
+//   pDemo->phaseStar++;
+//
+//   //
+//   // draw everything
+//   //
+//
+//   drawCrewDragon(pDemo->ptCrewDragon, pDemo->angleShip);
+//   drawHubble(    pDemo->ptHubble,     pDemo->angleShip);
+//   drawSputnik(   pDemo->ptSputnik,    pDemo->angleShip);
+//   drawStarlink(  pDemo->ptStarlink,   pDemo->angleShip);
+//   drawShip(      pDemo->ptShip,       pDemo->angleShip,    pUI->isSpace());
+//   drawGPS(       pDemo->ptGPS,        pDemo->angleShip);
+//   drawStar(      pDemo->ptStar,       pDemo->phaseStar);
+//
+//   Position pt;
+//   drawEarth(       pt, pDemo->angleEarth);
 }
 
 double Position::metersFromPixels = 40.0;
@@ -149,14 +154,17 @@ int main(int argc, char** argv)
    ptUpperRight.setPixelsX(1000.0);
    ptUpperRight.setPixelsY(1000.0);
    Interface ui(0, NULL,
-      "Demo", // name on the window
+      "Orbit 'Simulator'", // name on the window
       ptUpperRight);
 
    // Initialize the demo
-   Demo demo(ptUpperRight);
+//   Demo demo(ptUpperRight);
+   Simulator sim(ptUpperRight);
+   
 
    // set everything into action
-   ui.run(callBack, &demo);
+//   ui.run(callBack, &demo);
+      ui.run(callBack, &sim);
 
 
    return YEET;

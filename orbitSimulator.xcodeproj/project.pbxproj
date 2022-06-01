@@ -38,7 +38,7 @@
 /* Begin PBXFileReference section */
 		141E3F4828442E8000C81352 /* README.md */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F49284439F700C81352 /* simulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = simulator.cpp; sourceTree = "<group>"; };
-		141E3F4A284439F700C81352 /* simulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; };
+		141E3F4A284439F700C81352 /* simulator.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4B28443AB600C81352 /* vector.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4C28443AB600C81352 /* vector.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F5028444B6C00C81352 /* velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
@@ -51,6 +51,8 @@
 		141E3F5A28444D1B00C81352 /* gravity.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = gravity.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F5F2844594000C81352 /* MovingObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MovingObject.cpp; sourceTree = "<group>"; };
 		141E3F602844594000C81352 /* MovingObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovingObject.h; sourceTree = "<group>"; };
+		1465B2EA284718D100B48318 /* geostationarySatellite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = geostationarySatellite.cpp; sourceTree = "<group>"; };
+		1465B2EB284718D100B48318 /* geostationarySatellite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = geostationarySatellite.h; sourceTree = "<group>"; };
 		C11C7E962578098A00EA4B2E /* orbitSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = orbitSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C11C7EA325780B2100EA4B2E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -102,6 +104,8 @@
 				C11C7EA625780B5C00EA4B2E /* main.cpp */,
 				141E3F4A284439F700C81352 /* simulator.h */,
 				141E3F49284439F700C81352 /* simulator.cpp */,
+				1465B2EB284718D100B48318 /* geostationarySatellite.h */,
+				1465B2EA284718D100B48318 /* geostationarySatellite.cpp */,
 				C11C7EAC25780B6000EA4B2E /* test.h */,
 				C11C7EA725780B5C00EA4B2E /* test.cpp */,
 				C11C7EAF25780B6500EA4B2E /* testPosition.h */,
