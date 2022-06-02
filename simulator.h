@@ -1,45 +1,49 @@
-//
-//  simulator.h
-//  Lab07
-//
-//  Created by Elijah Harrison on 5/29/22.
-//
+/***********************************************************************
+ * Heaader File:
+ *    Simulator class
+ *
+ * Summary:
+ *    The class that contains the update, handleInput and display methods
+ *    and handles all the Sim logic.
+ ************************************************************************/
+
 
 #pragma once
 
+#include "earth.h"
+#include "geostationarySatellite.h"
 #include "uiInteract.h"
 #include "uiDraw.h"
-#include "geostationarySatellite.h"
 
 class Simulator {
     
 public:
-   Simulator(Position ptUpperRight) : ptUpperRight(ptUpperRight) {
-        earthAngle = 0.0;
-    }
+   Simulator(Position ptUpperRight) : tr(ptUpperRight), bob(tr) { }
     
-    void update(const Interface * pUI) {
-       earthAngle += 0.01;
-//       pDemo->angleShip += 0.02;
-//       pDemo->phaseStar++;
-       bob.setRelativeP(earthAngle);
-       bob.update();
-    }
+   void update(const Interface * pUI) {
+      bob.setRelativePosition(earth.getAngle());
+      
+      earth.update(pUI); // Earth
+      bob.update(pUI); // Geostationary Satellite
+   }
     
-    void handleInput(const Interface * pUI) {
-        
-    }
-    
-    void display() const {
-       drawEarth(earthPosition, earthAngle);
-       bob.display();
-    }
-    
+   void display() const {
+      // hello operator, I'd like to call...
+      earth.display();
+      bob.display();
+   }
+ 
+   void handleInput(const Interface * pUI) {
+      if (pUI->isEscape()) exit(0);
+   }
+ 
 private:
-    Position earthPosition;
-   Position ptUpperRight;
-    double earthAngle;
-    GeostationarySatellite bob;
-    
-    
+   // screen
+   Position tr; // upper-right point of window (center is [0,0] so this gives us dimensions w/2 and h/2)
+   
+   // Earth
+   Earth earth;
+   
+   // MovingObjects
+   GeostationarySatellite bob;
 };

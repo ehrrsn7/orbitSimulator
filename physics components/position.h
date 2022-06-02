@@ -30,8 +30,7 @@ class TestPosition;
  * Simulator and the pixels drawn to the screen
  * via the ogstream object.
  *********************************************/
-class Position : Vector
-{
+class Position : public Vector {
 public:
    friend class TestPosition;
    
@@ -55,6 +54,10 @@ public:
    void setMeters(double xMeters, double yMeters) {
       setMetersX(xMeters);
       setMetersY(yMeters);
+   }
+   
+   void setMetersPolar(double magnitudeMeters, double angleRadians) {
+      setPolar(magnitudeMeters, angleRadians);
    }
    
    void setPixelsX(double xPixels)  { setMetersX(xPixels * metersFromPixels); }
@@ -97,8 +100,7 @@ private:
  * COMPUTE DISTANCE
  * Find the distance between two positions
  *********************************************/
-inline double computeDistance(const Position& pos1, const Position& pos2)
-{
+inline double computeDistance(const Position& pos1, const Position& pos2) {
    return sqrt((pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
                (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));
 }
@@ -112,8 +114,7 @@ std::istream & operator >> (std::istream & in,        Position& rhs);
  * PT
  * Trivial point
  *********************************************/
-struct PT
-{
+struct PT {
    double x;
    double y;
 };

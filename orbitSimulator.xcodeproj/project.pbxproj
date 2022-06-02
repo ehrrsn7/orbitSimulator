@@ -7,13 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		141E3F4D2844498100C81352 /* simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F49284439F700C81352 /* simulator.cpp */; };
-		141E3F4E2844498600C81352 /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F4B28443AB600C81352 /* vector.cpp */; };
 		141E3F5228444B6C00C81352 /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5028444B6C00C81352 /* velocity.cpp */; };
 		141E3F5528444C9700C81352 /* acceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5328444C9700C81352 /* acceleration.cpp */; };
 		141E3F5828444CEF00C81352 /* force.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5628444CEF00C81352 /* force.cpp */; };
 		141E3F5B28444D1B00C81352 /* gravity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5928444D1B00C81352 /* gravity.cpp */; };
-		141E3F612844594000C81352 /* MovingObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5F2844594000C81352 /* MovingObject.cpp */; };
 		C11C7EA425780B2100EA4B2E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA225780B2100EA4B2E /* GLUT.framework */; };
 		C11C7EA525780B2100EA4B2E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA325780B2100EA4B2E /* OpenGL.framework */; };
 		C11C7EB125780B6500EA4B2E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C11C7EA625780B5C00EA4B2E /* main.cpp */; };
@@ -37,22 +34,17 @@
 
 /* Begin PBXFileReference section */
 		141E3F4828442E8000C81352 /* README.md */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; tabWidth = 3; };
-		141E3F49284439F700C81352 /* simulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = simulator.cpp; sourceTree = "<group>"; };
 		141E3F4A284439F700C81352 /* simulator.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; tabWidth = 3; };
-		141E3F4B28443AB600C81352 /* vector.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4C28443AB600C81352 /* vector.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F5028444B6C00C81352 /* velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
-		141E3F5128444B6C00C81352 /* velocity.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F5328444C9700C81352 /* acceleration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = acceleration.cpp; sourceTree = "<group>"; };
-		141E3F5428444C9700C81352 /* acceleration.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = acceleration.h; sourceTree = "<group>"; tabWidth = 3; usesTabs = 0; };
 		141E3F5628444CEF00C81352 /* force.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = force.cpp; sourceTree = "<group>"; };
-		141E3F5728444CEF00C81352 /* force.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = force.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F5928444D1B00C81352 /* gravity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gravity.cpp; sourceTree = "<group>"; };
-		141E3F5A28444D1B00C81352 /* gravity.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = gravity.h; sourceTree = "<group>"; tabWidth = 3; };
-		141E3F5F2844594000C81352 /* MovingObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MovingObject.cpp; sourceTree = "<group>"; };
 		141E3F602844594000C81352 /* MovingObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovingObject.h; sourceTree = "<group>"; };
-		1465B2EA284718D100B48318 /* geostationarySatellite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = geostationarySatellite.cpp; sourceTree = "<group>"; };
-		1465B2EB284718D100B48318 /* geostationarySatellite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = geostationarySatellite.h; sourceTree = "<group>"; };
+		1465B2EB284718D100B48318 /* geostationarySatellite.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = geostationarySatellite.h; sourceTree = "<group>"; tabWidth = 3; };
+		14D1A6DC2847B21E0044DB45 /* earth.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = earth.h; sourceTree = "<group>"; tabWidth = 3; };
+		14D1A6DD2847B4240044DB45 /* physicsFormulas.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsFormulas.h; sourceTree = "<group>"; tabWidth = 3; };
+		14D1A6DE2847B6700044DB45 /* physicsComponents.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsComponents.h; sourceTree = "<group>"; tabWidth = 3; };
 		C11C7E962578098A00EA4B2E /* orbitSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = orbitSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C11C7EA325780B2100EA4B2E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -85,17 +77,36 @@
 			isa = PBXGroup;
 			children = (
 				C179C6C227E375D600E3E514 /* position.h */,
+				14D1A6DE2847B6700044DB45 /* physicsComponents.h */,
+				14D1A6DD2847B4240044DB45 /* physicsFormulas.h */,
 				C179C6C027E375AF00E3E514 /* position.cpp */,
-				141E3F5128444B6C00C81352 /* velocity.h */,
 				141E3F5028444B6C00C81352 /* velocity.cpp */,
-				141E3F5428444C9700C81352 /* acceleration.h */,
 				141E3F5328444C9700C81352 /* acceleration.cpp */,
-				141E3F5728444CEF00C81352 /* force.h */,
 				141E3F5628444CEF00C81352 /* force.cpp */,
-				141E3F5A28444D1B00C81352 /* gravity.h */,
 				141E3F5928444D1B00C81352 /* gravity.cpp */,
 			);
 			path = "physics components";
+			sourceTree = "<group>";
+		};
+		148D9E22284900ED00AB8639 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				C11C7EAC25780B6000EA4B2E /* test.h */,
+				C11C7EA725780B5C00EA4B2E /* test.cpp */,
+				C11C7EAF25780B6500EA4B2E /* testPosition.h */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		148D9E232849011000AB8639 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				C11C7EB025780B6500EA4B2E /* uiDraw.h */,
+				C11C7EAD25780B6000EA4B2E /* uiDraw.cpp */,
+				C11C7EA825780B5C00EA4B2E /* uiInteract.h */,
+				C11C7EA925780B5E00EA4B2E /* uiInteract.cpp */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 		C11C7E8D2578098A00EA4B2E = {
@@ -103,21 +114,13 @@
 			children = (
 				C11C7EA625780B5C00EA4B2E /* main.cpp */,
 				141E3F4A284439F700C81352 /* simulator.h */,
-				141E3F49284439F700C81352 /* simulator.cpp */,
-				1465B2EB284718D100B48318 /* geostationarySatellite.h */,
-				1465B2EA284718D100B48318 /* geostationarySatellite.cpp */,
-				C11C7EAC25780B6000EA4B2E /* test.h */,
-				C11C7EA725780B5C00EA4B2E /* test.cpp */,
-				C11C7EAF25780B6500EA4B2E /* testPosition.h */,
-				C11C7EB025780B6500EA4B2E /* uiDraw.h */,
-				C11C7EAD25780B6000EA4B2E /* uiDraw.cpp */,
-				C11C7EA825780B5C00EA4B2E /* uiInteract.h */,
-				C11C7EA925780B5E00EA4B2E /* uiInteract.cpp */,
-				141E3F602844594000C81352 /* MovingObject.h */,
-				141E3F5F2844594000C81352 /* MovingObject.cpp */,
 				141E3F4C28443AB600C81352 /* vector.h */,
-				141E3F4B28443AB600C81352 /* vector.cpp */,
+				141E3F602844594000C81352 /* MovingObject.h */,
+				14D1A6DC2847B21E0044DB45 /* earth.h */,
+				1465B2EB284718D100B48318 /* geostationarySatellite.h */,
+				148D9E232849011000AB8639 /* ui */,
 				141E3F4F28444B2B00C81352 /* physics components */,
+				148D9E22284900ED00AB8639 /* test */,
 				141E3F4828442E8000C81352 /* README.md */,
 				C11C7E972578098A00EA4B2E /* Products */,
 				C11C7EA125780B2000EA4B2E /* Frameworks */,
@@ -167,7 +170,7 @@
 		C11C7E8E2578098A00EA4B2E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					C11C7E952578098A00EA4B2E = {
 						CreatedOnToolsVersion = 12.2;
@@ -198,14 +201,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C11C7EB125780B6500EA4B2E /* main.cpp in Sources */,
-				141E3F4D2844498100C81352 /* simulator.cpp in Sources */,
 				141E3F5528444C9700C81352 /* acceleration.cpp in Sources */,
 				C11C7EB225780B6500EA4B2E /* test.cpp in Sources */,
-				141E3F612844594000C81352 /* MovingObject.cpp in Sources */,
 				C11C7EB525780B6500EA4B2E /* uiDraw.cpp in Sources */,
 				141E3F5B28444D1B00C81352 /* gravity.cpp in Sources */,
 				C11C7EB325780B6500EA4B2E /* uiInteract.cpp in Sources */,
-				141E3F4E2844498600C81352 /* vector.cpp in Sources */,
 				141E3F5828444CEF00C81352 /* force.cpp in Sources */,
 				C179C6C127E375AF00E3E514 /* position.cpp in Sources */,
 				141E3F5228444B6C00C81352 /* velocity.cpp in Sources */,
@@ -329,6 +329,7 @@
 		C11C7E9E2578098A00EA4B2E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -337,6 +338,7 @@
 		C11C7E9F2578098A00EA4B2E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

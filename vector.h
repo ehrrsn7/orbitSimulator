@@ -7,8 +7,8 @@
 
 #pragma once
 
+#include "physicsFormulas.h" // for Trig
 #include <iostream>
-#include <cmath>
 #include <cassert>
 
 /*********************************************
@@ -41,6 +41,11 @@ public:
    
    void set(Vector & s) { set(s.getX(), s.getY()); }
    
+   void setPolar(double magnitude, double angleRadians) {
+      set(magnitude * sin(angleRadians), magnitude * cos(angleRadians));
+//      set(Trig::polarToCartesian(magnitude, angleRadians)); // TODO: fix and uncomment
+   }
+   
    // adders
    void addX(double dx) { setX(getX() + dx); }
    void addY(double dy) { setY(getY() + dy); }
@@ -56,7 +61,7 @@ public:
    }
    
    // helper methods
-   double magnitude() const;
+   double magnitude() const { return sqrt((x*x) + (y*y)); }
 
 protected:
    double x; // horizontal position (meters)
