@@ -29,3 +29,4 @@ private:
 };
 
 class Hubble : MovingObject {};
+class SpaceShip : MovingObject {};
