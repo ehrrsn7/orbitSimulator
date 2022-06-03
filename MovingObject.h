@@ -30,3 +30,8 @@ private:
 
 class Hubble : MovingObject {};
 class SpaceShip : MovingObject {};
+class CrewDragon : MovingObject {};
+class Sputnik : MovingObject {};
+class GPS : MovingObject {};
+class Starlink : MovingObject {};
+//class Star : MovingObject {}; //not a movling object but is something that is on the screen.
