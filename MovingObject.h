@@ -27,3 +27,11 @@ private:
     // Velocity v;
     // what do we put here? if it's all purely a has-a relationship then we should put all the possible physics child classes as MovingObject components
 };
+
+class Hubble : MovingObject {};
+class SpaceShip : MovingObject {};
+class CrewDragon : MovingObject {};
+class Sputnik : MovingObject {};
+class GPS : MovingObject {};
+class Starlink : MovingObject {};
+//class Star : MovingObject {}; //not a movling object but is something that is on the screen.
