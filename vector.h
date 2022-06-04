@@ -1,9 +1,6 @@
-//
-//  vector.h
-//  Lab07
-//
-//  Created by Elijah Harrison on 5/29/22.
-//
+/*************************************************************
+ * Header File: Vector
+ *****************************************************************/
 
 #pragma once
 
@@ -43,7 +40,6 @@ public:
    
    void setPolar(double magnitude, double angleRadians) {
       set(magnitude * sin(angleRadians), magnitude * cos(angleRadians));
-//      set(Trig::polarToCartesian(magnitude, angleRadians)); // TODO: fix and uncomment
    }
    
    // adders

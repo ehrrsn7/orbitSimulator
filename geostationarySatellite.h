@@ -25,16 +25,18 @@ public:
             tr.getPixelsX() * random(-0.5, 0.5),
             tr.getPixelsY() * random(-0.5, 0.5)
          );
-      } // anywhere on screen except for on top of earth
-      while(computeDistance(p, Position()) < EARTH_APPROX_RADIUS);
+      } // any consistent position on screen except for on top of earth
+      while(
+         computeDistance(p, Position()) < EARTH_APPROX_RADIUS ||
+         computeDistance(p, Position()) > computeDistance(Position(tr.getMetersX(), 0.0), Position())
+      );
       
       // keep this consistent for geostationary orbital pattern
       distFromEarth = p.magnitude();
       
-      // initial angle
-      angle = 0.0;
-      // change in angle (rad/frame)
-      da = random(-0.02, 0.02);
+      // angles
+      angle = 0.0;               // initial angle (rad)
+      da = random(-0.02, 0.02);  // change in angle (rad/frame)
    }
     
    void update(const Interface * pUI) {
@@ -59,8 +61,8 @@ public:
    }
    
    // manual getters/setters
-   void setPosition(Position p) { this->p = p; }
-   Position getP() const { return p;}
+   void setPosition(Position p)  { this->p = p; }
+   Position getP() const         { return p;}
     
 private:
    Position p;
