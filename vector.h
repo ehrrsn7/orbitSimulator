@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include "physicsFormulas.h" // for Trig
 #include <iostream>
 #include <cassert>
+#include <cmath> // for sin/cos (at least for now until we get Trig class implemented)
 
 /*********************************************
  * CLASS Vector
@@ -57,7 +57,17 @@ public:
    }
    
    // helper methods
-   double magnitude() const { return sqrt((x*x) + (y*y)); }
+   double getMagnitude() const { return sqrt((x*x) + (y*y)); }
+   void addMagnitude(double magnitude, double angleRadians) {
+      add(magnitude * sin(angleRadians), magnitude * cos(angleRadians));
+   }
+   
+   // operators
+   Vector& operator+ (const Vector & rhs) {
+      // add another vector
+      add(rhs.getX(), rhs.getY());
+      return *this;
+   }
 
 protected:
    double x; // horizontal position (meters)

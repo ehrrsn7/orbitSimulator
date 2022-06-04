@@ -6,11 +6,3 @@
 //
 
 #include "physicsComponents.h"
-
-#define ACCEL_DUE_TO_GRAVITY 9.8 // m/s/s
-
-/*********************************************
- * STATICS
- *********************************************/
-
-double Gravity::g = ACCEL_DUE_TO_GRAVITY; // macro defined in "physicsComponents.h"

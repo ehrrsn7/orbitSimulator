@@ -22,26 +22,24 @@ using std::max;
 
 #include <sstream>
 
-
 #define GL_SILENCE_DEPRECATION
 
 /*************************************************************************
  * GRAPHICS STREAM
  * A graphics stream that behaves much like COUT except on a drawn screen
  *************************************************************************/
-class ogstream : public std::ostringstream
-{
+class ogstream : public std::ostringstream {
 public:
    ogstream(const Position& pt) : pt(pt) {}
    ~ogstream() { flush(); }; 
    void flush();
 
    void setPosition(const Position& pt) { flush(); this->pt = pt; }
-   ogstream& operator = (const Position& pt)
-   {
+   ogstream& operator = (const Position& pt) {
       setPosition(pt);
       return *this;
    }
+    
 private:
    Position pt;
 };
@@ -121,6 +119,7 @@ void drawStarlinkArray(const Position& center, const Position& offset, double ro
  *        thrust  Whether the thrusters are on
  *************************************************************************/
 void drawShip(const Position& center, double rotation, bool thrust);
+
 /************************************************************************
  * DRAW Earth
  * Draw Earth

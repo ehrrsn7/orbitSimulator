@@ -13,10 +13,22 @@
  * operator =
  * class: Position
  * Assign a Point
- * Note: overrides Vector operator=
+ * Note: basically an override of Vector=
  *****************************************/
 Position & Position::operator = (const Position & rhs) {
    setMeters(rhs.getMetersX(), rhs.getMetersY());
+   return *this;
+}
+
+/******************************************
+ * operator +
+ * class: Position
+ * Adds another point to this*
+ * Note: basically an override of Vector+
+ *****************************************/
+Position& Position::operator+ (const Position & rhs) {
+   // add another vector
+   addMeters(rhs.getMetersX(), rhs.getMetersY());
    return *this;
 }
 

@@ -90,7 +90,9 @@ class Gravity : public Force {
 // magnitude()  | substitutes get force due to gravity
    
 private:
-   static double g; // acceleration due to gravity (value set in gravity.cpp, defined here in header)
+//   static double g; // acceleration due to gravity (value set in gravity.cpp, defined here in header)
+   // should this ^^^ be a constant? or should it be variable like in the Howitzer lab?
+   // I feel like g should be calculated via the g = G * (m1 m2)/d^2 formula between all objects on the screen to each other
 
 public:
    // constructors

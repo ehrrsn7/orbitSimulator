@@ -8,7 +8,8 @@
 #include "uiInteract.h"
 #include "uiDraw.h"
 
-#define EARTH_APPROX_RADIUS 6371000.0
+#define EARTH_RADIUS                6371000.0   // m
+#define ACCEL_DUE_TO_GRAVITY_EARTH  9.80665     // m/s/s
 
 /***********************************************************************
  * Class: Earth
@@ -21,9 +22,13 @@ class Earth {
 public:
    Earth() : angle(0.0) { }
 
-   void update(const Interface * pUI) { addAngle(0.01); }
+   void update(const Interface * pUI) {
+      addAngle(0.01);
+   }
    void display() const { drawEarth(p, angle); }
-   void handleInput(const Interface * pUI) { }
+   void handleInput(const Interface * pUI) {
+      if (pUI->isSpace()) addAngle(-0.01);
+   }
    
    // getters/setters
    double getAngle() const       { return angle; }

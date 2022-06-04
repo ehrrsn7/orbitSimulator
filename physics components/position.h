@@ -92,6 +92,9 @@ public:
       this->metersFromPixels = metersFromPixels;
    }
    
+   // operators
+   Position& operator+ (const Position & rhs);
+   
 private:
    static double metersFromPixels;
 };

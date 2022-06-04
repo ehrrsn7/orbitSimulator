@@ -11,6 +11,7 @@
 		141E3F5528444C9700C81352 /* acceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5328444C9700C81352 /* acceleration.cpp */; };
 		141E3F5828444CEF00C81352 /* force.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5628444CEF00C81352 /* force.cpp */; };
 		141E3F5B28444D1B00C81352 /* gravity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5928444D1B00C81352 /* gravity.cpp */; };
+		14A952CB284BBB520054130D /* physicsFormulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */; };
 		C11C7EA425780B2100EA4B2E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA225780B2100EA4B2E /* GLUT.framework */; };
 		C11C7EA525780B2100EA4B2E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA325780B2100EA4B2E /* OpenGL.framework */; };
 		C11C7EB125780B6500EA4B2E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C11C7EA625780B5C00EA4B2E /* main.cpp */; };
@@ -43,7 +44,7 @@
 		141E3F602844594000C81352 /* MovingObject.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = MovingObject.h; sourceTree = "<group>"; tabWidth = 3; };
 		1465B2EB284718D100B48318 /* geostationarySatellite.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = geostationarySatellite.h; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DC2847B21E0044DB45 /* earth.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = earth.h; sourceTree = "<group>"; tabWidth = 3; };
-		14D1A6DD2847B4240044DB45 /* physicsFormulas.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsFormulas.h; sourceTree = "<group>"; tabWidth = 3; };
+		14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = physicsFormulas.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DE2847B6700044DB45 /* physicsComponents.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsComponents.h; sourceTree = "<group>"; tabWidth = 3; };
 		C11C7E962578098A00EA4B2E /* orbitSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = orbitSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -77,9 +78,9 @@
 			isa = PBXGroup;
 			children = (
 				C179C6C227E375D600E3E514 /* position.h */,
-				14D1A6DE2847B6700044DB45 /* physicsComponents.h */,
-				14D1A6DD2847B4240044DB45 /* physicsFormulas.h */,
 				C179C6C027E375AF00E3E514 /* position.cpp */,
+				14D1A6DE2847B6700044DB45 /* physicsComponents.h */,
+				14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */,
 				141E3F5028444B6C00C81352 /* velocity.cpp */,
 				141E3F5328444C9700C81352 /* acceleration.cpp */,
 				141E3F5628444CEF00C81352 /* force.cpp */,
@@ -201,14 +202,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C11C7EB125780B6500EA4B2E /* main.cpp in Sources */,
-				141E3F5528444C9700C81352 /* acceleration.cpp in Sources */,
-				C11C7EB225780B6500EA4B2E /* test.cpp in Sources */,
 				C11C7EB525780B6500EA4B2E /* uiDraw.cpp in Sources */,
-				141E3F5B28444D1B00C81352 /* gravity.cpp in Sources */,
 				C11C7EB325780B6500EA4B2E /* uiInteract.cpp in Sources */,
-				141E3F5828444CEF00C81352 /* force.cpp in Sources */,
+				14A952CB284BBB520054130D /* physicsFormulas.cpp in Sources */,
 				C179C6C127E375AF00E3E514 /* position.cpp in Sources */,
 				141E3F5228444B6C00C81352 /* velocity.cpp in Sources */,
+				141E3F5528444C9700C81352 /* acceleration.cpp in Sources */,
+				141E3F5828444CEF00C81352 /* force.cpp in Sources */,
+				141E3F5B28444D1B00C81352 /* gravity.cpp in Sources */,
+				C11C7EB225780B6500EA4B2E /* test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,16 +27,17 @@ public:
          );
       } // any consistent position on screen except for on top of earth
       while(
-         computeDistance(p, Position()) < EARTH_APPROX_RADIUS ||
+         computeDistance(p, Position()) < EARTH_RADIUS ||
          computeDistance(p, Position()) > computeDistance(Position(tr.getMetersX(), 0.0), Position())
       );
       
       // keep this consistent for geostationary orbital pattern
-      distFromEarth = p.magnitude();
+      distFromEarth = p.getMagnitude();
       
-      // angles
-      angle = 0.0;               // initial angle (rad)
-      da = random(-0.02, 0.02);  // change in angle (rad/frame)
+      // angle
+      double a0 = 0.0;           // initial angle (rad)
+      angle = a0;                // initialize angle
+      da = random(-0.02, 0.02);  // change in angle (rad/frame) (constant val)
    }
     
    void update(const Interface * pUI) {
