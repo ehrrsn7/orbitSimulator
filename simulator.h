@@ -34,6 +34,8 @@ public:
    }
  
    void handleInput(const Interface * pUI) {
+      earth.handleInput(pUI);
+      bob.handleInput(pUI);
       if (pUI->isEscape()) exit(0);
    }
  

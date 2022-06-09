@@ -92,3 +92,20 @@ double velocityConstantAccelVert(const Velocity & v0, const Acceleration & a, do
 {
    return v0.getY() + (a.getY() * t);
 }
+
+double x(Vector& v) { return sin(v.getMagnitude()); }
+double y(Vector& v) { return cos(v.getMagnitude()); }
+
+Velocity constantAccelerationToVelocity(const Acceleration& constantAcceleration, const Velocity& initialVelocity, double changeInTime) {
+   Velocity newVelocity(initialVelocity);
+   newVelocity.add(constantAcceleration.getX() * changeInTime, constantAcceleration.getY() * changeInTime);
+   return newVelocity;
+}
+
+/*
+Velocity aToVn(const Acceleration& a, const Velocity& v0, double dt) {
+   return Velocity(v0 + a*t);
+}
+ 
+v.set(x(aToVn(9.8, this->v, dt)));
+*/

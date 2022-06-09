@@ -7,6 +7,8 @@
 #include "position.h"
 #include "uiDraw.h"
 #include <cmath>
+#include <iostream>
+using namespace std;
 
 /***********************************************************************
  * Class: Geostationary Satellite
@@ -25,10 +27,9 @@ public:
             tr.getPixelsX() * random(-0.5, 0.5),
             tr.getPixelsY() * random(-0.5, 0.5)
          );
-      } // any consistent position on screen except for on top of earth
-      while(
-         computeDistance(p, Position()) < EARTH_RADIUS ||
-         computeDistance(p, Position()) > computeDistance(Position(tr.getMetersX(), 0.0), Position())
+      } // any cosistent position on screen except for on top of earth
+      while(computeDistance(p, Position()) < EARTH_RADIUS ||
+            computeDistance(p, Position()) > min(tr.getMetersX(), tr.getMetersY())
       );
       
       // keep this consistent for geostationary orbital pattern

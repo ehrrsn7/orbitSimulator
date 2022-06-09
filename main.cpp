@@ -61,7 +61,7 @@ int main(int argc, char** argv)
    ptUpperRight.setPixelsY(1000.0);
    
    Interface ui(0, NULL,
-      "Orbit 'Simulator'", // name on the window
+      "Orbit Simulator", // name on the window
       ptUpperRight);
    
    Simulator sim(ptUpperRight);

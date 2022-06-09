@@ -27,7 +27,7 @@ public:
    }
    void display() const { drawEarth(p, angle); }
    void handleInput(const Interface * pUI) {
-      if (pUI->isSpace()) addAngle(-0.01);
+//      if (!pUI->isSpace()) addAngle(0.01);
    }
    
    // getters/setters
