@@ -12,13 +12,14 @@
 #include "vector.h"
 #include "position.h"
 
-/*********************************************
+/**************************************************
  * CLASS Velocity
  * A change in Position.
- *********************************************/
+ **************************************************/
 class Velocity : public Vector {
 
-// to not overcomplicate things, let's rely on Vector's get/set components for our getters/setters in the child classes:
+// to not overcomplicate things, let's rely on Vector's get/set components
+// for our getters/setters in the child classes:
 
 // getX()       | substitutes get dx
 // getY()       | substitutes get dy
@@ -32,12 +33,16 @@ public:
    Velocity & operator = (const Velocity & rhs) {  // assignment operator '='
       set(rhs.getX(), rhs.getY()); return *this;
    }
+   
+   // operators
+   Position operator*(const double& rhs); // v{this} * Δt{rhs} -> Δp{Posiiton}
+   Position operator*(const double rhs); // when reference is unavailable
 };
 
-/*********************************************
+/**************************************************
  * CLASS Acceleration
  * A change in Velocity.
- *********************************************/
+ **************************************************/
 class Acceleration : public Vector {
 // getX()       | substitutes get ddx
 // getY()       | substitutes get ddy
@@ -51,12 +56,16 @@ public:
    Acceleration & operator = (const Acceleration & rhs) { // assignment operator '='
       set(rhs.getX(), rhs.getY()); return *this;
    }
+   
+   // operators
+   Velocity operator*(const double& rhs); // v{this} * Δt{rhs} -> Δp{Posiiton}
+   Velocity operator*(const double rhs); // when reference is unavailable
 };
 
-/*********************************************
+/**************************************************
  * CLASS Force
  * Acceleration integrated by mass.
- *********************************************/
+ **************************************************/
 class Force : public Vector {
 // getX()       | substitutes get ddxdm/dt
 // getY()       | substitutes get ddydm/dt
@@ -79,11 +88,11 @@ public:
     
 };
 
-/*********************************************
+/**************************************************
  * CLASS Gravity
  * A special kind of force which describes
  * force due to gravity.
- *********************************************/
+ **************************************************/
 class Gravity : public Force {
 // getX()       | substitutes get ddxdm/dt
 // getY()       | substitutes get ddydm/dt

@@ -1,6 +1,7 @@
-/***********************************************************************
+/**********************************************************************
  * geostationarySatellite.h
- ************************************************************************/
+ * orbitSimulator
+ **********************************************************************/
 
 #pragma once
 
@@ -10,18 +11,20 @@
 #include <iostream>
 using namespace std;
 
-/***********************************************************************
- * Class: Geostationary Satellite
- *
- * This is mostly for proof of concept purposes.
- * We were asked to mimic the behavior described in the W07 Lab where
- * the satellite followed a geostationary pattern.
- * This is, of course, easy to replicate as we just position the satellite
- * at a fixed distance away from the earth. (the center point on the screen)
- ************************************************************************/
+/**************************************************
+ * CLASS Geostationary Satellite
+ *    This is mostly for proof of concept purposes.
+ *    We were asked to mimic the behavior described
+ *    in the W07 Lab where the satellite followed a
+ *    geostationary pattern.
+ *    This is, of course, easy to replicate as we
+ *    just position the satellite at a fixed
+ *    distance away from the earth. (the center
+ *    point on the screen)
+ **************************************************/
 class GeostationarySatellite {
 public:
-   GeostationarySatellite(Position tr) {
+   GeostationarySatellite(Position tr) : angle(0.0), da(random(-0.02, 0.02)) {
       do {
          p.setPixels( // anywhere on the screen
             tr.getPixelsX() * random(-0.5, 0.5),
@@ -34,11 +37,6 @@ public:
       
       // keep this consistent for geostationary orbital pattern
       distFromEarth = p.getMagnitude();
-      
-      // angle
-      double a0 = 0.0;           // initial angle (rad)
-      angle = a0;                // initialize angle
-      da = random(-0.02, 0.02);  // change in angle (rad/frame) (constant val)
    }
     
    void update(const Interface * pUI) {

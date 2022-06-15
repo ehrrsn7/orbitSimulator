@@ -1,4 +1,4 @@
-/*********************************************
+/*************************************************************************
  * Header file:
  *    UI INTERFACE
  * Author:
@@ -12,7 +12,7 @@
  *    3. callback     - Specified in Run, this user-provided
  *                      function will get called with every frame
  *    4. isDown()     - Is a given key pressed on this loop?
- **********************************************/
+ *************************************************************************/
 
 #pragma once
 
@@ -23,11 +23,11 @@ using std::max;
 
 #define GL_SILENCE_DEPRECATION
 
-/********************************************
+/*************************************************************************
  * INTERFACE
  * All the data necessary to keep our graphics
  * state in memory
- ********************************************/
+ *************************************************************************/
 class Interface
 {
 public:
@@ -94,7 +94,7 @@ private:
 
 
 
-/************************************************************************
+/*************************************************************************
  * DRAW CALLBACK
  * This is the main callback from OpenGL. It gets called constantly by
  * the graphics engine to refresh and draw the window.  Here we will
@@ -106,27 +106,27 @@ private:
  *************************************************************************/
 void drawCallback();
 
-/************************************************************************
+/*************************************************************************
  * KEY DOWN CALLBACK
  * When a key on the keyboard has been pressed, we need to pass that
  * on to the client.  Currnetly, we are only registering the arrow keys
  *************************************************************************/
 void keyDownCallback(int key, int x, int y);
 
-/************************************************************************
+/*************************************************************************
  * KEY UP CALLBACK
  * When the user has released the key, we need to reset the pressed flag
  *************************************************************************/
 void keyUpCallback(int key, int x, int y);
 
-/***************************************************************
+/*************************************************************************
  * KEYBOARD CALLBACK
  * Generic callback to a regular ascii keyboard event, such as
  * the space bar or the letter 'q'
- ***************************************************************/
+ *************************************************************************/
 void keyboardCallback(unsigned char key, int x, int y);
 
-/************************************************************************
+/*************************************************************************
  * RUN
  * Set the game in action.  We will get control back in our drawCallback
  *************************************************************************/

@@ -1,4 +1,4 @@
-/***********************************************************************
+/*************************************************************************
  * Header File:
  *    Point : The representation of a position 
  * Author:
@@ -13,7 +13,7 @@
  *    to call those methods in the Vector parent class.
  *    Previously, all this functionality was involved in one single class.
  *    --elijah
- ************************************************************************/
+ *************************************************************************/
 
 
 #pragma once
@@ -22,14 +22,14 @@
 
 class TestPosition;
 
-/*********************************************
- * Position
+/**************************************************
+ * CLASS Position
  * A single position on the field in Meters.
  * Position is responsible for keeping track of
  * both the meters representation of the
  * Simulator and the pixels drawn to the screen
  * via the ogstream object.
- *********************************************/
+ **************************************************/
 class Position : public Vector {
 public:
    friend class TestPosition;
@@ -99,10 +99,10 @@ private:
    static double metersFromPixels;
 };
 
-/*********************************************
+/**************************************************
  * COMPUTE DISTANCE
  * Find the distance between two positions
- *********************************************/
+ **************************************************/
 inline double computeDistance(const Position& pos1, const Position& pos2) {
    return sqrt((pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
                (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));
@@ -113,10 +113,10 @@ std::ostream & operator << (std::ostream & out, const Position& rhs);
 std::istream & operator >> (std::istream & in,        Position& rhs);
 
 
-/*********************************************
+/**************************************************
  * PT
  * Trivial point
- *********************************************/
+ **************************************************/
 struct PT {
    double x;
    double y;

@@ -1,8 +1,7 @@
-//
-//  gravity.cpp
-//  orbitSimulator
-//
-//  Created by Elijah Harrison on 5/29/22.
-//
+/**********************************************************************
+ * gravity.cpp
+ * orbitSimulator
+ **********************************************************************/
 
 #include "physicsComponents.h"
+

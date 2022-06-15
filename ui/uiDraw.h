@@ -136,13 +136,13 @@ void drawEarth(const Position& center, double rotation);
 *************************************************************************/
 void drawStar(const Position& point, unsigned char phase);
 
-/******************************************************************
+/*************************************************************************
  * RANDOM
  * This function generates a random number.  The user specifies
  * The parameters 
  *    INPUT:   min, max : The number of values (min <= num <= max)
  *    OUTPUT   <return> : Return the integer/double
- ****************************************************************/
+ *************************************************************************/
 int    random(int    min, int    max);
 double random(double min, double max);
 

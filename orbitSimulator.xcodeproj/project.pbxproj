@@ -37,11 +37,12 @@
 		141E3F4828442E8000C81352 /* README.md */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4A284439F700C81352 /* simulator.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4C28443AB600C81352 /* vector.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; tabWidth = 3; };
-		141E3F5028444B6C00C81352 /* velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
+		141E3F5028444B6C00C81352 /* velocity.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F5328444C9700C81352 /* acceleration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = acceleration.cpp; sourceTree = "<group>"; };
 		141E3F5628444CEF00C81352 /* force.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = force.cpp; sourceTree = "<group>"; };
 		141E3F5928444D1B00C81352 /* gravity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gravity.cpp; sourceTree = "<group>"; };
-		141E3F602844594000C81352 /* MovingObject.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = MovingObject.h; sourceTree = "<group>"; tabWidth = 3; };
+		141E3F602844594000C81352 /* movingObject.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = movingObject.h; sourceTree = "<group>"; tabWidth = 3; };
+		144FDE7D2854FA7400F9F34D /* star.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = star.h; sourceTree = "<group>"; tabWidth = 3; };
 		1465B2EB284718D100B48318 /* geostationarySatellite.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = geostationarySatellite.h; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DC2847B21E0044DB45 /* earth.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = earth.h; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = physicsFormulas.cpp; sourceTree = "<group>"; tabWidth = 3; };
@@ -56,7 +57,7 @@
 		C11C7EAC25780B6000EA4B2E /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		C11C7EAD25780B6000EA4B2E /* uiDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiDraw.cpp; sourceTree = "<group>"; };
 		C11C7EAF25780B6500EA4B2E /* testPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testPosition.h; sourceTree = "<group>"; };
-		C11C7EB025780B6500EA4B2E /* uiDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uiDraw.h; sourceTree = "<group>"; };
+		C11C7EB025780B6500EA4B2E /* uiDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = uiDraw.h; sourceTree = "<group>"; tabWidth = 3; };
 		C179C6C027E375AF00E3E514 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
 		C179C6C227E375D600E3E514 /* position.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; tabWidth = 3; };
 /* End PBXFileReference section */
@@ -77,6 +78,7 @@
 		141E3F4F28444B2B00C81352 /* physics components */ = {
 			isa = PBXGroup;
 			children = (
+				141E3F4C28443AB600C81352 /* vector.h */,
 				C179C6C227E375D600E3E514 /* position.h */,
 				C179C6C027E375AF00E3E514 /* position.cpp */,
 				14D1A6DE2847B6700044DB45 /* physicsComponents.h */,
@@ -87,6 +89,17 @@
 				141E3F5928444D1B00C81352 /* gravity.cpp */,
 			);
 			path = "physics components";
+			sourceTree = "<group>";
+		};
+		144FDE7E2854FBF600F9F34D /* simulator objects */ = {
+			isa = PBXGroup;
+			children = (
+				144FDE7D2854FA7400F9F34D /* star.h */,
+				141E3F602844594000C81352 /* movingObject.h */,
+				14D1A6DC2847B21E0044DB45 /* earth.h */,
+				1465B2EB284718D100B48318 /* geostationarySatellite.h */,
+			);
+			path = "simulator objects";
 			sourceTree = "<group>";
 		};
 		148D9E22284900ED00AB8639 /* test */ = {
@@ -115,10 +128,7 @@
 			children = (
 				C11C7EA625780B5C00EA4B2E /* main.cpp */,
 				141E3F4A284439F700C81352 /* simulator.h */,
-				141E3F4C28443AB600C81352 /* vector.h */,
-				141E3F602844594000C81352 /* MovingObject.h */,
-				14D1A6DC2847B21E0044DB45 /* earth.h */,
-				1465B2EB284718D100B48318 /* geostationarySatellite.h */,
+				144FDE7E2854FBF600F9F34D /* simulator objects */,
 				148D9E232849011000AB8639 /* ui */,
 				141E3F4F28444B2B00C81352 /* physics components */,
 				148D9E22284900ED00AB8639 /* test */,

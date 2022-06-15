@@ -1,11 +1,11 @@
-/***********************************************************************
+/**********************************************************************
  * Header File:
  *    Test Position : Test the Position class
  * Author:
  *    Br. Helfrich
  * Summary:
  *    All the unit tests for Position
- ************************************************************************/
+ **********************************************************************/
 
 #pragma once
 
@@ -15,10 +15,11 @@
 
 using namespace std;
 
-/*******************************
+/**************************************************
  * TEST Position
- * A friend class for Position which contains the Position unit tests
- ********************************/
+ *    A friend class for Position which contains 
+ *    the Position unit tests.
+ **************************************************/
 class TestPosition
 {
 public:

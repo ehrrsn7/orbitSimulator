@@ -1,4 +1,4 @@
-/***********************************************************************
+/*************************************************************************
  * Source File:
  *    User Interface Draw : put pixels on the screen
  * Author:
@@ -8,7 +8,7 @@
  *    of procedural functions here because each draw function does not
  *    retain state. In other words, they are verbs (functions), not nouns
  *    (variables) or a mixture (objects)
- ************************************************************************/
+ *************************************************************************/
 
 #include <string>     // need you ask?
 #include <sstream>    // convert an integer into text
@@ -51,7 +51,7 @@ const int RGB_GOLD[] =       { 255, 255,   0 };
 const int RGB_TAN[] =        { 180, 150, 110 };
 const int RGB_GREEN[] =      {   0, 150,   0 };
 
-/************************************************************************
+/*************************************************************************
  * ROTATE
  * Rotate a given point (point) around a given origin (center) by a given
  * number of degrees (angle).
@@ -85,11 +85,11 @@ inline void glResetColor()
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
 }   
 
-/************************************************************
+/*************************************************************************
  * COLOR RECTANGLE
  * A structure used to conveniently specify a rectangle 
  * of a certain color
- ************************************************************/
+ *************************************************************************/
 struct ColorRect
 {
    int x0;
@@ -103,11 +103,11 @@ struct ColorRect
    const int* rgb;
 };
 
-/************************************************************************
-* GL COLOR
-* Set the color on the board
-*   INPUT  rgb  RGB color in integers (0...255)
-*************************************************************************/
+/*************************************************************************
+ * GL COLOR
+ * Set the color on the board
+ *   INPUT  rgb  RGB color in integers (0...255)
+ *************************************************************************/
 void glColor(const int* rgb)
 {
    glColor3f((GLfloat)(rgb[0] / 256.0),
@@ -203,7 +203,7 @@ void ogstream :: flush()
    str("");
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW PROJECTILE
  * Draw a projectile on the screen at a given point.
  *   INPUT  pt     The location of the projectile
@@ -219,7 +219,7 @@ void drawProjectile(const Position& pt)
       glDrawRect(pt, Position(), rects[i], 0.0);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW FRAGMENT
  * Draw a fragment on the screen.
  *   INPUT  pt     The location of the projectile
@@ -236,7 +236,7 @@ void drawFragment(const Position& center, double rotation)
       glDrawRect(center, Position(), rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Crew Dragon Center
  * Draw the center part of the Crew Dragon module
  *  INPUT point   The position of the satellite
@@ -256,7 +256,7 @@ void drawCrewDragonCenter(const Position& center, double rotation)
       glDrawRect(center, Position(), rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Crew Dragon Right array
  * Draw the right solar array of the crew dragon module
  *  INPUT point   The position of the ship
@@ -276,7 +276,7 @@ void drawCrewDragonRight(const Position& center, const Position& offset, double 
       glDrawRect(center, offset, rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Crew Dragon Left array
  * Draw the left solar array of the crew dragon module
  *  INPUT point   The position of the ship
@@ -297,7 +297,7 @@ void drawCrewDragonLeft(const Position& center, const Position& offset, double r
 }
 
 
-/************************************************************************
+/*************************************************************************
  * DRAW Crew Dragon
  * Draw a crew dragon on the screen. It consists of three components
  *  INPUT point   The position of the ship
@@ -318,7 +318,7 @@ void drawCrewDragon(const Position& center, double rotation)
    drawCrewDragonLeft(  center, posLeft, rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Sputnik
  * Draw the satellite on the screen
  *  INPUT point   The position of the ship
@@ -355,7 +355,7 @@ void drawSputnik(const Position& center, double rotation)
    glEnd();
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW GPS Left
  * Draw a GPS satellite left solar array on the screen
  *  INPUT point   The position of the ship
@@ -393,7 +393,7 @@ void drawGPSLeft(const Position& center, const Position& offset, double rotation
    glEnd();
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW GPS Right
  * Draw a GPS satellite right solar array on the screen
  *  INPUT point   The position of the ship
@@ -432,7 +432,7 @@ void drawGPSRight(const Position& center, const Position& offset, double rotatio
 
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW GPS Center
  * Draw the main part of the GPS satellite
  *  INPUT point   The position of the ship
@@ -452,7 +452,7 @@ void drawGPSCenter(const Position& center, double rotation)
       glDrawRect(center, Position(), rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW GPS
  * Draw a GPS satellite on the screen. It consists of three parts
  *  INPUT point   The position of the ship
@@ -473,7 +473,7 @@ void drawGPS(const Position& center, double rotation)
    drawGPSLeft(center,  posLeft, rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Hubble Telescope
  * Draw a the telescope part of the hubble
  *  INPUT point   The position of the ship
@@ -493,7 +493,7 @@ void drawHubbleTelescope(const Position& center, const Position& offset, double 
       glDrawRect(center, offset, rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Hubble Computer
  * Draw a the computer part of the hubble space telescope
  *  INPUT point   The position of the ship
@@ -514,7 +514,7 @@ void drawHubbleComputer(const Position& center, const Position& offset, double r
       glDrawRect(center, offset, rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Hubble Left
  * Draw left solar array of the hubble space telescope on the screen
  *  INPUT point   The position of the ship
@@ -548,7 +548,7 @@ void drawHubbleLeft(const Position& center, const Position& offset, double rotat
 }
 
 
-/************************************************************************
+/*************************************************************************
  * DRAW Hubble Right
  * Draw right solar array of the hubble space telescope on the screen
  *  INPUT point   The position of the ship
@@ -581,7 +581,7 @@ void drawHubbleRight(const Position& center, const Position& offset, double rota
    glEnd();
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Hubble
  * Draw a Hubble satellite on the screen. It consists of 4 parts
  *  INPUT point   The position of the ship
@@ -610,7 +610,7 @@ void drawHubble(const Position& center, double rotation)
    drawHubbleLeft(center,      posLeft, rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Starlink Body
  * Draw the body of the Starlink satellite on the screen
  *  INPUT point   The position of the ship
@@ -630,7 +630,7 @@ void drawStarlinkBody(const Position& center, const Position& offset, double rot
       glDrawRect(center, offset, rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Starlink Array
  * Draw the solar array of the Starlink satellite on the screen
  *  INPUT point   The position of the ship
@@ -649,7 +649,7 @@ void drawStarlinkArray(const Position& center, const Position& offset, double ro
       glDrawRect(center, offset, rects[i], rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Starlink
  * Draw a Starlink satellite on the screen. It consists of 2 components
  *  INPUT point   The position of the ship
@@ -668,7 +668,7 @@ void drawStarlink(const Position& center, double rotation)
    drawStarlinkArray(center, posArray, rotation);
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Ship
  * Draw a spaceship on the screen
  *  INPUT point   The position of the ship
@@ -724,7 +724,7 @@ void drawShip(const Position& center, double rotation, bool thrust)
    glEnd();
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW Earth
  * Draw Earth
  *  INPUT point   The position of the ship
@@ -833,7 +833,7 @@ void drawEarth(const Position& center, double rotation)
    return;
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW STAR
  * Draw a star that twinkles
  *   INPUT  POINT     The position of the beginning of the star
@@ -890,13 +890,13 @@ void drawStar(const Position& point, unsigned char phase)
 }
 
 
-/******************************************************************
+/*************************************************************************
  * RANDOM
  * This function generates a random number.  
  *
  *    INPUT:   min, max : The number of values (min <= num <= max)
  *    OUTPUT   <return> : Return the integer
- ****************************************************************/
+ *************************************************************************/
 int random(int min, int max)
 {
    assert(min < max);
@@ -906,13 +906,13 @@ int random(int min, int max)
    return num;
 }
 
-/******************************************************************
+/*************************************************************************
  * RANDOM
  * This function generates a random number.  
  *
  *    INPUT:   min, max : The number of values (min <= num <= max)
  *    OUTPUT   <return> : Return the double
- ****************************************************************/
+ *************************************************************************/
 double random(double min, double max)
 {
    assert(min <= max);

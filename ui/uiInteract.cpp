@@ -1,4 +1,4 @@
-/***********************************************************************
+/*************************************************************************
  * Source File:
  *     UI INTERACT
  * Author:
@@ -8,7 +8,7 @@
  *     all the interfaces and events necessary to work with OpenGL.  Your
  *     program will interface with this thorough the callback function
  *     pointer towards the bottom of the file.
- ************************************************************************/
+ *************************************************************************/
 
 #include <string>     // need you ask?
 #include <sstream>    // convert an integer into text
@@ -45,13 +45,13 @@
 using namespace std;
 
 
-/*********************************************************************
+/*************************************************************************
  * SLEEP
  * Pause for a while.  We want to put the program to sleep until it
  * is time to draw again.  Note that this requires us to tell the OS
  * that we are idle.  the nanosleep function performs this task for us
  *   INPUT: msSleep: sleep time in milliseconds
- *********************************************************************/
+ *************************************************************************/
 void sleep(unsigned long msSleep)
 {
    // Windows handles sleep one way
@@ -73,7 +73,7 @@ void sleep(unsigned long msSleep)
    return;
 }
 
-/************************************************************************
+/*************************************************************************
  * DRAW CALLBACK
  * This is the main callback from OpenGL. It gets called constantly by
  * the graphics engine to refresh and draw the window.  Here we will
@@ -109,7 +109,7 @@ void drawCallback()
    ui.keyEvent();
 }
 
-/************************************************************************
+/*************************************************************************
  * KEY DOWN CALLBACK
  * When a key on the keyboard has been pressed, we need to pass that
  * on to the client.  Currently, we are only registering the arrow keys
@@ -124,7 +124,7 @@ void keyDownCallback(int key, int x, int y)
    ui.keyEvent(key, true /*fDown*/);
 }
 
-/************************************************************************
+/*************************************************************************
  * KEY UP CALLBACK
  * When the user has released the key, we need to reset the pressed flag
  *   INPUT   key:   the key we pressed according to the GLUT_KEY_ prefix
@@ -138,11 +138,11 @@ void keyUpCallback(int key, int x, int y)
    ui.keyEvent(key, false /*fDown*/);
 }
 
-/***************************************************************
+/*************************************************************************
  * KEYBOARD CALLBACK
  * Generic callback to a regular ascii keyboard event, such as
  * the space bar or the letter 'q'
- ***************************************************************/
+ *************************************************************************/
 void keyboardCallback(unsigned char key, int x, int y)
 {
    // Even though this is a local variable, all the members are static
@@ -151,7 +151,7 @@ void keyboardCallback(unsigned char key, int x, int y)
    ui.keyEvent(key, true /*fDown*/);
 }
 
-/************************************************************************
+/*************************************************************************
  * CLOSE CALLBACK
  * Get the close button to appear so we can exit
  *************************************************************************/
@@ -160,12 +160,12 @@ void closeCallback()
    exit(0);
 }
 
-/***************************************************************
+/*************************************************************************
  * INTERFACE : KEY EVENT
  * Either set the up or down event for a given key
  *   INPUT   key     which key is pressed
  *           fDown   down or brown
- ****************************************************************/
+ *************************************************************************/
 void Interface::keyEvent(int key, bool fDown)
 {
    switch(key)
@@ -195,12 +195,12 @@ void Interface::keyEvent(int key, bool fDown)
    }
 }
 
-/***************************************************************
+/*************************************************************************
  * INTERFACE : KEY EVENT
  * Either set the up or down event for a given key
  *   INPUT   key     which key is pressed
  *           fDown   down or brown
- ****************************************************************/
+ *************************************************************************/
 void Interface::keyEvent()
 {
    if (isDownPress)
@@ -214,7 +214,7 @@ void Interface::keyEvent()
    isSpacePress = false;
 }
 
-/************************************************************************
+/*************************************************************************
  * INTEFACE : IS TIME TO DRAW
  * Have we waited long enough to draw swap the background buffer with
  * the foreground buffer?
@@ -224,7 +224,7 @@ bool Interface::isTimeToDraw()
    return ((unsigned int)clock() >= nextTick);
 }
 
-/************************************************************************
+/*************************************************************************
  * INTERFACE : SET NEXT DRAW TIME
  * What time should we draw the buffer again?  This is a function of
  * the current time and the frames per second.
@@ -234,7 +234,7 @@ void Interface::setNextDrawTime()
    nextTick = (long)clock() + static_cast<long> (timePeriod * CLOCKS_PER_SEC);
 }
 
-/************************************************************************
+/*************************************************************************
  * INTERFACE : SET FRAMES PER SECOND
  * The frames per second dictates the speed of the game.  The more frames
  * per second, the quicker the game will appear to the user.  We will default
@@ -246,11 +246,11 @@ void Interface::setFramesPerSecond(double value)
     timePeriod = (1 / value);
 }
 
-/***************************************************
+/*************************************************************************
  * STATICS
  * All the static member variables need to be initialized
  * Somewhere globally.  This is a good spot
- **************************************************/
+ *************************************************************************/
 int             Interface::isDownPress      = 0;
 int             Interface::isUpPress        = 0;
 int             Interface::isLeftPress      = 0;
@@ -264,7 +264,7 @@ void *          Interface::p                = NULL;
 void (*Interface::callBack)(const Interface *, void *) = NULL;
 
 
-/************************************************************************
+/*************************************************************************
  * INTEFACE : INITIALIZE
  * Initialize our drawing window.  This will set the size and position,
  * get ready for drawing, set up the colors, and everything else ready to
@@ -312,7 +312,7 @@ void Interface::initialize(int argc, char ** argv, const char * title,
    return;
 }
 
-/************************************************************************
+/*************************************************************************
  * INTERFACE : RUN
  *            Start the main graphics loop and play the game
  * INPUT callBack:   Callback function.  Every time we are beginning
