@@ -47,6 +47,8 @@
 		14D1A6DC2847B21E0044DB45 /* earth.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = earth.h; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = physicsFormulas.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DE2847B6700044DB45 /* physicsComponents.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsComponents.h; sourceTree = "<group>"; tabWidth = 3; };
+		803B58A9285BA4A800B7D81B /* testForce.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = testForce.h; sourceTree = "<group>"; tabWidth = 3; };
+		803B58AA285BA4D100B7D81B /* testVector.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = testVector.h; sourceTree = "<group>"; tabWidth = 3; };
 		C11C7E962578098A00EA4B2E /* orbitSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = orbitSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C11C7EA325780B2100EA4B2E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -108,6 +110,8 @@
 				C11C7EAC25780B6000EA4B2E /* test.h */,
 				C11C7EA725780B5C00EA4B2E /* test.cpp */,
 				C11C7EAF25780B6500EA4B2E /* testPosition.h */,
+				803B58A9285BA4A800B7D81B /* testForce.h */,
+				803B58AA285BA4D100B7D81B /* testVector.h */,
 			);
 			path = test;
 			sourceTree = "<group>";
