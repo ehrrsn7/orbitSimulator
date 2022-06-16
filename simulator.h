@@ -27,42 +27,48 @@
 class Simulator {
     
 public:
-   Simulator(Position ptUpperRight) : tr(ptUpperRight) { }
+   Simulator(Position ptUpperRight) : tr(ptUpperRight) {
+      ship.setPosition(Position(10000000, 10000000));
+   }
     
-   void update(const Interface * pUI) {
+   void update() {
       // self
+      handleCollisions();
       
       // duck duck goose
-      earth.update(); // Earth
-      ship.update(); // Ship
+      if (earth.isAlive()) earth.update();
+      if (ship.isAlive()) ship.update();
+      for (auto it : stars) it.update();
+      for (auto it : satellites)    if (it->isAlive()) it->update();
+      for (auto it : fragments)     if (it.isAlive())  it.update();
+      for (auto it : projectiles)   if (it.isAlive())  it.update();
    }
     
    void display() const {
       // self
       
       // hello operator, I'd like to call...
-      earth.display();
+      if (earth.isAlive()) earth.display();
+      if (ship.isAlive()) ship.display();
+      for (auto it : stars) it.display();
+      for (auto it : satellites) if (it->isAlive()) it->display();
+      for (auto it : fragments) if (it.isAlive()) it.display();
+      for (auto it : projectiles) if (it.isAlive()) it.display();
    }
  
    void handleInput(const Interface * pUI) {
       // self
-      if (pUI->isEscape()) exit(0);
+      if (pUI->isEscape()) exit(0); // press ESC to end program
 
       // do our rounds..
-      earth.handleInput(pUI);
+      if (earth.isAlive()) earth.handleInput(pUI);
+      if (ship.isAlive()) ship.handleInput(pUI);
+      for (auto it : stars) it.handleInput(pUI);
+      for (auto it : satellites) if (it->isAlive()) it->handleInput(pUI);
+      for (auto it : fragments) if (it.isAlive()) it.handleInput(pUI);
+      for (auto it : projectiles) if (it.isAlive()) it.handleInput(pUI);
    }
    
-   /*
-    + Constructor/lnitializer()
-    + Constructor/Initializer(tr : P.)
-    + update()
-    + display()
-    + handlelnput(pUI)
-    - handleCollisions()
-    - applyGravity()
-    - cleanUpZombies()
-    
-    */
 
 private:
    // Screen Dimensions
@@ -76,4 +82,55 @@ private:
    std::vector<Fragment> fragments;
    std::vector<Projectile> projectiles;
    std::vector<Star> stars;
+   
+   
+   /**************************************************
+    * helper methods
+    **************************************************/
+   void handleCollisions() {
+      // ship and other
+      if (ship.isAlive()) {
+         
+         // ship and smaller objects
+         for (auto it : satellites)  if (it->isAlive()) handleCollision(ship, *it);
+         for (auto it : fragments)   if (it.isAlive())  handleCollision(ship, it);
+         for (auto it : projectiles) if (it.isAlive())  handleCollision(ship, it);
+         
+         // ship and earth
+         if (earth.isAlive()) ship.hit();
+         
+         // ship and edge of screen
+         if (abs(ship.getPosition().getX()) >= tr.getX() || abs(ship.getPosition().getY()) >= tr.getY()) ship.hit();
+      }
+      
+      // bullets and moving objects
+   }
+   
+   void handleCollision(MovingObject & obj1, MovingObject & obj2) {
+      if (computeDistance(obj1.getPosition(), obj2.getPosition()) < obj1.getRadius() + obj2.getRadius()) {
+         obj1.hit();
+         obj2.hit();
+      }
+   }
+   
+   void applyGravity() {
+      // earth -> moving objects
+      if (earth.isAlive()) earth.display();
+      if (ship.isAlive()) ship.display();
+      for (auto it : stars) it.display();
+      for (auto it : satellites) if (it->isAlive()) it->display();
+      for (auto it : fragments) if (it.isAlive()) it.display();
+      for (auto it : projectiles) if (it.isAlive()) it.display();
+      
+      // moving objects -> earth lol
+      
+      // moving objects to each other HAHAHA
+   }
+   
+   void cleanUpZombies() {
+      // all vector<MovingObject> contents
+      for (auto it : satellites) if (!it->isAlive()) ;
+      for (auto it : fragments) if (!it.isAlive())  ;
+      for (auto it : projectiles) if (!it.isAlive())  ;
+   }
 };

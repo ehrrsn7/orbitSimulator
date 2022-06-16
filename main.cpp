@@ -29,9 +29,9 @@ void callBack(const Interface* pUI, void* p) {
    // single callback function in OpenGL.
    Simulator* pSim = (Simulator*)p;
    
-   pSim->update(pUI);
-   pSim->handleInput(pUI);
+   pSim->update();
    pSim->display();
+   pSim->handleInput(pUI);
 }
 
 double Position::metersFromPixels = 40.0;
