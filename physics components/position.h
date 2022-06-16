@@ -92,6 +92,9 @@ public:
       this->metersFromPixels = metersFromPixels;
    }
    
+   // revert to vector
+   Vector toVector() { return Vector(getX(), getY()); }
+   
    // operators
    Position& operator+ (const Position & rhs);
    

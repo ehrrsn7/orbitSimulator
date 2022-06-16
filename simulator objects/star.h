@@ -16,11 +16,21 @@
 class Star {
 public:
    Star() {}
+   Star(Position p) : p(p) {}
    
    void update() { }
    void display() const { }
    void handleInput(const Interface * pUI) { }
 
 private:
+   Position p;
+   double phase;
    
+   /**************************************************
+    * helper methods
+    **************************************************/
+   void twinkle() {
+      // update phase
+      
+   }
 };

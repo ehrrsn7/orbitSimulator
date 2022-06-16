@@ -9,8 +9,11 @@
 
 #pragma once
 
+//#define G 6.67384e-11
+
 #include "vector.h"
 #include "position.h"
+
 
 /**************************************************
  * CLASS Velocity

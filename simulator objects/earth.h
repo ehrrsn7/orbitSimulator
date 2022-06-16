@@ -24,7 +24,7 @@ class Earth : public MovingObject {
 public:
    Earth() : angle(0.0) { }
 
-   void update(const Interface * pUI) { addAngle(0.01); }
+   void update() { addAngle(0.01); }
    void display() const { drawEarth(p, angle); }
    void handleInput(const Interface * pUI) { }
    

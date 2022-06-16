@@ -7,13 +7,16 @@
  *    and handles all the Sim logic.
  **********************************************************************/
 
-
 #pragma once
 
 #include "earth.h"
-#include "geostationarySatellite.h"
+#include "movingObject.h"
+#include "star.h"
 #include "uiInteract.h"
 #include "uiDraw.h"
+
+#include <vector>
+
 
 /**************************************************
  * CLASS Simulator
@@ -24,15 +27,14 @@
 class Simulator {
     
 public:
-   Simulator(Position ptUpperRight) : tr(ptUpperRight), bob(tr) { }
+   Simulator(Position ptUpperRight) : tr(ptUpperRight) { }
     
    void update(const Interface * pUI) {
       // self
-      bob.setRelativePosition(earth.getAngle());
       
       // duck duck goose
-      earth.update(pUI); // Earth
-      bob.update(pUI); // Geostationary Satellite
+      earth.update(); // Earth
+      ship.update(); // Ship
    }
     
    void display() const {
@@ -40,7 +42,6 @@ public:
       
       // hello operator, I'd like to call...
       earth.display();
-      bob.display();
    }
  
    void handleInput(const Interface * pUI) {
@@ -49,17 +50,30 @@ public:
 
       // do our rounds..
       earth.handleInput(pUI);
-      bob.handleInput(pUI);
    }
- 
+   
+   /*
+    + Constructor/lnitializer()
+    + Constructor/Initializer(tr : P.)
+    + update()
+    + display()
+    + handlelnput(pUI)
+    - handleCollisions()
+    - applyGravity()
+    - cleanUpZombies()
+    
+    */
+
 private:
-   // screen
+   // Screen Dimensions
    Position tr; // upper-right point of window
-   // (center is [0,0] giving us dimensions w/2 and h/2)
+   // (center is [0,0], giving us dimensions w/2 and h/2)
    
-   // Earth
+   // objects on the screen
    Earth earth;
-   
-   // MovingObjects
-   GeostationarySatellite bob;
+   Ship ship;
+   std::vector<Satellite*> satellites; // pointers* for polymorphism
+   std::vector<Fragment> fragments;
+   std::vector<Projectile> projectiles;
+   std::vector<Star> stars;
 };

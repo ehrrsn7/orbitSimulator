@@ -28,6 +28,7 @@ double trigY(const double mag, const double angleRadians)
 double trigX(const Vector & v) { return trigX(v.mag(), v.angle()); }
 double trigY(const Vector & v) { return trigY(v.mag(), v.angle()); }
  
+
 /**********************************************************************
  * Time Functions
  **********************************************************************/
