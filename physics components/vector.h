@@ -78,6 +78,11 @@ public:
       set(magnitude * sin(angleRadians), magnitude * cos(angleRadians));
    }
    
+   void setMagnitude(double magnitude, double angleRadians) {
+      // just an alias for setPolar
+      setPolar(magnitude, angleRadians);
+   }
+   
    // add
    void addMagnitude(double magnitude, double angleRadians) {
       add(magnitude * sin(angleRadians), magnitude * cos(angleRadians));
@@ -90,7 +95,7 @@ public:
    /**************************************************
     * Operators
     **************************************************/
-   Vector& operator+ (const Vector & rhs) {
+   Vector& operator+ (const Vector& rhs) {
       // add another vector
       add(rhs.getX(), rhs.getY());
       return *this;

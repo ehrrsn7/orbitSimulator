@@ -34,6 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1418E114285C3ADB005D93AD /* physicsFormulas.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsFormulas.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4828442E8000C81352 /* README.md */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4A284439F700C81352 /* simulator.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4C28443AB600C81352 /* vector.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; tabWidth = 3; };
@@ -82,6 +83,7 @@
 				C179C6C227E375D600E3E514 /* position.h */,
 				C179C6C027E375AF00E3E514 /* position.cpp */,
 				14D1A6DE2847B6700044DB45 /* physicsComponents.h */,
+				1418E114285C3ADB005D93AD /* physicsFormulas.h */,
 				14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */,
 				141E3F5028444B6C00C81352 /* velocity.cpp */,
 				141E3F5328444C9700C81352 /* acceleration.cpp */,

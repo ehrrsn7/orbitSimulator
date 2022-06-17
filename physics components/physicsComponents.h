@@ -9,7 +9,7 @@
 
 #pragma once
 
-//#define G 6.67384e-11
+#define G 6.67384e-11
 
 #include "vector.h"
 #include "position.h"
@@ -38,8 +38,7 @@ public:
    }
    
    // operators
-   Position operator*(const double& rhs); // v{this} * Δt{rhs} -> Δp{Posiiton}
-   Position operator*(const double rhs); // when reference is unavailable
+   Position operator*(const double rhs); // v{this} * Δt{rhs} -> Δp{Posiiton}
 };
 
 /**************************************************
@@ -61,8 +60,7 @@ public:
    }
    
    // operators
-   Velocity operator*(const double& rhs); // v{this} * Δt{rhs} -> Δp{Posiiton}
-   Velocity operator*(const double rhs); // when reference is unavailable
+   Velocity operator*(const double rhs); // v{this} * Δt{rhs} -> Δp{Posiiton}
 };
 
 /**************************************************
