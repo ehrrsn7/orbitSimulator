@@ -4,14 +4,16 @@
  * (We have a collection of procedural functions here because each math
  * helper function does not retain state)
  **********************************************************************/
- 
-#define FPS 30                   // frames/s
-#define SECONDS_IN_DAY 86400     // s : 60s/min * 60min/hr * 24hr/d
- 
-#include "physicsFormulas.h"     // header file
- 
-#include <cmath>                 // for math functions
- 
+
+#define FPS 30                // frames/s
+#define SECONDS_IN_DAY 86400  // s : 60s/min * 60min/hr * 24hr/d
+
+#include "physicsFormulas.h"  // header file
+#include "movingObject.h"     // for MovingObject
+#include "earth.h"            // for Earth
+
+#include <cmath>              // for math functions
+
 
 /**********************************************************************
  * Horizontal/Vertical Components
@@ -23,22 +25,33 @@ double trigX(const double mag, const double angleRadians)
 double trigY(const double mag, const double angleRadians)
    { return mag * cos(angleRadians); }
  
-double trigX(const Vector & v) { return trigX(v.mag(), v.angle()); }
-double trigY(const Vector & v) { return trigY(v.mag(), v.angle()); }
+double trigX(const Vector & v) { return trigX(mag(v), v.angle()); }
+double trigY(const Vector & v) { return trigY(mag(v), v.angle()); }
+
+double mag(const Vector& s) { return mag(s.getX(), s.getY()); }
+double mag(double x, double y) { return sqrt(x*x + y*y); }
+                                         
+double deg(double angleRadians) { return 180 * angleRadians / M_PI; }
+double rad(double angleDegrees) { return M_PI * angleDegrees / 180; }
 
 /**********************************************************************
 * Distance Functions
 **********************************************************************/
 
 /**************************************************
+ * author: james helfrich
+ **************************************************/
+double computeDistance(const Position& pos1, const Position& pos2) {
+  return sqrt((pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
+              (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));
+}
+
+/**************************************************
  * distance(position1, position2)
  * Distance = √[(p1.x-p2.x)^2 + (p1.y-p2.y)^2]
  **************************************************/
-double distance(const Position& pos1, const Position& pos2) {
-   return sqrt(
-      (pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
-      (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY())
-   );
+double distance(const Position& p1, const Position& p2) {
+   return computeDistance(p1, p2);
 }
 
 /**************************************************
@@ -49,6 +62,7 @@ double distance(const Position& pos1, const Position& pos2) {
 double distance(const MovingObject& obj1, const MovingObject& obj2) {
    return distance(obj1.getPosition(), obj2.getPosition());
 }
+
 
 /**********************************************************************
  * Time Functions
@@ -157,9 +171,9 @@ Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2) {
 * gh = g (r/(r + h))^2
 **************************************************/
 double calcGravity(double height) {
- return ACCEL_DUE_TO_GRAVITY_EARTH * (
-    pow((EARTH_RADIUS / (EARTH_RADIUS + height)), 2)
- );
+   return ACCEL_DUE_TO_GRAVITY_EARTH * (
+      pow((EARTH_RADIUS / (EARTH_RADIUS + height)), 2)
+   );
 }
 
 /**************************************************
@@ -186,7 +200,7 @@ Gravity calcGravityVector(const Position& p) {
  * s = s0 + v0 * dt + 1/2 * a * dt^2
  **************************************************/
 double aToD(const Acceleration& a, const Velocity& v0, double dt, double initialD) {
-   return initialD + v0.mag() * dt + .5 * a.mag() * pow(dt, 2);
+   return initialD + mag(v0) * dt + .5 * mag(a) * pow(dt, 2);
    // dEjA vUUUUoo 🥹🚗
 }
  

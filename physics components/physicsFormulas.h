@@ -5,11 +5,14 @@
 
 #pragma once
 
-#include "earth.h"               // for EARTH_RADIUS and Earth class
-#include "movingObject.h"        // for MovingObject
-#include "physicsComponents.h"   // for ACCEL_DUE_TO_GRAVITY_EARTH and vector child classes
-#include "position.h"            // for Position
+#include "earth.h"      // for EARTH_RADIUS and Earth class
+#include "vector.h"     // for ACCEL_DUE_TO_GRAVITY_EARTH and vector child classes
 
+/**************************************************
+ * Prototypes
+ **************************************************/
+class MovingObject;
+class Earth;
 
 /**********************************************************************
  * Horizontal/Vertical Components
@@ -20,11 +23,17 @@ double trigY(const double mag, const double angleRadians);
 double trigX(const Vector & v);
 double trigY(const Vector & v);
 
+double mag(double x, double y);
+double mag(const Vector& s);
+double deg(double angleRadians);
+double rad(double angleDegrees);
+
 /**********************************************************************
 * Distance Functions
 **********************************************************************/
 double distance(const Position& pos1, const Position& pos2);
 double distance(const MovingObject& obj1, const MovingObject& obj2);
+double computeDistance(const Position& pos1, const Position& pos2);
 
 /**********************************************************************
  * Time Functions

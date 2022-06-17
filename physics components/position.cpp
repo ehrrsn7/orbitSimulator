@@ -7,7 +7,45 @@
  *    Everything we need to know about a location on the screen.
  ************************************************************************/
 
-#include "physicsComponents.h"
+#include "vector.h"
+
+void Position::setMeters(double xMeters, double yMeters) {
+   setMetersX(xMeters);
+   setMetersY(yMeters);
+}
+
+void Position::setMetersPolar(double magnitudeMeters, double angleRadians) {
+   setPolar(magnitudeMeters, angleRadians);
+}
+
+void Position::setPixels(double xPixels, double yPixels) {
+   setPixelsX(xPixels);
+   setPixelsY(yPixels);
+}
+
+/**************************************************
+ * method: add
+ * class: Position
+ * Assign a Point
+ * Note: basically the definition of Vector+=
+ **************************************************/
+void Position::add(const Velocity& dv, double dt) {
+   add(Velocity(dv.getX() * dt, dv.getY() * dt));
+}
+
+void Position::addPixels(double dxPixels, double dyPixels) {
+   addPixelsX(dxPixels);
+   addPixelsY(dyPixels);
+}
+
+void Position::addMeters(double dxMeters, double dyMeters) {
+   addMetersX(dxMeters);
+   addMetersY(dyMeters);
+}
+
+void Position::setZoom(double metersFromPixels) {
+   this->metersFromPixels = metersFromPixels;
+}
 
 /**************************************************
  * operator =
@@ -23,10 +61,20 @@ Position & Position::operator = (const Position & rhs) {
 /**************************************************
  * operator +
  * class: Position
- * Adds another point to this*
- * Note: basically an override of Vector+
+ * Adds another point to this* and returns it as a new Position
  **************************************************/
-Position& Position::operator+ (const Position & rhs) {
+Position Position::operator+ (const Position & rhs) {
+   Position newP;
+   newP.add(rhs);
+   return newP;
+}
+
+/**************************************************
+ * operator +=
+ * class: Position
+ * Adds another point to this*
+ **************************************************/
+Position& Position::operator+= (const Position & rhs) {
    // add another vector
    addMeters(rhs.getMetersX(), rhs.getMetersY());
    return *this;

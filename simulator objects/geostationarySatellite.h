@@ -5,11 +5,7 @@
 
 #pragma once
 
-#include "position.h"
-#include "uiDraw.h"
-#include <cmath>
-#include <iostream>
-using namespace std;
+#include "movingObject.h" // MovingObject, vector.h, ui*.h
 
 /**************************************************
  * CLASS Geostationary Satellite

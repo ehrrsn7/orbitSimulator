@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1418E116285C4CA5005D93AD /* vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1418E115285C4CA5005D93AD /* vector.cpp */; };
 		141E3F5228444B6C00C81352 /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5028444B6C00C81352 /* velocity.cpp */; };
 		141E3F5528444C9700C81352 /* acceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5328444C9700C81352 /* acceleration.cpp */; };
 		141E3F5828444CEF00C81352 /* force.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 141E3F5628444CEF00C81352 /* force.cpp */; };
@@ -35,6 +36,7 @@
 
 /* Begin PBXFileReference section */
 		1418E114285C3ADB005D93AD /* physicsFormulas.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsFormulas.h; sourceTree = "<group>"; tabWidth = 3; };
+		1418E115285C4CA5005D93AD /* vector.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = vector.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4828442E8000C81352 /* README.md */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4A284439F700C81352 /* simulator.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = simulator.h; sourceTree = "<group>"; tabWidth = 3; };
 		141E3F4C28443AB600C81352 /* vector.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; tabWidth = 3; };
@@ -47,7 +49,6 @@
 		1465B2EB284718D100B48318 /* geostationarySatellite.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = geostationarySatellite.h; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DC2847B21E0044DB45 /* earth.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = earth.h; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = physicsFormulas.cpp; sourceTree = "<group>"; tabWidth = 3; };
-		14D1A6DE2847B6700044DB45 /* physicsComponents.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = physicsComponents.h; sourceTree = "<group>"; tabWidth = 3; };
 		C11C7E962578098A00EA4B2E /* orbitSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = orbitSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C11C7EA325780B2100EA4B2E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -59,8 +60,7 @@
 		C11C7EAD25780B6000EA4B2E /* uiDraw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uiDraw.cpp; sourceTree = "<group>"; };
 		C11C7EAF25780B6500EA4B2E /* testPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testPosition.h; sourceTree = "<group>"; };
 		C11C7EB025780B6500EA4B2E /* uiDraw.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = uiDraw.h; sourceTree = "<group>"; tabWidth = 3; };
-		C179C6C027E375AF00E3E514 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
-		C179C6C227E375D600E3E514 /* position.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; tabWidth = 3; };
+		C179C6C027E375AF00E3E514 /* position.cpp */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; tabWidth = 3; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,15 +80,14 @@
 			isa = PBXGroup;
 			children = (
 				141E3F4C28443AB600C81352 /* vector.h */,
-				C179C6C227E375D600E3E514 /* position.h */,
+				1418E115285C4CA5005D93AD /* vector.cpp */,
 				C179C6C027E375AF00E3E514 /* position.cpp */,
-				14D1A6DE2847B6700044DB45 /* physicsComponents.h */,
-				1418E114285C3ADB005D93AD /* physicsFormulas.h */,
-				14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */,
 				141E3F5028444B6C00C81352 /* velocity.cpp */,
 				141E3F5328444C9700C81352 /* acceleration.cpp */,
 				141E3F5628444CEF00C81352 /* force.cpp */,
 				141E3F5928444D1B00C81352 /* gravity.cpp */,
+				1418E114285C3ADB005D93AD /* physicsFormulas.h */,
+				14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */,
 			);
 			path = "physics components";
 			sourceTree = "<group>";
@@ -217,6 +216,7 @@
 				C11C7EB525780B6500EA4B2E /* uiDraw.cpp in Sources */,
 				C11C7EB325780B6500EA4B2E /* uiInteract.cpp in Sources */,
 				14A952CB284BBB520054130D /* physicsFormulas.cpp in Sources */,
+				1418E116285C4CA5005D93AD /* vector.cpp in Sources */,
 				C179C6C127E375AF00E3E514 /* position.cpp in Sources */,
 				141E3F5228444B6C00C81352 /* velocity.cpp in Sources */,
 				141E3F5528444C9700C81352 /* acceleration.cpp in Sources */,

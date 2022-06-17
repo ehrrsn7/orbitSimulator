@@ -28,12 +28,21 @@ class Simulator {
     
 public:
    Simulator(Position ptUpperRight) : tr(ptUpperRight) {
+      // earth -- nothing needed
+      // ship
       ship.setPosition(Position(10000000, 10000000));
+      ship.setVelocity(Velocity(500000, 500000));
+      // stars
+      // satellites
+      // fragments
+      // projectiles
    }
     
    void update() {
       // self
       handleCollisions();
+      applyGravity();
+      cleanUpZombies();
       
       // duck duck goose
       if (earth.isAlive()) earth.update();
@@ -115,12 +124,10 @@ private:
    
    void applyGravity() {
       // earth -> moving objects
-      if (earth.isAlive()) earth.display();
-      if (ship.isAlive()) ship.display();
-      for (auto it : stars) it.display();
-      for (auto it : satellites) if (it->isAlive()) it->display();
-      for (auto it : fragments) if (it.isAlive()) it.display();
-      for (auto it : projectiles) if (it.isAlive()) it.display();
+      if (ship.isAlive()) ship.applyGravity(earth);
+      for (auto it : satellites)  if (it->isAlive()) it->applyGravity(earth);
+      for (auto it : fragments)   if (it.isAlive())  it.applyGravity(earth);
+      for (auto it : projectiles) if (it.isAlive())  it.applyGravity(earth);
       
       // moving objects -> earth lol
       
@@ -129,8 +136,8 @@ private:
    
    void cleanUpZombies() {
       // all vector<MovingObject> contents
-      for (auto it : satellites) if (!it->isAlive()) ;
-      for (auto it : fragments) if (!it.isAlive())  ;
+      for (auto it : satellites)  if (!it->isAlive()) ;
+      for (auto it : fragments)   if (!it.isAlive())  ;
       for (auto it : projectiles) if (!it.isAlive())  ;
    }
 };

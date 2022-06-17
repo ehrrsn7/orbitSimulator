@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "position.h"
+#include "vector.h"
 #include <algorithm> // used for min() and max() (specifically required by Visual Studio)
 using std::min;
 using std::max;
