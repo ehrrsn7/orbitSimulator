@@ -101,10 +101,10 @@ std::istream & operator >> (std::istream & in,        Vector& rhs);
  **************************************************/
 class Position : public Vector {
 public:
-   Position() : Position(0.0, 0.0) { }          // non-default constructor
+   Position() : Position(0.0, 0.0) { }                      // non-default constructor
    Position(double metersX, double metersY) : Vector(metersX, metersY) { } // default
-   Position(const Vector & pt) { *this = pt; }  // copy constructor
-   Position & operator = (const Position & pt); // assignment operator '='
+   Position(const Vector & pt) { *this = pt; }              // copy constructor
+   Position & operator = (const Position & pt);             // assignment operator '='
    
    double getMetersX() const { return getX(); }
    double getMetersY() const { return getY(); }
@@ -165,12 +165,13 @@ class Velocity : public Vector {
     
 public:
    // constructors
-   Velocity() : Vector(0.0, 0.0)  {              } // default constructor
-   Velocity(double dx, double dy) { set(dx, dy); } // normal "
-   Velocity(const Velocity& s)    { *this = s;   } // copy "
-   Velocity & operator = (const Velocity & rhs) {  // assignment operator '='
-      set(rhs.getX(), rhs.getY()); return *this;
-   }
+   Velocity() : Vector(0.0, 0.0)  {                      }  // default constructor
+   Velocity(double dx, double dy) { Vector::set(dx, dy); }  // normal "
+   Velocity(const Velocity& s)    { *this = s;           }  // copy "
+   Velocity & operator = (const Velocity & rhs);            // assignment operator '='
+   
+   // set
+   void set(const Velocity& v) { Vector::set(v.getX(), v.getY()); }
    
    // add
    void add(const Velocity& dv) {
@@ -209,12 +210,15 @@ class Acceleration : public Vector {
     
 public:
    // constructors
-   Acceleration() : Vector(0.0, 0.0)    {                } // default constructor
-   Acceleration(double ddx, double ddy) { set(ddx, ddy); } // normal "
-   Acceleration(const Acceleration& s)  { *this = s;     } // copy "
-   Acceleration & operator = (const Acceleration & rhs) { // assignment operator '='
-      set(rhs.getX(), rhs.getY()); return *this;
+   Acceleration() : Vector(0.0, 0.0)    {                        }   // default constructor
+   Acceleration(double ddx, double ddy) { Vector::set(ddx, ddy); }   // normal "
+   Acceleration(const Acceleration& s)  { *this = s;             }   // copy "
+   Acceleration & operator = (const Acceleration & rhs) {            // assignment operator '='
+      Vector::set(rhs.getX(), rhs.getY()); return *this;
    }
+   
+   // set
+   void set(const Acceleration& a) { Vector::set(a.getX(), a.getY()); }
    
    // add
    void add(const Acceleration& da) {
@@ -253,12 +257,15 @@ class Force : public Vector {
    
 public:
    // constructors
-   Force() : Vector(0.0, 0.0)  {              } // default constructor
-   Force(double fx, double fy) { set(fx, fy); } // normal "
-   Force(const Force& s)       { *this = s;   } // copy "
-   Force & operator = (const Force & rhs) { // assignment operator '='
-     set(rhs.getX(), rhs.getY()); return *this;
+   Force() : Vector(0.0, 0.0)  {                      }  // default constructor
+   Force(double fx, double fy) { Vector::set(fx, fy); }  // normal "
+   Force(const Force& s)       { *this = s;           }  // copy "
+   Force & operator = (const Force & rhs) {              // assignment operator '='
+     Vector::set(rhs.getX(), rhs.getY()); return *this;
   }
+   
+   // set
+   void set(const Force& f) { Vector::set(f.getX(), f.getY()); }
    
    // add
    void add(const Force dF) {
@@ -297,12 +304,15 @@ class Gravity : public Force {
    
 public:
    // constructors
-   Gravity() : Force(0.0, 0.0)   {              } // default constructor
-   Gravity(double fx, double fy) { set(fx, fy); } // normal "
-   Gravity(const Gravity& s)     { *this = s;   } // copy "
-   Gravity & operator = (const Gravity & rhs) { // assignment operator '='
-      set(rhs.getX(), rhs.getY()); return *this;
+   Gravity() : Force(0.0, 0.0)   {                      }   // default constructor
+   Gravity(double fx, double fy) { Vector::set(fx, fy); }   // normal "
+   Gravity(const Gravity& s)     { *this = s;           }   // copy "
+   Gravity & operator = (const Gravity & rhs) {             // assignment operator '='
+      Vector::set(rhs.getX(), rhs.getY()); return *this;
    }
+   
+   // set
+   void set(const Gravity& g) { Vector::set(g.getX(), g.getY()); }
    
    // add
    void add(const Gravity dF) {

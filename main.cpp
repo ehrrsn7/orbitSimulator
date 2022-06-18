@@ -53,8 +53,7 @@ int main(int argc, char** argv)
    // Initialize OpenGL
    Position ptUpperRight;
    ptUpperRight.setZoom(128000.0 /* 128km equals 1 pixel */);
-   ptUpperRight.setPixelsX(1000.0);
-   ptUpperRight.setPixelsY(1000.0);
+   ptUpperRight.setPixels(1000.0, 1000.0);
    
    // create interface object
    Interface ui(0, NULL,

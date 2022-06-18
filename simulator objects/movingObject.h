@@ -63,9 +63,9 @@ public:
       setAngle(da); // TODO: idk how this method should be used to make things more convenient
    }
    
-   void applyGravity(const MovingObject & obj) {
+   void applyGravity(const MovingObject & obj, double dt) {
       // obj: object with mass that is attracting this
-      //  a += forceDueToGravity(this, obj) / getMass(); // TODO: fix and uncomment
+      //  a += dt * forceDueToGravity(this, obj) / getMass(); // TODO: fix and uncomment
    }
 
 protected:
@@ -97,14 +97,23 @@ public:
    }
 };
 
+// MovingObject children
 class Satellite : public MovingObject {};
 class Projectile : public MovingObject {};
 class SatellitePart : public MovingObject {};
 class Fragment : public MovingObject {} ;
 
+// Satellite children
 class Hubble : public Satellite {};
 class SpaceShip : public Satellite {};
 class CrewDragon : public Satellite {};
-class Sputnik : public Satellite {};
+
+class Sputnik : public Satellite {
+public:
+   void display() const {
+      drawSputnik(p, angle);
+   }
+};
+
 class GPS : public Satellite {};
 class Starlink : public Satellite {};
