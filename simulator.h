@@ -27,13 +27,28 @@
 class Simulator {
     
 public:
-   Simulator(Position ptUpperRight) : tr(ptUpperRight) {
+   Simulator(Position ptUpperRight) : tr(ptUpperRight), dt(0.0) {
+      // earth -- nothing needed
+      // ship
       ship.setPosition(Position(10000000, 10000000));
+      ship.setVelocity(Velocity(500000, 500000));
+      // stars
+      // satellites
+      /// sputnik
+      Sputnik* sputnik = new Sputnik; // allocate new memory
+      sputnik->setPosition(Position(-36515095.13, 21082000.0)); // m
+      sputnik->setVelocity(Velocity(2050.0, 2684.68)); // m/s
+      satellites.push_back(sputnik);
+      // fragments
+      // projectiles
    }
     
    void update() {
       // self
       handleCollisions();
+      applyGravity();
+      cleanUpZombies();
+      dt = (double)1/30; // TODO: make this more intuitive
       
       // duck duck goose
       if (earth.isAlive()) earth.update();
@@ -51,9 +66,9 @@ public:
       if (earth.isAlive()) earth.display();
       if (ship.isAlive()) ship.display();
       for (auto it : stars) it.display();
-      for (auto it : satellites) if (it->isAlive()) it->display();
-      for (auto it : fragments) if (it.isAlive()) it.display();
-      for (auto it : projectiles) if (it.isAlive()) it.display();
+      for (auto it : satellites)  if (it->isAlive()) it->display();
+      for (auto it : fragments)   if (it.isAlive())  it.display();
+      for (auto it : projectiles) if (it.isAlive())  it.display();
    }
  
    void handleInput(const Interface * pUI) {
@@ -64,9 +79,9 @@ public:
       if (earth.isAlive()) earth.handleInput(pUI);
       if (ship.isAlive()) ship.handleInput(pUI);
       for (auto it : stars) it.handleInput(pUI);
-      for (auto it : satellites) if (it->isAlive()) it->handleInput(pUI);
-      for (auto it : fragments) if (it.isAlive()) it.handleInput(pUI);
-      for (auto it : projectiles) if (it.isAlive()) it.handleInput(pUI);
+      for (auto it : satellites)  if (it->isAlive()) it->handleInput(pUI);
+      for (auto it : fragments)   if (it.isAlive())  it.handleInput(pUI);
+      for (auto it : projectiles) if (it.isAlive())  it.handleInput(pUI);
    }
    
 
@@ -74,6 +89,9 @@ private:
    // Screen Dimensions
    Position tr; // upper-right point of window
    // (center is [0,0], giving us dimensions w/2 and h/2)
+   
+   // time
+   double dt;
    
    // objects on the screen
    Earth earth;
@@ -115,12 +133,10 @@ private:
    
    void applyGravity() {
       // earth -> moving objects
-      if (earth.isAlive()) earth.display();
-      if (ship.isAlive()) ship.display();
-      for (auto it : stars) it.display();
-      for (auto it : satellites) if (it->isAlive()) it->display();
-      for (auto it : fragments) if (it.isAlive()) it.display();
-      for (auto it : projectiles) if (it.isAlive()) it.display();
+      if (ship.isAlive()) ship.applyGravity(earth);
+      for (auto it : satellites)  if (it->isAlive()) it->applyGravity(earth, dt);
+      for (auto it : fragments)   if (it.isAlive())  it.applyGravity(earth, dt);
+      for (auto it : projectiles) if (it.isAlive())  it.applyGravity(earth, dt);
       
       // moving objects -> earth lol
       
@@ -128,9 +144,75 @@ private:
    }
    
    void cleanUpZombies() {
-      // all vector<MovingObject> contents
-      for (auto it : satellites) if (!it->isAlive()) ;
-      for (auto it : fragments) if (!it.isAlive())  ;
-      for (auto it : projectiles) if (!it.isAlive())  ;
+      // clean up all dead satellites
+      std::vector<Satellite*>::iterator sIt = satellites.begin();
+      while (sIt != satellites.end()) {
+         if (!(*sIt)->isAlive()) {
+            
+            // let vector::erase handle unallocating the memory and pointing us
+            // to the next living component (or satellites.end())
+            sIt = satellites.erase(sIt);
+         }
+         // just keep swimming
+         else ++sIt;
+      }
+      
+      // clean up all dead fragments
+      std::vector<Fragment>::iterator fIt = fragments.begin();
+      while (fIt != fragments.end()) {
+         if (!fIt->isAlive())
+            fIt = fragments.erase(fIt);
+         else ++fIt;
+      }
+      
+      // clean up all dead projectiles
+      std::vector<Projectile>::iterator pIt = projectiles.begin();
+      while (pIt != projectiles.end()) {
+         if (!pIt->isAlive())
+            pIt = projectiles.erase(pIt);
+         else ++pIt;
+      }
+   }
+   
+   void deleteAllSatellites() {
+      // idk why you'd need this helper function but it's
+      // a great reference for how to correctly unallocate
+      // the memory of pointers (they don't fall in the same
+      // scope of memory as the other attributes/class variables)
+      
+      // check to see if there are any satellites left
+      // (just check position 0, this will do.)
+      if (satellites[0] != NULL) {
+         
+         // create a Satellite* iterator, set it to point to
+         // the first position in satellites
+         std::vector<Satellite*>::iterator it = satellites.begin();
+         
+         while (it != satellites.end()) {
+            // normally here we'd increment by calling ++it,
+            // but vector::erase will move us through each
+            // item in the collection to the end
+            
+            // dereference the iterator object using * to get the Satellite* pointer
+            Satellite* satellite_ptr = *it; // referring to this as (*it) works just fine
+            
+            // now we have our pointer, which we want to delete:
+            if (satellite_ptr != NULL) { // this should always be null
+               
+               // The first necessary step before we remove the object + its pntr
+               // is to delete the object and set its pointer to NULL
+               delete satellite_ptr;
+               satellite_ptr = NULL;
+               
+            }
+            
+            // the next necessary step in removing an object + pntr
+            // is to remove its pointer (now NULL) from vector
+            it = satellites.erase(it);
+            
+         }
+      }
+      
+      // "only YOU can prevent memory leaks!" ("please allocate responsibly")
    }
 };

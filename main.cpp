@@ -9,7 +9,7 @@
 #define YEET 0
 
 #include "simulator.h"  // for Simulator
-#include "position.h"   // for Point
+#include "vector.h"   // for Point
 #include "uiInteract.h" // for Interface
 #include "uiDraw.h"     // for Random and draw*
 
@@ -29,7 +29,7 @@ void callBack(const Interface* pUI, void* p) {
    // single callback function in OpenGL.
    Simulator* pSim = (Simulator*)p;
    
-   pSim->update();
+   pSim->update(); // TODO: is there a way to get deltaTime from pUI? if so, pass it here and in the subsequent updating objects so that we have more accurate directions on how to update them
    pSim->display();
    pSim->handleInput(pUI);
 }
@@ -53,8 +53,7 @@ int main(int argc, char** argv)
    // Initialize OpenGL
    Position ptUpperRight;
    ptUpperRight.setZoom(128000.0 /* 128km equals 1 pixel */);
-   ptUpperRight.setPixelsX(1000.0);
-   ptUpperRight.setPixelsY(1000.0);
+   ptUpperRight.setPixels(1000.0, 1000.0);
    
    // create interface object
    Interface ui(0, NULL,

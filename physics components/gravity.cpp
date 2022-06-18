@@ -3,5 +3,4 @@
  * orbitSimulator
  **********************************************************************/
 
-#include "physicsComponents.h"
-
+#include "vector.h"

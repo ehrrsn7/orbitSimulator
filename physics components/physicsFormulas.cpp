@@ -4,16 +4,16 @@
  * (We have a collection of procedural functions here because each math
  * helper function does not retain state)
  **********************************************************************/
- 
-#define FPS 30 // frames/s
-#define SECONDS_IN_DAY 86400 // s
- 
-#include "earth.h"               // for EARTH_RADIUS
-#include "physicsComponents.h"   // for ACCEL_DUE_TO_GRAVITY_EARTH
-#include "position.h"            // for Position
- 
-#include <cmath>                 // for math functions
- 
+
+#define FPS 30                // frames/s
+#define SECONDS_IN_DAY 86400  // s : 60s/min * 60min/hr * 24hr/d
+
+#include "physicsFormulas.h"  // header file
+#include "movingObject.h"     // for MovingObject
+#include "earth.h"            // for Earth
+
+#include <cmath>              // for math functions
+
 
 /**********************************************************************
  * Horizontal/Vertical Components
@@ -25,9 +25,44 @@ double trigX(const double mag, const double angleRadians)
 double trigY(const double mag, const double angleRadians)
    { return mag * cos(angleRadians); }
  
-double trigX(const Vector & v) { return trigX(v.mag(), v.angle()); }
-double trigY(const Vector & v) { return trigY(v.mag(), v.angle()); }
- 
+double trigX(const Vector & v) { return trigX(mag(v), v.angle()); }
+double trigY(const Vector & v) { return trigY(mag(v), v.angle()); }
+
+double mag(const Vector& s) { return mag(s.getX(), s.getY()); }
+double mag(double x, double y) { return sqrt(x*x + y*y); }
+                                         
+double deg(double angleRadians) { return 180 * angleRadians / M_PI; }
+double rad(double angleDegrees) { return M_PI * angleDegrees / 180; }
+
+/**********************************************************************
+* Distance Functions
+**********************************************************************/
+
+/**************************************************
+ * author: james helfrich
+ **************************************************/
+double computeDistance(const Position& pos1, const Position& pos2) {
+  return sqrt((pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
+              (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));
+}
+
+/**************************************************
+ * distance(position1, position2)
+ * Distance = √[(p1.x-p2.x)^2 + (p1.y-p2.y)^2]
+ **************************************************/
+double distance(const Position& p1, const Position& p2) {
+   return computeDistance(p1, p2);
+}
+
+/**************************************************
+ * Overloaded function for easy converting
+ * distance(objects) -> distance(positions)
+ * Distance = √[(p1.x-p2.x)^2 + (p1.y-p2.y)^2]
+ **************************************************/
+double distance(const MovingObject& obj1, const MovingObject& obj2) {
+   return distance(obj1.getPosition(), obj2.getPosition());
+}
+
 
 /**********************************************************************
  * Time Functions
@@ -51,9 +86,9 @@ double timeDilation() {return 24 * 60; }
  **************************************************/
 double timePerFrame() {return timeDilation() / FPS; }
  
-/**************************************************
+/**********************************************************************
  * Earth Functions
- **************************************************/
+ **********************************************************************/
  
 /**************************************************
  * rotation speed
@@ -64,20 +99,13 @@ double timePerFrame() {return timeDilation() / FPS; }
  *    seconds in day - number of seconds for 1 earth rotation
  **************************************************/
 double rotationSpeed() {
-   // n is the current time of the software from callback
    return -(2 * M_PI / FPS) * (timeDilation() / SECONDS_IN_DAY);
 }
- 
-/**************************************************
- * gravity equation
- * gh = g (r/(r + h))^2
- **************************************************/
-double calcGravity(double height) {
-   return ACCEL_DUE_TO_GRAVITY_EARTH * (
-      pow((EARTH_RADIUS / (EARTH_RADIUS + height)), 2)
-   );
-}
- 
+
+/**********************************************************************
+* Gravity Functions
+**********************************************************************/
+
 /**************************************************
  * height above the earth
  * h = √[x² + y²] - r
@@ -91,6 +119,11 @@ double calcHeight(const Position & p) {
    ) - EARTH_RADIUS;
 }
  
+/**************************************************
+ * height above the earth
+ * h = √[(x2 - x1)² + (y2 - y1)²] - r
+ *    √[x2² + y2²] -> distance from p1
+ **************************************************/
 double calcHeight(const Position & p, const Earth & e) {
    // should the earth not strictly be at the origin
    return sqrt(
@@ -101,33 +134,73 @@ double calcHeight(const Position & p, const Earth & e) {
  
 /**************************************************
  * direction of gravity pull
- * a = atan2(xe - xs, ye - ys)
- *    e - earth, s - object/satellite
+ * a = atan2(p.x2 - p.x2, p.y1 - p.y2)
  *    *note that x and y are backwards, this is on purpose...:L
  **************************************************/
-double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2) {
+double directionOfGravity(const Position& p1, const Position& p2) {
    return atan2(
-      obj1.getPosition().getMetersX() - obj2.getPosition().getMetersX(),
-      obj1.getPosition().getMetersY() - obj2.getPosition().getMetersY()
+      p1.getMetersX() - p2.getMetersX(),
+      p1.getMetersY() - p2.getMetersY()
    );
 }
- 
- 
- 
-double getGravityOf(const MovingObject& obj1, const MovingObject& obj2) {
-   return 0.0;
+
+/**************************************************
+ * alias for directionOfGravity(Position, Position)
+ * direction of gravity pull
+ * a = atan2(p.x2 - p.x2, p.y1 - p.y2)
+ **************************************************/
+double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2) {
+   return directionOfGravity(obj1.getPosition(), obj2.getPosition());
 }
- 
- 
+
+/**************************************************
+ * gravity due to mass equation
+ * Fg = G * m1 m2 / d^2 @angle towards obj2
+ * placed beneath directionOfGravity so that it sees it
+ **************************************************/
+Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2) {
+   Gravity g;
+   g.setPolar(
+      G * obj1.getMass() * obj2.getMass() / distance(obj1, obj2),
+      directionOfGravity(obj1, obj2));
+   return g;
+}
+
+/**************************************************
+* gravity equation
+* gh = g (r/(r + h))^2
+**************************************************/
+double calcGravity(double height) {
+   return ACCEL_DUE_TO_GRAVITY_EARTH * (
+      pow((EARTH_RADIUS / (EARTH_RADIUS + height)), 2)
+   );
+}
+
+/**************************************************
+* gravity equation
+* gh = g (r/(r + h))^2
+* but returns a Gravity vector object in the
+* direction of the origin
+**************************************************/
+Gravity calcGravityVector(const Position& p) {
+  Gravity g;
+  g.setPolar(
+     calcGravity(calcHeight(p)),
+     directionOfGravity(p, Position())
+  );
+  return g;
+}
+
 /**********************************************************************
  * Motion
  **********************************************************************/
  
 /**************************************************
  * motion with constant acceleration
+ * s = s0 + v0 * dt + 1/2 * a * dt^2
  **************************************************/
 double aToD(const Acceleration& a, const Velocity& v0, double dt, double initialD) {
-   return initialD + v0.mag() * dt + a.mag() * pow(dt, 2);
+   return initialD + mag(v0) * dt + .5 * mag(a) * pow(dt, 2);
    // dEjA vUUUUoo 🥹🚗
 }
  
@@ -135,7 +208,7 @@ double aToD(const Acceleration& a, const Velocity& v0, double dt, double initial
  * x component of motion with constant acceleration
  **************************************************/
 double aToX(const Acceleration& a, const Velocity& v0, double dt, double initialD) {
-   return initialD + v0.getX() * dt + a.getX() * pow(dt, 2);
+   return initialD + v0.getX() * dt + .5 * a.getX() * pow(dt, 2);
    // return toX(aToD(a, v0, dt, initialD), Velocity(a * dt + v0).getAngleRadians());
 }
  
@@ -143,16 +216,8 @@ double aToX(const Acceleration& a, const Velocity& v0, double dt, double initial
  * y component of motion with constant acceleration
  **************************************************/
 double aToY(const Acceleration& a, const Velocity& v0, double dt, double initialD) {
-   return initialD + v0.getY() * dt + a.getY() * pow(dt, 2);
+   return initialD + v0.getY() * dt + .5 * a.getY() * pow(dt, 2);
    // return toX(aToD(a, v0, dt, initialD), Velocity(a * dt + v0).getAngleRadians());
-}
- 
-/**************************************************
- * velocity with constant acceleration
- **************************************************/
-Velocity aToV(const Acceleration& a, const Velocity& v0, const double dt) {
-//   return v0 + a * dt; // TODO: uncomment and fix
-   return Velocity();
 }
  
 /**************************************************
@@ -160,7 +225,6 @@ Velocity aToV(const Acceleration& a, const Velocity& v0, const double dt) {
  **************************************************/
 double aToDx(const Acceleration& a, const Velocity& v0, double dt) {
    return v0.getX() + a.getX() * dt;
-   // return toX(aToV(a, v0, dt));
 }
  
 /**************************************************
@@ -169,4 +233,12 @@ double aToDx(const Acceleration& a, const Velocity& v0, double dt) {
 double aToDy(const Acceleration& a, const Velocity& v0, double dt) {
    return v0.getY() + a.getY() * dt;
    // return toY(aToV(a, v0, dt));
+}
+
+/**************************************************
+* velocity with constant acceleration
+**************************************************/
+Velocity aToV(const Acceleration& a, const Velocity& v0, const double dt) {
+//   return v0 + a * dt; // TODO: fix and uncomment
+  return Velocity(aToDx(a, v0, dt), aToDy(a, v0, dt));
 }
