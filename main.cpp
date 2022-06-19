@@ -9,7 +9,8 @@
 #define YEET 0
 
 #include "simulator.h"  // for Simulator
-#include "vector.h"   // for Point
+#include "vector.h"     // for Point
+#include "test.h"       // for testRunner
 #include "uiInteract.h" // for Interface
 #include "uiDraw.h"     // for Random and draw*
 
@@ -62,6 +63,13 @@ int main(int argc, char** argv)
    
    // create orbit simulator
    Simulator sim(ptUpperRight);
+   
+   // run tests
+   bool runTests = true;
+   if (runTests) {
+      testRunner(); // unit tests
+      return 0; // early exit before running main loop
+   }
    
    // run interface, pass in orbit simulator
    ui.run(callBack, &sim);

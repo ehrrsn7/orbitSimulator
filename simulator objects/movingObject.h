@@ -115,5 +115,10 @@ public:
    }
 };
 
-class GPS : public Satellite {};
+class GPS : public Satellite {
+public:
+   void display() const {
+      drawGPS(p, angle);
+   }
+};
 class Starlink : public Satellite {};

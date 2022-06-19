@@ -52,7 +52,7 @@ public:
    void setY(double y) { this->y = y; }
    
    void set(double x, double y);
-   void set(Vector & s) { set(s.getX(), s.getY()); }
+   void set(const Vector & s) { set(s.getX(), s.getY()); }
    
    /**************************************************
     * Adders
@@ -85,6 +85,8 @@ public:
 protected:
    double x; // horizontal position (meters)
    double y; // vertical position (meters)
+   
+   friend class TestVector;
 };
 
 // stream I/O useful for debugging
@@ -111,6 +113,7 @@ public:
    double getPixelsX() const { return getMetersX() / metersFromPixels; }
    double getPixelsY() const { return getMetersY() / metersFromPixels; }
    
+   void set(double x, double y) { Vector::set(x, y); }
    void set(const Position& p) { Vector::set(p.getX(), p.getY()); }
    void setMetersX(double xMeters) { setX(xMeters); }
    void setMetersY(double yMeters) { setY(yMeters); }
@@ -171,6 +174,7 @@ public:
    Velocity & operator = (const Velocity & rhs);            // assignment operator '='
    
    // set
+   void set(double x, double y) { Vector::set(x, y); }
    void set(const Velocity& v) { Vector::set(v.getX(), v.getY()); }
    
    // add
@@ -218,6 +222,7 @@ public:
    }
    
    // set
+   void set(double x, double y) { Vector::set(x, y); }
    void set(const Acceleration& a) { Vector::set(a.getX(), a.getY()); }
    
    // add
@@ -265,6 +270,7 @@ public:
   }
    
    // set
+   void set(double x, double y) { Vector::set(x, y); }
    void set(const Force& f) { Vector::set(f.getX(), f.getY()); }
    
    // add
@@ -293,6 +299,8 @@ private:
    Acceleration toAcceleration(double mass) const {
       return Acceleration(getX() / mass, getY() / mass);
    }
+   
+   friend class TestForce;
 };
 
 /**************************************************
@@ -312,6 +320,7 @@ public:
    }
    
    // set
+   void set(double x, double y) { Vector::set(x, y); }
    void set(const Gravity& g) { Vector::set(g.getX(), g.getY()); }
    
    // add

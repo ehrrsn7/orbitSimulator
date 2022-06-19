@@ -39,6 +39,8 @@ public:
       sputnik->setPosition(Position(-36515095.13, 21082000.0)); // m
       sputnik->setVelocity(Velocity(2050.0, 2684.68)); // m/s
       satellites.push_back(sputnik);
+      /// GPS
+      createGPSObjects();
       // fragments
       // projectiles
    }
@@ -133,7 +135,7 @@ private:
    
    void applyGravity() {
       // earth -> moving objects
-      if (ship.isAlive()) ship.applyGravity(earth);
+      if (ship.isAlive()) ship.applyGravity(earth, dt);
       for (auto it : satellites)  if (it->isAlive()) it->applyGravity(earth, dt);
       for (auto it : fragments)   if (it.isAlive())  it.applyGravity(earth, dt);
       for (auto it : projectiles) if (it.isAlive())  it.applyGravity(earth, dt);
@@ -149,8 +151,12 @@ private:
       while (sIt != satellites.end()) {
          if (!(*sIt)->isAlive()) {
             
-            // let vector::erase handle unallocating the memory and pointing us
-            // to the next living component (or satellites.end())
+            // unallocate memory
+            Satellite* pSIt = *sIt;
+            delete pSIt;
+            pSIt = NULL;
+            
+            // remove from vector and iterate
             sIt = satellites.erase(sIt);
          }
          // just keep swimming
@@ -214,5 +220,43 @@ private:
       }
       
       // "only YOU can prevent memory leaks!" ("please allocate responsibly")
+   }
+
+   Satellite* createGPSObject(Position p, Velocity v) {
+      GPS* newGPS = new GPS; // allocate new memory
+      newGPS->setPosition(p); // m
+      newGPS->setVelocity(v); // m/s
+      return newGPS;
+   }
+
+   void createGPSObjects() {
+      Position initialP;
+      Velocity initialV;
+
+      // ( 0.0 m, 26,560,000.0 m) (-3,880.0 m/s, 0.0 m/s)
+      initialP.set(0.0, 26560000.0);
+      initialV.set(-3880.0, 0.0);
+      satellites.push_back(createGPSObject(initialP, initialV));
+
+      // ( 23,001,634.72 m, 13,280,000.0 m) ( -1,940.00 m/s, 3,360.18 m/s)
+      initialP.set(23001634.72, 13280000.0);
+      initialV.set(-1940.00, 3360.18);
+      satellites.push_back(createGPSObject(initialP, initialV));
+
+      // ( 0.0 m, -26,560,000.0 m) ( 3,880.0 m/s, 0.0 m/s)
+      initialP.set(0.0, -26560000.0);
+      initialV.set(3880.0, 0.0);
+      satellites.push_back(createGPSObject(initialP, initialV));
+
+      // (023,001,634.72 m, -13,280,000.0 m)	( 1,940.00 m/s, -3,360.18 m/s)
+      initialP.set(023001634.72, -13280000.0);
+      initialV.set(1940.00, -3360.18);
+      satellites.push_back(createGPSObject(initialP, initialV));
+
+      // (-23,001,634.72 m, 13,280,000.0 m) ( -1,940.00 m/s, -3,360.18 m/s)
+      initialP.set(-23001634.72, -13280000.0);
+      initialV.set(-1940.00, -3360.18);
+      satellites.push_back(createGPSObject(initialP, initialV));
+
    }
 };
