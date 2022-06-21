@@ -22,7 +22,7 @@ void Vector::add(const Vector & v) {
 }
 
 void Vector::setPolar(double magnitude, double angleRadians) {
-   add(trigX(magnitude, angleRadians), trigY(magnitude, angleRadians));
+   Vector::set(trigX(magnitude, angleRadians), trigY(magnitude, angleRadians));
 }
 
 void Vector::setMagnitude(double magnitude, double angleRadians) {
