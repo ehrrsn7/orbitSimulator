@@ -58,6 +58,10 @@ public:
    // How many frames per second are we configured for?
    void setFramesPerSecond(double value);
    
+   // How much time passed since the last frame?
+   void updateDeltaTime();
+   double getDeltaTime() const;
+   
    // Key event indicating a key has been pressed or not.  The callbacks
    // should be the only onces to call this
    void keyEvent(int key, bool fDown);
@@ -72,7 +76,7 @@ public:
    int  isLeft()     const { return isLeftPress;   };
    int  isRight()    const { return isRightPress;  };
    bool isSpace()    const { return isSpacePress;  };
-   bool isEscape()   const { return isEscapePress; };
+   bool isEscape()   const { return isEscapePress; }; // (ELIJAH)
    
    static void *p;                   // for client
    static void (*callBack)(const Interface *, void *);
@@ -80,16 +84,19 @@ public:
 private:
    void initialize(int argc, char ** argv, const char * title, const Position & ptUpperRight);
 
-   static bool         initialized;  // only run the constructor once!
-   static double       timePeriod;   // interval between frame draws
-   static unsigned long nextTick;     // time (from clock()) of our next draw
+   static bool          initialized;   // only run the constructor once!
+   static double        timePeriod;    // interval between frame draws
+   static unsigned long nextTick;      // time (from clock()) of our next draw
+   static std::chrono::duration<double> deltaTime;  // (s) actual recorded change in time between frames (ELIJAH)
+   static std::chrono::steady_clock::time_point tn; // timestamp for this frame
+   static std::chrono::steady_clock::time_point t0; // timestamp for last frame
 
    static int  isDownPress;          // is the down arrow currently pressed?
    static int  isUpPress;            //    "   up         "
    static int  isLeftPress;          //    "   left       "
    static int  isRightPress;         //    "   right      "
    static bool isSpacePress;         //    "   space      "
-   static bool isEscapePress;        //    "   escape     "
+   static bool isEscapePress;        //    "   escape     " (ELIJAH)
 };
 
 

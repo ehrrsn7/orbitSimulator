@@ -15,6 +15,9 @@
 #include "uiInteract.h"
 #include "uiDraw.h"
 
+#include <thread>         // std::this_thread::sleep_for
+#include <chrono>         // std::chrono::seconds
+
 #include <vector>
 
 
@@ -50,7 +53,6 @@ public:
       handleCollisions();
       applyGravity();
       cleanUpZombies();
-      dt = (double)1/30; // TODO: make this more intuitive
       
       // duck duck goose
       if (earth.isAlive()) earth.update();
@@ -75,6 +77,8 @@ public:
  
    void handleInput(const Interface * pUI) {
       // self
+      dt = pUI->getDeltaTime();
+      std::cout << dt*1000 << " ms\n";
       if (pUI->isEscape()) exit(0); // press ESC to end program
 
       // do our rounds..

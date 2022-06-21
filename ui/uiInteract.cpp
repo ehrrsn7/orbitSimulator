@@ -14,6 +14,7 @@
 #include <sstream>    // convert an integer into text
 #include <cassert>    // I feel the need... the need for asserts
 #include <time.h>     // for clock
+#include <chrono>     // for duration_cast
 #include <cstdlib>    // for rand()
 
 
@@ -101,6 +102,9 @@ void drawCallback()
 
    // from this point, set the next draw time
    ui.setNextDrawTime();
+   
+   // ELIJAH: use this moment to record what our current deltaTime was for the last frame
+   ui.updateDeltaTime();
 
    // bring forth the background buffer
    glutSwapBuffers();
@@ -247,20 +251,44 @@ void Interface::setFramesPerSecond(double value)
 }
 
 /*************************************************************************
+ * INTERFACE : UPDATE DELTA TIME
+ * Record how much time has passed since the last frame to static variable
+ * deltaTime.
+ *************************************************************************/
+void Interface::updateDeltaTime() {
+   tn = std::chrono::high_resolution_clock::now(); // record current timestamp
+   // with t0 being the old timestamp, this should give us the amount of time elapsed
+   deltaTime = std::chrono::duration<double>(tn - t0); // seconds
+   t0 = std::chrono::high_resolution_clock::now(); // save for next timestamp
+}
+
+/*************************************************************************
+ * INTERFACE : GET DELTA TIME
+ * Return recorded deltaTime (s), where deltaTime is the amount of time
+ * that has passed since the last frame.
+ *************************************************************************/
+double Interface::getDeltaTime() const {
+   return (double)(deltaTime.count()); // seconds
+}
+
+/*************************************************************************
  * STATICS
  * All the static member variables need to be initialized
  * Somewhere globally.  This is a good spot
  *************************************************************************/
-int             Interface::isDownPress      = 0;
-int             Interface::isUpPress        = 0;
-int             Interface::isLeftPress      = 0;
-int             Interface::isRightPress     = 0;
-bool            Interface::isSpacePress     = false;
-bool            Interface::isEscapePress    = false;
-bool            Interface::initialized      = false;
-double          Interface::timePeriod       = 1.0 / 30; // 30 frames/s default
-unsigned long   Interface::nextTick         = 0;        // redraw now please
-void *          Interface::p                = NULL;
+int            Interface::isDownPress     = 0;
+int            Interface::isUpPress       = 0;
+int            Interface::isLeftPress     = 0;
+int            Interface::isRightPress    = 0;
+bool           Interface::isSpacePress    = false;
+bool           Interface::isEscapePress   = false;
+bool           Interface::initialized     = false;
+double         Interface::timePeriod      = 1.0 / 30; // 30 frames/s default
+unsigned long  Interface::nextTick        = 0;        // redraw now please
+std::chrono::duration<double> Interface::deltaTime = std::chrono::duration<double>(1/30); // initial value 1/30th s
+std::chrono::steady_clock::time_point Interface::t0 = std::chrono::high_resolution_clock::now();
+std::chrono::steady_clock::time_point Interface::tn = std::chrono::high_resolution_clock::now();
+void *         Interface::p               = NULL;
 void (*Interface::callBack)(const Interface *, void *) = NULL;
 
 

@@ -65,7 +65,7 @@ int main(int argc, char** argv)
    Simulator sim(ptUpperRight);
    
    // run tests
-   bool runTests = true;
+   bool runTests = false;
    if (runTests) {
       testRunner(); // unit tests
       return 0; // early exit before running main loop
