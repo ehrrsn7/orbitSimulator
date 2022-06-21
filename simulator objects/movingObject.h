@@ -24,10 +24,10 @@ public:
       
    }
    
-   void update() {
-      double dt = (double)1/30; // TODO: is there a better way to get this from pUI? 
-      v += a * dt; // TODO: fix and uncomment
-      p += v * dt;
+   void update(const Interface * pUI) {
+      v += a * pUI->getDeltaTime(); // TODO: fix and uncomment
+      p += v * pUI->getDeltaTime();
+      rotate();
    }
    
    virtual void display() const { }
@@ -53,19 +53,22 @@ public:
    double getAngle()             const { return angle; }
    double getDAngle()            const { return dAngle; }
    
+   // adders
+   void addAngle(double dAngle) { setAngle(getAngle() + dAngle); }
+   
    // other
    void hit() { setAlive(false); }
    
    /**************************************************
     * helper methods
     **************************************************/
-   void rotate(double da) {
-      setAngle(da); // TODO: idk how this method should be used to make things more convenient
+   void rotate() {
+      addAngle(dAngle);
    }
    
    void applyGravity(const MovingObject & obj, double dt) {
       // obj: object with mass that is attracting this
-      //  a += dt * forceDueToGravity(this, obj) / getMass(); // TODO: fix and uncomment
+//      a += dt * forceDueToGravity(obj, obj) / getMass(); // TODO: fix and uncomment
    }
 
 protected:
@@ -88,8 +91,8 @@ public:
       
    }
    
-   void update() {
-      
+   void update(const Interface * pUI) {
+      MovingObject::update(pUI);
    }
    
    void display() const {

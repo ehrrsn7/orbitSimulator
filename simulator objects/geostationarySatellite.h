@@ -39,11 +39,11 @@ public:
       angle += da;
    }
    
-   void handleInput(const Interface * pUI) { }
-   
    void display() const {
       drawHubble(p, angle);
    }
+   
+   void handleInput(const Interface * pUI) { }
    
    /********************************************
     * public methods which will help Simulator

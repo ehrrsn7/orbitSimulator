@@ -10,6 +10,7 @@
 
 #include "simulator.h"  // for Simulator
 #include "vector.h"     // for Point
+#include "physicsFormulas.h"
 #include "test.h"       // for testRunner
 #include "uiInteract.h" // for Interface
 #include "uiDraw.h"     // for Random and draw*
@@ -30,9 +31,12 @@ void callBack(const Interface* pUI, void* p) {
    // single callback function in OpenGL.
    Simulator* pSim = (Simulator*)p;
    
-   pSim->update(); // TODO: is there a way to get deltaTime from pUI? if so, pass it here and in the subsequent updating objects so that we have more accurate directions on how to update them
+   pSim->update(pUI);
    pSim->display();
    pSim->handleInput(pUI);
+   
+   // other
+   if (pUI->isEscape()) exit(0); // press ESC to end program
 }
 
 double Position::metersFromPixels = 40.0;

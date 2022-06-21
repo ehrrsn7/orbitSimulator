@@ -258,7 +258,7 @@ void Interface::setFramesPerSecond(double value)
 void Interface::updateDeltaTime() {
    tn = std::chrono::high_resolution_clock::now(); // record current timestamp
    // with t0 being the old timestamp, this should give us the amount of time elapsed
-   deltaTime = std::chrono::duration<double>(tn - t0); // seconds
+   deltaTime = (std::chrono::duration<double>)(tn - t0); // seconds
    t0 = std::chrono::high_resolution_clock::now(); // save for next timestamp
 }
 
@@ -285,9 +285,11 @@ bool           Interface::isEscapePress   = false;
 bool           Interface::initialized     = false;
 double         Interface::timePeriod      = 1.0 / 30; // 30 frames/s default
 unsigned long  Interface::nextTick        = 0;        // redraw now please
-std::chrono::duration<double> Interface::deltaTime = std::chrono::duration<double>(1/30); // initial value 1/30th s
+
+std::chrono::duration<double> Interface::deltaTime  = std::chrono::duration<double>(1/30); // initial value 1/30th s
 std::chrono::steady_clock::time_point Interface::t0 = std::chrono::high_resolution_clock::now();
 std::chrono::steady_clock::time_point Interface::tn = std::chrono::high_resolution_clock::now();
+
 void *         Interface::p               = NULL;
 void (*Interface::callBack)(const Interface *, void *) = NULL;
 

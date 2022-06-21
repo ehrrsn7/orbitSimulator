@@ -30,7 +30,7 @@
 class Simulator {
     
 public:
-   Simulator(Position ptUpperRight) : tr(ptUpperRight), dt(0.0) {
+   Simulator(Position ptUpperRight) : tr(ptUpperRight) {
       // earth -- nothing needed
       // ship
       ship.setPosition(Position(10000000, 10000000));
@@ -48,19 +48,19 @@ public:
       // projectiles
    }
     
-   void update() {
+   void update(const Interface * pUI) {
       // self
       handleCollisions();
-      applyGravity();
+      applyGravity(pUI);
       cleanUpZombies();
       
       // duck duck goose
-      if (earth.isAlive()) earth.update();
-      if (ship.isAlive()) ship.update();
+      if (earth.isAlive()) earth.update(pUI);
+      if (ship.isAlive()) ship.update(pUI);
       for (auto it : stars) it.update();
-      for (auto it : satellites)    if (it->isAlive()) it->update();
-      for (auto it : fragments)     if (it.isAlive())  it.update();
-      for (auto it : projectiles)   if (it.isAlive())  it.update();
+      for (auto it : satellites)    if (it->isAlive()) it->update(pUI);
+      for (auto it : fragments)     if (it.isAlive())  it.update(pUI);
+      for (auto it : projectiles)   if (it.isAlive())  it.update(pUI);
    }
     
    void display() const {
@@ -77,9 +77,7 @@ public:
  
    void handleInput(const Interface * pUI) {
       // self
-      dt = pUI->getDeltaTime();
-      std::cout << dt*1000 << " ms\n";
-      if (pUI->isEscape()) exit(0); // press ESC to end program
+      std::cout << (double)pUI->getDeltaTime()*1000 << " ms\n";
 
       // do our rounds..
       if (earth.isAlive()) earth.handleInput(pUI);
@@ -95,9 +93,6 @@ private:
    // Screen Dimensions
    Position tr; // upper-right point of window
    // (center is [0,0], giving us dimensions w/2 and h/2)
-   
-   // time
-   double dt;
    
    // objects on the screen
    Earth earth;
@@ -137,12 +132,12 @@ private:
       }
    }
    
-   void applyGravity() {
+   void applyGravity(const Interface * pUI) {
       // earth -> moving objects
-      if (ship.isAlive()) ship.applyGravity(earth, dt);
-      for (auto it : satellites)  if (it->isAlive()) it->applyGravity(earth, dt);
-      for (auto it : fragments)   if (it.isAlive())  it.applyGravity(earth, dt);
-      for (auto it : projectiles) if (it.isAlive())  it.applyGravity(earth, dt);
+      if (ship.isAlive()) ship.applyGravity(earth, pUI->getDeltaTime());
+      for (auto it : satellites)  if (it->isAlive()) it->applyGravity(earth, pUI->getDeltaTime());
+      for (auto it : fragments)   if (it.isAlive())  it.applyGravity(earth, pUI->getDeltaTime());
+      for (auto it : projectiles) if (it.isAlive())  it.applyGravity(earth, pUI->getDeltaTime());
       
       // moving objects -> earth lol
       
