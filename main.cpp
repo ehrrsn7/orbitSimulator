@@ -36,7 +36,12 @@ void callBack(const Interface* pUI, void* p) {
    pSim->handleInput(pUI);
    
    // other
-   if (pUI->isEscape()) exit(0); // press ESC to end program
+   
+   // press ESC to end program
+   if (pUI->isEscape()) exit(0);
+   
+   // R to restart
+   if (pUI->isR()) replaceSimulator(pUI->getPtUpperRight(), pSim);
 }
 
 double Position::metersFromPixels = 40.0;
@@ -69,7 +74,7 @@ int main(int argc, char** argv)
    Simulator sim(ptUpperRight);
    
    // run tests
-   bool runTests = true;
+   bool runTests = false;
    if (runTests) {
       testRunner(); // unit tests
       return 0; // early exit before running main loop

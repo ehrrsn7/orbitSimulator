@@ -76,6 +76,12 @@ double distance(const MovingObject& obj1, const MovingObject& obj2) {
  *    minutes in hour - 60
  **************************************************/
 double timeDilation() {return 24 * 60; }
+
+/**************************************************
+* dilate time
+* use timeDilation() to calculate adjusted deltaTime
+**************************************************/
+double dilateTime(double dt) { return timeDilation() * dt; }
  
 /**************************************************
  * time per frame

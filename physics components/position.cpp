@@ -76,7 +76,7 @@ Position Position::operator+ (const Position & rhs) {
  **************************************************/
 Position& Position::operator+= (const Position & rhs) {
    // add another vector
-   addMeters(rhs.getMetersX(), rhs.getMetersY());
+   this->add(rhs);
    return *this;
 }
 

@@ -18,8 +18,13 @@
 
 #include "vector.h"
 #include <algorithm> // used for min() and max() (specifically required by Visual Studio)
+
 using std::min;
 using std::max;
+
+// make an alias for `timestamp` and `seconds`
+typedef  std::chrono::steady_clock::time_point  timestamp;
+typedef  std::chrono::duration<double>          seconds;
 
 #define GL_SILENCE_DEPRECATION
 
@@ -35,7 +40,7 @@ public:
 
    // Constructor if you want to set up the window with anything but
    // the default parameters
-   Interface(int argc, char ** argv, const char * title, const Position & ptUpperRight)
+   Interface(int argc, char ** argv, const char * title, const Position & ptUpperRight) : ptUpperRight(ptUpperRight)
    {
       initialize(argc, argv, title, ptUpperRight);
    }
@@ -61,6 +66,7 @@ public:
    // How much time passed since the last frame?
    void updateDeltaTime();
    double getDeltaTime() const;
+   double getDeltaTimeMs() const;
    
    // Key event indicating a key has been pressed or not.  The callbacks
    // should be the only onces to call this
@@ -70,6 +76,9 @@ public:
    // Current frame rate
    double frameRate() const { return timePeriod;   };
    
+   // screen dimensions
+   Position getPtUpperRight() const { return ptUpperRight; }
+   
    // Get various key events
    int  isDown()     const { return isDownPress;   };
    int  isUp()       const { return isUpPress;     };
@@ -77,28 +86,30 @@ public:
    int  isRight()    const { return isRightPress;  };
    bool isSpace()    const { return isSpacePress;  };
    bool isEscape()   const { return isEscapePress; }; // (ELIJAH)
+   bool isR()        const { return isRPress;      }; // (ELIJAH)
    
    static void *p;                   // for client
    static void (*callBack)(const Interface *, void *);
 
 private:
    void initialize(int argc, char ** argv, const char * title, const Position & ptUpperRight);
+   Position ptUpperRight;
 
    static bool          initialized;   // only run the constructor once!
    static double        timePeriod;    // interval between frame draws
    static unsigned long nextTick;      // time (from clock()) of our next draw
-   static std::chrono::duration<double> deltaTime;  // (s) actual recorded change in time between frames (ELIJAH)
-   static std::chrono::steady_clock::time_point tn; // timestamp for this frame
-   static std::chrono::steady_clock::time_point t0; // timestamp for last frame
+   static int           isDownPress;   // is the down arrow currently pressed?
+   static int           isUpPress;     //    "   up         "
+   static int           isLeftPress;   //    "   left       "
+   static int           isRightPress;  //    "   right      "
+   static bool          isSpacePress;  //    "   space      "
+   static bool          isEscapePress; //    "   escape     " (ELIJAH)
+   static bool          isRPress;      //
+   static timestamp     tn;            // `timestamp` for this frame (ELIJAH)
+   static timestamp     t0;            // `timestamp` for last frame
+   static seconds       deltaTime;     // `seconds` actual recorded change in time between frames
 
-   static int  isDownPress;          // is the down arrow currently pressed?
-   static int  isUpPress;            //    "   up         "
-   static int  isLeftPress;          //    "   left       "
-   static int  isRightPress;         //    "   right      "
-   static bool isSpacePress;         //    "   space      "
-   static bool isEscapePress;        //    "   escape     " (ELIJAH)
 };
-
 
 
 /*************************************************************************

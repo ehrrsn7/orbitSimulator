@@ -7,6 +7,7 @@
  *    All the unit tests for Position
  **********************************************************************/
 
+
 #pragma once
 
 #include <iostream>
@@ -36,6 +37,7 @@ public:
       
       addPixels();
       addMeters();
+      addOnto();
    }
    
 private:
@@ -143,5 +145,17 @@ private:
       assert(pos.x == 4000.0);
       assert(pos.y == 7000.0);
    }  // teardown
+    
+    void addOnto() const {
+       // setup
+       Position pos;
+       pos.x = 2000.0;
+       pos.y = 4000.0;
+       // exercise
+       pos += Position(2000.0, 3000.0);
+       // verify
+       assert(pos.x == 4000.0);
+       assert(pos.y == 7000.0);
+    }  // teardown
 
 };

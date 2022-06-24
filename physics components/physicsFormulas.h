@@ -5,7 +5,6 @@
 
 #pragma once
 
-#include "earth.h"      // for EARTH_RADIUS and Earth class
 #include "vector.h"     // for ACCEL_DUE_TO_GRAVITY_EARTH and vector child classes
 
 /**************************************************
@@ -39,6 +38,7 @@ double computeDistance(const Position& pos1, const Position& pos2);
  * Time Functions
  **********************************************************************/
 double timeDilation();
+double dilateTime(double dt);
 double timePerFrame();
  
 /**********************************************************************

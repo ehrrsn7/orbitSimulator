@@ -5,7 +5,6 @@
 
 #pragma once
 
-#include "vector.h"
 #include "physicsFormulas.h"
 #include "uiInteract.h"
 #include "uiDraw.h"
@@ -20,13 +19,16 @@ class MovingObject {
     
 public:
    // constructors
-   MovingObject() : alive(true) {
-      
-   }
+   MovingObject() : alive(true), r(1.0), m(1.0), angle(0.0), dAngle(0.0) { }
    
    void update(const Interface * pUI) {
-      v += a * pUI->getDeltaTime(); // TODO: fix and uncomment
-      p += v * pUI->getDeltaTime();
+      double dt = dilateTime(pUI->getDeltaTime()); // adjust dt to sim time
+      
+      // for testing: let's slow everything down by 4x
+      dt *= .25;
+      
+      v += a * dt;
+      p += v * dt;
       rotate();
    }
    
@@ -68,7 +70,7 @@ public:
    
    void applyGravity(const MovingObject & obj, double dt) {
       // obj: object with mass that is attracting this
-//      a += dt * forceDueToGravity(obj, obj) / getMass(); // TODO: fix and uncomment
+      a += forceDueToGravity(obj, obj) / getMass();
    }
 
 protected:
@@ -81,47 +83,3 @@ protected:
    double angle; // current angle to be drawn at
    double dAngle; // dingle dangle, change my angle
 };
-
-/**************************************************
- * Other MovingObject Classes
- **************************************************/
-class Ship : public MovingObject {
-public:
-   Ship() {
-      
-   }
-   
-   void update(const Interface * pUI) {
-      MovingObject::update(pUI);
-   }
-   
-   void display() const {
-      drawShip(p, angle, false);
-   }
-};
-
-// MovingObject children
-class Satellite : public MovingObject {};
-class Projectile : public MovingObject {};
-class SatellitePart : public MovingObject {};
-class Fragment : public MovingObject {} ;
-
-// Satellite children
-class Hubble : public Satellite {};
-class SpaceShip : public Satellite {};
-class CrewDragon : public Satellite {};
-
-class Sputnik : public Satellite {
-public:
-   void display() const {
-      drawSputnik(p, angle);
-   }
-};
-
-class GPS : public Satellite {
-public:
-   void display() const {
-      drawGPS(p, angle);
-   }
-};
-class Starlink : public Satellite {};

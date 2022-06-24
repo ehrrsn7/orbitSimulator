@@ -5,7 +5,8 @@
 
 #pragma once
 
-#include "movingObject.h" // MovingObject, vector.h, ui*.h
+#include "movingObject.h" // for MovingObject
+#include "uiDraw.h" // for drawEarth
 
 #define EARTH_RADIUS                6371000.0   // m
 #define EARTH_MASS                  5.972e24    // kg
@@ -20,25 +21,13 @@
  **************************************************/
 class Earth : public MovingObject {
 public:
-   Earth() : angle(0.0) { }
-
-   void update(const Interface * pUI) { addAngle(0.3 * pUI->getDeltaTime()); }
+   Earth() {
+      setRadius(EARTH_RADIUS); // px
+      setAngle(0.0); // rad
+      setDAngle(0.3); // rad
+      setMass(EARTH_MASS); // kg
+   }
+   
    void display() const { drawEarth(p, angle); }
-   void handleInput(const Interface * pUI) { }
-   
-   // getters
-   Position getPosition() const { return p; }
-   double getAngle() const { return angle; }
-   
-   // setters
-   void setPosition(const Position & p) { this->p = p; }
-   void setAngle(double angle) { this->angle = angle; }
-
-   // adders
-   void addAngle(double da) { setAngle(getAngle() + da); }
-   
-private:
-   Position p; // always 0,0 but we keep it for clarity/efficiency
-   double angle;
 };
 

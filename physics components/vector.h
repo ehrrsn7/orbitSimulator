@@ -113,6 +113,9 @@ public:
    double getPixelsX() const { return getMetersX() / metersFromPixels; }
    double getPixelsY() const { return getMetersY() / metersFromPixels; }
    
+   double metersToPixels(double meters) const { return meters / metersFromPixels; }
+   double pixelsToMeters(double pixels) const { return pixels * metersFromPixels; }
+   
    void set(double x, double y) { Vector::set(x, y); }
    void set(const Position& p) { Vector::set(p.getX(), p.getY()); }
    void setMetersX(double xMeters) { setX(xMeters); }
@@ -190,7 +193,7 @@ public:
    }
    
    Velocity& operator+= (const Velocity& rhs) { // rhs : Δt
-      *this = *this + rhs;
+      add(rhs);
       return *this;
    }
    
@@ -204,7 +207,13 @@ private:
    Position toPosition(const double dt) {
       return Position(getX() * dt, getY() * dt);
    }
+   
+   friend class TestVelocity;
 };
+
+// stream I/O useful for debugging
+std::ostream & operator << (std::ostream & out, const Velocity& rhs);
+std::istream & operator >> (std::istream & in,        Velocity& rhs);
 
 /**************************************************
  * CLASS Acceleration
@@ -238,7 +247,7 @@ public:
    }
    
    Acceleration& operator+= (const Acceleration& rhs) { // rhs : Δt
-      *this = *this + rhs;
+      add(rhs);
       return *this;
    }
    
@@ -252,7 +261,13 @@ private:
    Velocity toVelocity(const double dt) {
       return Velocity(getX() * dt, getY() * dt);
    }
+   
+   friend class TestAcceleration;
 };
+
+// stream I/O useful for debugging
+std::ostream & operator << (std::ostream & out, const Acceleration& rhs);
+std::istream & operator >> (std::istream & in,        Acceleration& rhs);
 
 /**************************************************
  * CLASS Force
@@ -286,7 +301,7 @@ public:
    }
    
    Force& operator+= (const Force& rhs) { // rhs : ΔF
-      *this = *this + rhs;
+      add(rhs);
       return *this;
    }
    
@@ -302,6 +317,10 @@ private:
    
    friend class TestForce;
 };
+
+// stream I/O useful for debugging
+std::ostream & operator << (std::ostream & out, const Force& rhs);
+std::istream & operator >> (std::istream & in,        Force& rhs);
 
 /**************************************************
  * CLASS Gravity
@@ -336,7 +355,7 @@ public:
    }
    
    Gravity& operator+= (const Gravity& rhs) { // rhs : ΔG
-      *this = *this + rhs;
+      add(rhs);
       return *this;
    }
    
@@ -349,5 +368,10 @@ private:
    Acceleration toAcceleration(double mass) const {
       return Acceleration(getX() / mass, getY() / mass);
    }
+   
+   friend class TestGravity;
 };
 
+// stream I/O useful for debugging
+std::ostream & operator << (std::ostream & out, const Gravity& rhs);
+std::istream & operator >> (std::istream & in,        Gravity& rhs);

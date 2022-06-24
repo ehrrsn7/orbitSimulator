@@ -15,22 +15,30 @@
  **************************************************/
 class Star {
 public:
-   Star() {}
-   Star(Position p) : p(p) {}
+   Star(): phase(random(0, 255)) { }
+   Star(Position p) : p(p), phase(random(0, 255)) { }
    
-   void update() { }
-   void display() const { }
+   void update() {
+      phase += 1;
+      twinkle();
+   }
+   
+   void display() const {
+//      std::cout << (int)phase << " ";
+      drawStar(p, (unsigned char)phase);
+   }
+   
    void handleInput(const Interface * pUI) { }
 
 private:
    Position p;
-   double phase;
+   int phase;
    
    /**************************************************
     * helper methods
     **************************************************/
    void twinkle() {
-      // update phase
-      
+      // update phase once per frame
+      phase++;
    }
 };

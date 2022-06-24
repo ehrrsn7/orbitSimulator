@@ -9,17 +9,15 @@
 
 #pragma once
 
-#include "earth.h"
+#include "earth.h" // import this before MovingObject
 #include "movingObject.h"
+#include "satellite.h"
+#include "ship.h"
 #include "star.h"
 #include "uiInteract.h"
 #include "uiDraw.h"
 
-#include <thread>         // std::this_thread::sleep_for
-#include <chrono>         // std::chrono::seconds
-
 #include <vector>
-
 
 /**************************************************
  * CLASS Simulator
@@ -31,36 +29,68 @@ class Simulator {
     
 public:
    Simulator(Position ptUpperRight) : tr(ptUpperRight) {
-      // earth -- nothing needed
-      // ship
-      ship.setPosition(Position(10000000, 10000000));
-      ship.setVelocity(Velocity(500000, 500000));
-      // stars
-      // satellites
-      /// sputnik
+      // Earth -- nothing needed
+
+      // Ship -- nothing needed
+
+      // Stars[]
+      unsigned int starAmount = 300;
+      for (int i = 0; i < starAmount; i++)
+         stars.push_back(Star(randomPositionOnScreen()));
+
+      // Satellites[]
+      /// Sputnik
       Sputnik* sputnik = new Sputnik; // allocate new memory
-      sputnik->setPosition(Position(-36515095.13, 21082000.0)); // m
-      sputnik->setVelocity(Velocity(2050.0, 2684.68)); // m/s
       satellites.push_back(sputnik);
-      /// GPS
+      
+      /// GPS (x5)
       createGPSObjects();
-      // fragments
-      // projectiles
+      
+      /// Hubble
+      Hubble* hubble = new Hubble; // allocate new memory
+      satellites.push_back(hubble);
+      
+      /// SpaceX Crew Dragon
+      CrewDragon* crewDragon = new CrewDragon; // "
+      satellites.push_back(crewDragon);
+      
+      /// SpaceX Starlink
+      Starlink* starlink = new Starlink;
+      satellites.push_back(starlink);
+      
+      /// Broken Satellite Pieces (child of Satellite) -- none at construction
+      ///
+      /// test:
+      Satellite* satPtr = satellites[0];
+      auto newFragments = satPtr->breakIntoFragments(); // TODO: fix and verify that len(newFragments) == 4, not 0
+      
+      // fragments[] -- none at construction
+      
+      // projectiles[] -- none at construction
+      
+      // test split
+      auto parts = satellites[1]->breakIntoParts();
+      for (auto it : parts) std::cout << it.getPosition() << std::endl;
    }
     
    void update(const Interface * pUI) {
       // self
+      // std::cout << pUI->getDeltaTimeMs() << " ms\n";
       handleCollisions();
-      applyGravity(pUI);
+      // applyGravity(pUI);
       cleanUpZombies();
       
       // duck duck goose
       if (earth.isAlive()) earth.update(pUI);
       if (ship.isAlive()) ship.update(pUI);
-      for (auto it : stars) it.update();
-      for (auto it : satellites)    if (it->isAlive()) it->update(pUI);
-      for (auto it : fragments)     if (it.isAlive())  it.update(pUI);
-      for (auto it : projectiles)   if (it.isAlive())  it.update(pUI);
+      for (auto it = stars.begin(); it != stars.end(); ++it)
+         it->update();
+      for (auto it = satellites.begin(); it != satellites.end(); ++it)
+         if ((*it)->isAlive()) (*it)->update(pUI);
+      for (auto it = fragments.begin(); it != fragments.end(); ++it)
+         if (it->isAlive()) it->update(pUI);
+      for (auto it = projectiles.begin(); it != projectiles.end(); ++it)
+         if (it->isAlive()) it->update(pUI);
    }
     
    void display() const {
@@ -77,17 +107,22 @@ public:
  
    void handleInput(const Interface * pUI) {
       // self
-      std::cout << (double)pUI->getDeltaTime()*1000 << " ms\n";
+      if (pUI->isSpace()) {
+         if (true) {
+            auto newProjectile = ship.fire();
+         }
+      }
 
       // do our rounds..
       if (earth.isAlive()) earth.handleInput(pUI);
-      if (ship.isAlive()) ship.handleInput(pUI);
+      // if (ship.isAlive()) ship.handleInput(pUI);
+      ship.handleInput(pUI);
       for (auto it : stars) it.handleInput(pUI);
       for (auto it : satellites)  if (it->isAlive()) it->handleInput(pUI);
       for (auto it : fragments)   if (it.isAlive())  it.handleInput(pUI);
       for (auto it : projectiles) if (it.isAlive())  it.handleInput(pUI);
    }
-   
+
 
 private:
    // Screen Dimensions
@@ -96,12 +131,11 @@ private:
    
    // objects on the screen
    Earth earth;
-   Ship ship;
+   SpaceShip ship;
    std::vector<Satellite*> satellites; // pointers* for polymorphism
    std::vector<Fragment> fragments;
    std::vector<Projectile> projectiles;
    std::vector<Star> stars;
-   
    
    /**************************************************
     * helper methods
@@ -135,9 +169,12 @@ private:
    void applyGravity(const Interface * pUI) {
       // earth -> moving objects
       if (ship.isAlive()) ship.applyGravity(earth, pUI->getDeltaTime());
-      for (auto it : satellites)  if (it->isAlive()) it->applyGravity(earth, pUI->getDeltaTime());
-      for (auto it : fragments)   if (it.isAlive())  it.applyGravity(earth, pUI->getDeltaTime());
-      for (auto it : projectiles) if (it.isAlive())  it.applyGravity(earth, pUI->getDeltaTime());
+      for (auto it : satellites)  if (it->isAlive())
+         it->applyGravity(earth, pUI->getDeltaTime());
+      for (auto it : fragments)   if (it.isAlive())
+         it.applyGravity(earth, pUI->getDeltaTime());
+      for (auto it : projectiles) if (it.isAlive())
+         it.applyGravity(earth, pUI->getDeltaTime());
       
       // moving objects -> earth lol
       
@@ -220,6 +257,8 @@ private:
       
       // "only YOU can prevent memory leaks!" ("please allocate responsibly")
    }
+   
+   // helper methods
 
    Satellite* createGPSObject(Position p, Velocity v) {
       GPS* newGPS = new GPS; // allocate new memory
@@ -256,6 +295,20 @@ private:
       initialP.set(-23001634.72, -13280000.0);
       initialV.set(-1940.00, -3360.18);
       satellites.push_back(createGPSObject(initialP, initialV));
-
+   }
+   
+   Position randomPositionOnScreen() const {
+      Position p;
+      while (distance(p, earth.getPosition()) < earth.getRadius())
+         p.set(random(-tr.getMetersX(), tr.getMetersX()),
+               random(-tr.getMetersY(), tr.getMetersY()));
+      return p;
    }
 };
+
+// helper function for callback(): if we want to restart our program in-game
+void replaceSimulator(Position tr, Simulator* pSim) {
+   Simulator* newSimulator = new Simulator(tr);
+   delete pSim; // don't forget to free old memory!
+   pSim = newSimulator; // the ol switcheroo
+}

@@ -7,18 +7,25 @@
  *    The test runner for all the unit tests
  **********************************************************************/
 
+
 #include "test.h"
-#include "testPosition.h"
 #include "testVector.h"
+#include "testPosition.h"
+#include "testVelocity.h"
+#include "TestAcceleration.h"
 #include "testForce.h"
+#include "testGravity.h"
 
 /**************************************************
  * TEST RUNNER
  * Runs all the unit tests
  **************************************************/
-void testRunner()
-{
+void testRunner() {
+   
    TestPosition().run();
-   TestVector().run();
-   TestForce().run();
+   // TestVector().run();
+   TestVelocity().run();
+   TestAcceleration().run();
+   // TestForce().run();
+   TestGravity().run();
 }

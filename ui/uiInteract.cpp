@@ -193,6 +193,9 @@ void Interface::keyEvent(int key, bool fDown)
       case 27: // escape key
          isEscapePress = fDown;
          break;
+      case 114: // R key
+         isRPress = fDown;
+         break;
       default:
          std::cout << "unregistered key[" << key << "]\n";
          break;
@@ -271,6 +274,10 @@ double Interface::getDeltaTime() const {
    return (double)(deltaTime.count()); // seconds
 }
 
+double Interface::getDeltaTimeMs() const {
+   return getDeltaTime() * 1000;
+}
+
 /*************************************************************************
  * STATICS
  * All the static member variables need to be initialized
@@ -282,13 +289,14 @@ int            Interface::isLeftPress     = 0;
 int            Interface::isRightPress    = 0;
 bool           Interface::isSpacePress    = false;
 bool           Interface::isEscapePress   = false;
+bool           Interface::isRPress        = false;
 bool           Interface::initialized     = false;
 double         Interface::timePeriod      = 1.0 / 30; // 30 frames/s default
 unsigned long  Interface::nextTick        = 0;        // redraw now please
 
-std::chrono::duration<double> Interface::deltaTime  = std::chrono::duration<double>(1/30); // initial value 1/30th s
-std::chrono::steady_clock::time_point Interface::t0 = std::chrono::high_resolution_clock::now();
-std::chrono::steady_clock::time_point Interface::tn = std::chrono::high_resolution_clock::now();
+seconds Interface::deltaTime  = std::chrono::duration<double>(1/30); // initial value 1/30th s
+timestamp Interface::t0       = std::chrono::high_resolution_clock::now();
+timestamp Interface::tn       = std::chrono::high_resolution_clock::now();
 
 void *         Interface::p               = NULL;
 void (*Interface::callBack)(const Interface *, void *) = NULL;
