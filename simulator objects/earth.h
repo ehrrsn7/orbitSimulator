@@ -11,6 +11,7 @@
 #define EARTH_RADIUS                6371000.0   // m
 #define EARTH_MASS                  5.972e24    // kg
 #define ACCEL_DUE_TO_GRAVITY_EARTH  9.80665     // m/s/s
+#define G                           6.67384e-11 // N kg⁻² m² (gravitational constant)
 
 /**************************************************
  * CLASS Earth
@@ -23,9 +24,9 @@ class Earth : public MovingObject {
 public:
    Earth() {
       setRadius(EARTH_RADIUS); // px
-      setAngle(0.0); // rad
-      setDAngle(0.3); // rad
       setMass(EARTH_MASS); // kg
+      setAngle(0.0); // rad
+      setDAngle(0.3); // rad/s
    }
    
    void display() const { drawEarth(p, angle); }

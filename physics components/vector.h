@@ -4,8 +4,6 @@
 
 #pragma once
 
-#define G 6.67384e-11
-
 #include <iostream>
 #include <cassert>
 #include <cmath> // for sin/cos (for now until physicsFormulas.h is done)
