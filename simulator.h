@@ -61,8 +61,8 @@ public:
       /// Broken Satellite Pieces (child of Satellite) -- none at construction
       ///
       /// test:
-      Satellite* satPtr = satellites[0];
-      auto newFragments = satPtr->breakIntoFragments(); // TODO: fix and verify that len(newFragments) == 4, not 0
+//      Satellite* satPtr = satellites[0];
+//      auto newFragments = satPtr->breakIntoFragments(); // TODO: fix and verify that len(newFragments) == 4, not 0
       
       // fragments[] -- none at construction
       

@@ -20,7 +20,9 @@ class Fragment;
  **************************************************/
 class Satellite : public MovingObject {
 public:
-   Satellite() : fragmentAmount(0) { }
+   Satellite() : fragmentAmount(0) {
+      dAngle = 0.001;
+   }
    
    ~Satellite() { }
    
@@ -78,8 +80,6 @@ public:
       v.set(2050.0, 2684.68); // m/s
       fragmentAmount = 4;
       setRadius(Position().pixelsToMeters(4)); // px
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(83.6); // kg
    }
 
@@ -126,8 +126,6 @@ public:
    GPS() {
       fragmentAmount = 2;
       setRadius(Position().pixelsToMeters(1)); // px TODO: what should radius be
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(1); // kg TODO: what should the mass be
    }
    
@@ -154,8 +152,6 @@ public:
    GPSCenter() {
       this->fragmentAmount = 3;
       setRadius(Position().pixelsToMeters(7)); // px
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(1); // kg TODO: what should the mass be
    }
    
@@ -176,8 +172,6 @@ public:
    GPSLeft() {
       this->fragmentAmount = 3;
       setRadius(Position().metersToPixels(8));
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(1); // kg TODO: what should the mass be
    }
    
@@ -199,8 +193,6 @@ class GPS::GPSRight : public SatellitePart {
 public:
    GPSRight() {
       setRadius(Position().pixelsToMeters(8));
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(1); // kg TODO: what should the mass be
    }
    
@@ -234,8 +226,6 @@ public:
       v.set(2050.0, 2684.68); // m/s
       fragmentAmount = 3;
       setRadius(Position().pixelsToMeters(10)); // px
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(1); // kg TODO: what should the mass be
    }
 
@@ -273,8 +263,6 @@ public:
       setVelocity(Velocity(-7900.0, 0.0)); // m/s
       fragmentAmount = 2;
       setRadius(Position().pixelsToMeters(7)); // px
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(1); // kg TODO: what should the mass be
    }
    
@@ -311,8 +299,6 @@ public:
       v.set(5800.0, 0.0); // m/s
       fragmentAmount = 2;
       setRadius(Position().pixelsToMeters(6)); // px
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
       setMass(1); // kg TODO: what should the mass be
    }
    
@@ -345,8 +331,7 @@ public:
       setPosition(parentP);
       setVelocity(parentV);
       setRadius(Position().pixelsToMeters(2)); // px TODO: what should radius be
-      setAngle(angle); // rad
-      setDAngle(0.0); // rad TODO: what should dAngle be
+      setDAngle(dAngle * 2); // rad
       setMass(1); // kg TODO: what should the mass be
       
       // randomize velocity here according to the description

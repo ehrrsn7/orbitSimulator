@@ -35,12 +35,9 @@ public:
    
    void display() const override { drawEarth(p, angle); }
    
-   void rotate(double dt) {
-      MovingObject::rotate(dt);
-
-      auto idk = dAngle * dt;
-      if (typeid(this) == typeid(Earth))
-         std::cout << idk << std::endl;
+   void rotate(double dt) override 
+   {
+      addAngle(earthRotationSpeed(dt));
    }
 };
 

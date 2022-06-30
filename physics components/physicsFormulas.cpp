@@ -60,7 +60,6 @@ double distance(const MovingObject& obj1, const MovingObject& obj2) {
    return distance(obj1.getPosition(), obj2.getPosition());
 }
 
-
 /**********************************************************************
  * Time Functions
  **********************************************************************/

@@ -19,16 +19,15 @@ class MovingObject {
     
 public:
    // constructors
-   MovingObject() : alive(true), r(1.0), m(1.0), angle(0.0), dAngle(10.0) { }
+   MovingObject() : alive(true), r(1.0), m(1.0), angle(0.0), dAngle(10.0) {
+   }
    
    void update(const Interface * pUI) {
-      double dt = dilateTime(pUI->getDeltaTime()); // adjust dt to sim time
-      dt *= .25; // for testing: let's slow everything down by 4x
-      
+      double dt =  dilateTime(pUI->getDeltaTime());
       v += a * dt;
       p += v * dt;
-//      rotate(dt);
-      addAngle(dAngle * pUI->getDeltaTime()); // for some reason, spinning seems to go faster rather than slower with dilated time, this will keep things normal for now - TODO: fix and uncomment previous line
+      
+      rotate(dt);
    }
    
    virtual void display() const { }
@@ -65,7 +64,7 @@ public:
     **************************************************/
    void applyGravity(const MovingObject & obj, double dt) {
       // obj: object with mass that is attracting this
-      a += forceDueToGravity(obj, obj) / getMass();
+      a += forceDueToGravity(obj, *this) / getMass();
    }
 
 protected:
@@ -81,5 +80,5 @@ protected:
    /**************************************************
     * private helper methods
     **************************************************/
-   void rotate(double dt) { addAngle(dAngle * dt); }
+   virtual void rotate(double dt) { addAngle(dAngle * dt); }
 };
