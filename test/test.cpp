@@ -15,6 +15,7 @@
 #include "TestAcceleration.h"
 #include "testForce.h"
 #include "testGravity.h"
+#include "testPhysicsFormulas.h"
 
 /**************************************************
  * TEST RUNNER
@@ -28,4 +29,5 @@ void testRunner() {
    TestAcceleration().run();
    // TestForce().run();
    TestGravity().run();
+   testPhysicsFormulas();
 }

@@ -80,10 +80,10 @@ public:
       setRadius(Position().pixelsToMeters(4)); // px
       setAngle(0.0); // rad TODO: what should angle be
       setDAngle(0.0); // rad TODO: what should dAngle be
-      setMass(1); // kg TODO: what should the mass be
+      setMass(83.6); // kg
    }
 
-   void display() const {
+   void display() const override {
       drawSputnik(p, angle);
    }
    
@@ -131,7 +131,7 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
    
-   void display() const {
+   void display() const override {
       drawGPS(p, angle);
    }
    
@@ -159,7 +159,7 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
    
-   void display() const { drawGPSCenter(p, angle); }
+   void display() const override { drawGPSCenter(p, angle); }
    
    void setRotation(double rotation) { this->rotation = rotation; }
    
@@ -181,7 +181,7 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
    
-   void display() const { drawGPSLeft(p, offset, rotation); }
+   void display() const override { drawGPSLeft(p, offset, rotation); }
    
    void setOffset(const Position& offset) { this->offset = offset; }
    void setRotation(double rotation) { this->rotation = rotation; }
@@ -204,7 +204,7 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
    
-   void display() const { drawGPSLeft(p, offset, rotation); }
+   void display() const override { drawGPSLeft(p, offset, rotation); }
    
    void setOffset(const Position& offset) { this->offset = offset; }
    void setRotation(double rotation) { this->rotation = rotation; }
@@ -239,7 +239,7 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
 
-   void display() const {
+   void display() const override {
       drawHubble(p, angle);
    }
    
@@ -278,7 +278,7 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
    
-   void display() const {
+   void display() const override {
       drawCrewDragon(p, angle);
    }
    
@@ -316,7 +316,7 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
    
-   void display() const {
+   void display() const override {
       drawStarlink(p, angle);
    }
    
@@ -356,7 +356,7 @@ public:
       // randomize angle here according to the description
    }
    
-   void display() const {
+   void display() const override {
       drawFragment(p, angle);
    }
 };

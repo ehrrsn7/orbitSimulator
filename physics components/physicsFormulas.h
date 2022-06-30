@@ -5,7 +5,10 @@
 
 #pragma once
 
-#include "vector.h"     // for ACCEL_DUE_TO_GRAVITY_EARTH and vector child classes
+#define FPS 30                // frames/s
+#define SECONDS_IN_DAY 86400  // s : 60s/min * 60min/hr * 24hr/d
+
+#include "vector.h" // for Vector/child classes 
 
 /**************************************************
  * Prototypes
@@ -44,7 +47,8 @@ double timePerFrame();
 /**********************************************************************
  * Earth Functions
  **********************************************************************/
-double rotationSpeed();
+double earthRotationSpeed();
+double earthRotationSpeed(double dt);
 
 /**********************************************************************
 * Gravity Functions
@@ -55,7 +59,7 @@ double directionOfGravity(const Position& p1, const Position& p2);
 double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2);
 Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2);
 double calcGravity(double height);
-Gravity calcGravityVector(const Position& p);
+Acceleration calcGravityVector(const Position& p);
 
 /**********************************************************************
  * Motion

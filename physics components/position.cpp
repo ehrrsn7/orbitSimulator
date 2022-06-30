@@ -81,6 +81,26 @@ Position& Position::operator+= (const Position & rhs) {
 }
 
 /**************************************************
+ * operator - (subtraction)
+ * class: Position
+ * Subtracts another point from this*
+ **************************************************/
+Position Position::operator- (const Position & rhs) {
+   Vector::add(-rhs.getX(), -rhs.getY());
+   return *this;
+}
+
+/**************************************************
+ * operator - (negative)
+ * class: Position
+ * Converts *this into its negative counterpart
+ **************************************************/
+Position Position::operator- () {
+   Vector::set(-this->getX(), -this->getY());
+   return *this;
+}
+
+/**************************************************
  * POSITION insertion
  *       Display coordinates on the screen
  **************************************************/

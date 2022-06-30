@@ -31,6 +31,8 @@ public:
       else setAlive(false);
    }
    
+   void display() const override { drawProjectile(p); }
+   
 private:
    double expirationTime;
 };
@@ -61,7 +63,7 @@ private:
  **************************************************/
 class SpaceShip : public Satellite {
 public:
-   SpaceShip() {
+   SpaceShip() : drawThrust(false), cooldownTimer(0) {
       p.setPixels(-450.0, 450.0); // px
       v.set(0.0, -2000.0); // m/s
       setRadius(Position().pixelsToMeters(10)); // px
@@ -72,14 +74,19 @@ public:
       cooldownTimer -= pUI->getDeltaTime();
    }
    
-   void display() const {
-      drawSputnik(p, angle);
+   // const Position& center, double rotation, bool thrust
+   void display() const override {
+      drawShip(p, angle, drawThrust);
+      if (drawThrust) std::cout << "drawing thrust\n"; // TODO: this seems to display nothing
+      else std::cout << "not drawing thrust\n";
    }
    
-   void handleInput(const Interface * pUI) {
+   void handleInput(const Interface * pUI) override {
       // handle acceleration (down arroy key)
       // down arrow will accelerate ship in direction it's facing at 30m/s/s
       if (pUI->isDown()) a.addPolar(30.0 /*m/s/s*/, getAngle());
+      if (pUI->isDown()) drawThrust = true;
+      else drawThrust = false;
       
       // handle angle (l/r arrow keys)
       setDAngle(0); // reset each frame, then set:
@@ -120,4 +127,5 @@ public:
    
 private:
    double cooldownTimer;
+   bool drawThrust;
 };

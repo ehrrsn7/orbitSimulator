@@ -139,6 +139,9 @@ public:
    Position operator+ (const Position & rhs);
    Position& operator+= (const Position & rhs);
    
+   Position operator- (const Position & rhs); // subtraction
+   Position operator- (); // negative
+   
 private:
    static double metersFromPixels;
    friend class TestPosition;

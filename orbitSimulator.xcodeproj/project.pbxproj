@@ -18,6 +18,7 @@
 		14678BD82865736400F511BE /* testVectorOther.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14ABA89928626C2D00252E0C /* testVectorOther.cpp */; };
 		14678BD92865736400F511BE /* testVectorUpper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14ABA89628626C2D00252E0C /* testVectorUpper.cpp */; };
 		14678BDA2865736400F511BE /* testVectorLower.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14ABA89828626C2D00252E0C /* testVectorLower.cpp */; };
+		14678BDD286631FB00F511BE /* testPhysicsFormulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14678BDC28662FC000F511BE /* testPhysicsFormulas.cpp */; };
 		14A952CB284BBB520054130D /* physicsFormulas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */; };
 		C11C7EA425780B2100EA4B2E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA225780B2100EA4B2E /* GLUT.framework */; };
 		C11C7EA525780B2100EA4B2E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA325780B2100EA4B2E /* OpenGL.framework */; };
@@ -57,6 +58,8 @@
 		14678BD22864DFC500F511BE /* satellite.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = satellite.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		14678BD328656D6800F511BE /* ship.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ship.cpp; sourceTree = "<group>"; };
 		14678BD428656D6800F511BE /* ship.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = ship.h; sourceTree = "<group>"; tabWidth = 3; };
+		14678BDB28662E3D00F511BE /* testPhysicsFormulas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testPhysicsFormulas.h; sourceTree = "<group>"; };
+		14678BDC28662FC000F511BE /* testPhysicsFormulas.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = testPhysicsFormulas.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		14ABA8932862664700252E0C /* testVelocity.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = testVelocity.h; sourceTree = "<group>"; tabWidth = 3; };
 		14ABA894286267D200252E0C /* testGravity.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = testGravity.h; sourceTree = "<group>"; tabWidth = 3; };
 		14ABA8952862689700252E0C /* TestAcceleration.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = TestAcceleration.h; sourceTree = "<group>"; tabWidth = 3; };
@@ -141,6 +144,8 @@
 				14ABA8952862689700252E0C /* TestAcceleration.h */,
 				803B58A9285BA4A800B7D81B /* testForce.h */,
 				14ABA894286267D200252E0C /* testGravity.h */,
+				14678BDB28662E3D00F511BE /* testPhysicsFormulas.h */,
+				14678BDC28662FC000F511BE /* testPhysicsFormulas.cpp */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				14678BD82865736400F511BE /* testVectorOther.cpp in Sources */,
 				14678BD92865736400F511BE /* testVectorUpper.cpp in Sources */,
 				14678BDA2865736400F511BE /* testVectorLower.cpp in Sources */,
+				14678BDD286631FB00F511BE /* testPhysicsFormulas.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

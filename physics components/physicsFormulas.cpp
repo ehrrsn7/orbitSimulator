@@ -5,9 +5,6 @@
  * helper function does not retain state)
  **********************************************************************/
 
-#define FPS 30                // frames/s
-#define SECONDS_IN_DAY 86400  // s : 60s/min * 60min/hr * 24hr/d
-
 #include "physicsFormulas.h"  // header file
 #include "movingObject.h"     // for MovingObject
 #include "earth.h"            // for Earth
@@ -97,15 +94,32 @@ double timePerFrame() {return timeDilation() / FPS; }
  **********************************************************************/
  
 /**************************************************
- * rotation speed
+ * earth rotation speed
  * speed = -(2π/frame rate) * (dialation / seconds in day)
  *    rf - rotation of the earth in radians per 1 frame
  *    frame rate - "
  *    timeDilation - "
  *    seconds in day - number of seconds for 1 earth rotation
  **************************************************/
-double rotationSpeed() {
-   return -(2 * M_PI / FPS) * (timeDilation() / SECONDS_IN_DAY);
+double earthRotationSpeed() {
+   return -2 * M_PI * timePerFrame() / SECONDS_IN_DAY;
+}
+
+/**************************************************
+ * earth rotation speed
+ * speed = -(2π/frame rate) * (dialation / seconds in day)
+ *    rf - rotation of the earth in radians per 1 frame
+ *    frame rate - "
+ *    timeDilation - "
+ *    seconds in day - number of seconds for 1 earth rotation
+ * This function overloads the original, but we take
+ * the actual change in time per frame as a parameter.
+ * So, we'll just replace timePerFrame() with the
+ * actual dt.
+ * (MovingObject will handle the time dilation)
+ **************************************************/
+double earthRotationSpeed(double dt) {
+   return -2 * M_PI * dt / SECONDS_IN_DAY;
 }
 
 /**********************************************************************
@@ -167,7 +181,7 @@ double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2) 
 Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2) {
    Gravity g;
    g.setPolar(
-      G * obj1.getMass() * obj2.getMass() / distance(obj1, obj2),
+      G * obj1.getMass() * obj2.getMass() / pow(distance(obj1, obj2), 2),
       directionOfGravity(obj1, obj2));
    return g;
 }
@@ -185,16 +199,16 @@ double calcGravity(double height) {
 /**************************************************
 * gravity equation
 * gh = g (r/(r + h))^2
-* but returns a Gravity vector object in the
+* but returns an Acceleration vector object in the
 * direction of the origin
 **************************************************/
-Gravity calcGravityVector(const Position& p) {
-  Gravity g;
-  g.setPolar(
-     calcGravity(calcHeight(p)),
-     directionOfGravity(p, Position())
-  );
-  return g;
+Acceleration calcGravityVector(const Position& p) {
+   Acceleration g;
+   g.setPolar(
+      calcGravity(calcHeight(p)),
+      directionOfGravity(p, Position())
+   );
+   return g;
 }
 
 /**********************************************************************
