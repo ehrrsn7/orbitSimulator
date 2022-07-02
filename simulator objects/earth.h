@@ -29,9 +29,12 @@ public:
       setDAngle(0.3); // rad/s
    }
    
-//   void update(const Interface * pUI) {
-//      
-//   }
+   void update(const Interface * pUI) {
+      double dt =  dilateTime(pUI->getDeltaTime());
+      v += a * dt;
+      p += v * dt;
+      rotate(dt);
+   }
    
    void display() const override { drawEarth(p, angle); }
    

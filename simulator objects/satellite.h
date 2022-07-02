@@ -126,7 +126,7 @@ public:
    GPS() {
       fragmentAmount = 2;
       setRadius(Position().pixelsToMeters(1)); // px TODO: what should radius be
-      setMass(1); // kg TODO: what should the mass be
+      setMass(1630); // kg TODO: what should the mass be
    }
    
    void display() const override {
@@ -152,7 +152,7 @@ public:
    GPSCenter() {
       this->fragmentAmount = 3;
       setRadius(Position().pixelsToMeters(7)); // px
-      setMass(1); // kg TODO: what should the mass be
+      setMass( 1630 / 3); // kg TODO: what should the mass be
    }
    
    void display() const override { drawGPSCenter(p, angle); }
@@ -172,7 +172,7 @@ public:
    GPSLeft() {
       this->fragmentAmount = 3;
       setRadius(Position().metersToPixels(8));
-      setMass(1); // kg TODO: what should the mass be
+      setMass(1630 / 3); // kg TODO: what should the mass be
    }
    
    void display() const override { drawGPSLeft(p, offset, rotation); }
@@ -193,7 +193,7 @@ class GPS::GPSRight : public SatellitePart {
 public:
    GPSRight() {
       setRadius(Position().pixelsToMeters(8));
-      setMass(1); // kg TODO: what should the mass be
+      setMass(1630 / 3); // kg TODO: what should the mass be
    }
    
    void display() const override { drawGPSLeft(p, offset, rotation); }
@@ -226,7 +226,7 @@ public:
       v.set(2050.0, 2684.68); // m/s
       fragmentAmount = 3;
       setRadius(Position().pixelsToMeters(10)); // px
-      setMass(1); // kg TODO: what should the mass be
+      setMass(12246); // kg TODO: what should the mass be
    }
 
    void display() const override {
@@ -263,7 +263,7 @@ public:
       setVelocity(Velocity(-7900.0, 0.0)); // m/s
       fragmentAmount = 2;
       setRadius(Position().pixelsToMeters(7)); // px
-      setMass(1); // kg TODO: what should the mass be
+      setMass(12055); // kg TODO: what should the mass be
    }
    
    void display() const override {
@@ -299,7 +299,7 @@ public:
       v.set(5800.0, 0.0); // m/s
       fragmentAmount = 2;
       setRadius(Position().pixelsToMeters(6)); // px
-      setMass(1); // kg TODO: what should the mass be
+      setMass(260); // kg TODO: what should the mass be
    }
    
    void display() const override {
@@ -332,7 +332,7 @@ public:
       setVelocity(parentV);
       setRadius(Position().pixelsToMeters(2)); // px TODO: what should radius be
       setDAngle(dAngle * 2); // rad
-      setMass(1); // kg TODO: what should the mass be
+      setMass(5); // kg TODO: what should the mass be
       
       // randomize velocity here according to the description
       

@@ -82,15 +82,15 @@ public:
       
       // duck duck goose
       if (earth.isAlive()) earth.update(pUI);
-      if (ship.isAlive()) ship.update(pUI);
+      if (ship.isAlive()) ship.update(pUI, earth);
       for (auto it = stars.begin(); it != stars.end(); ++it)
          it->update();
       for (auto it = satellites.begin(); it != satellites.end(); ++it)
-         if ((*it)->isAlive()) (*it)->update(pUI);
+         if ((*it)->isAlive()) (*it)->update(pUI, earth);
       for (auto it = fragments.begin(); it != fragments.end(); ++it)
-         if (it->isAlive()) it->update(pUI);
+         if (it->isAlive()) it->update(pUI, earth);
       for (auto it = projectiles.begin(); it != projectiles.end(); ++it)
-         if (it->isAlive()) it->update(pUI);
+         if (it->isAlive()) it->update(pUI, earth);
    }
     
    void display() const {

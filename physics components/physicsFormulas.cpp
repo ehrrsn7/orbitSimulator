@@ -185,6 +185,7 @@ Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2) {
    return g;
 }
 
+
 /**************************************************
 * gravity equation
 * gh = g (r/(r + h))^2
