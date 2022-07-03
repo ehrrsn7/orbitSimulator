@@ -77,8 +77,6 @@ public:
    // const Position& center, double rotation, bool thrust
    void display() const override {
       drawShip(p, angle, drawThrust);
-      if (drawThrust) std::cout << "drawing thrust\n"; // TODO: this seems to display nothing
-      else std::cout << "not drawing thrust\n";
    }
    
    void handleInput(const Interface * pUI) override {
@@ -91,9 +89,9 @@ public:
       // handle angle (l/r arrow keys)
       setDAngle(0); // reset each frame, then set:
       // user right arrow -> rotate +0.1 radians
-      if (pUI->isLeft()) dAngle += 0.1 * pUI->getDeltaTime();
+      if (pUI->isLeft()) dAngle -= 0.1 * pUI->getDeltaTime();
       // user left arrow -> rotate -0.1 radians
-      if (pUI->isRight()) dAngle -= 0.1 * pUI->getDeltaTime();
+      if (pUI->isRight()) dAngle += 0.1 * pUI->getDeltaTime();
        
       // fire projectiles: handle in simulator -- see fire() method below
    }

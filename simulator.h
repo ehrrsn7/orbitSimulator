@@ -108,8 +108,9 @@ public:
    void handleInput(const Interface * pUI) {
       // self
       if (pUI->isSpace()) {
-         if (true) {
+         if (ship.timeToFireProjectile()) {
             auto newProjectile = ship.fire();
+            projectiles.push_back(newProjectile);
          }
       }
 
@@ -145,25 +146,33 @@ private:
       if (ship.isAlive()) {
          
          // ship and smaller objects
-         for (auto it : satellites)  if (it->isAlive()) handleCollision(ship, *it);
-         for (auto it : fragments)   if (it.isAlive())  handleCollision(ship, it);
-         for (auto it : projectiles) if (it.isAlive())  handleCollision(ship, it);
+         for (auto it : satellites)  if (it->isAlive() && handleCollision(ship, *it))
+         {
+            ship.hit();
+            it->hit();
+         }
+         for (auto it : fragments)   if (it.isAlive() && handleCollision(ship, it))
+         {
+            ship.hit();
+            it.hit();
+         }
          
          // ship and earth
-         if (earth.isAlive()) ship.hit();
+         if (handleCollision(ship, earth)) ship.hit();
          
          // ship and edge of screen
          if (abs(ship.getPosition().getX()) >= tr.getX() || abs(ship.getPosition().getY()) >= tr.getY()) ship.hit();
       }
+      // everything to the earth
+      for (auto it : satellites)  if (it->isAlive() && handleCollision(earth, *it)) {it->hit();}
+      for (auto it : fragments)   if (it.isAlive() && handleCollision(earth, it))   {it.hit();}
+      for (auto it : projectiles) if (it.isAlive() && handleCollision(earth, it))   {it.hit();}
       
       // bullets and moving objects
    }
    
-   void handleCollision(MovingObject & obj1, MovingObject & obj2) {
-      if (computeDistance(obj1.getPosition(), obj2.getPosition()) < obj1.getRadius() + obj2.getRadius()) {
-         obj1.hit();
-         obj2.hit();
-      }
+   bool handleCollision(MovingObject & obj1, MovingObject & obj2) {
+      return (computeDistance(obj1.getPosition(), obj2.getPosition()) < obj1.getRadius() + obj2.getRadius());
    }
    
    void applyGravity(const Interface * pUI) {
