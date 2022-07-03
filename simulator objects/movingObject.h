@@ -22,12 +22,11 @@ public:
    MovingObject() : alive(true), r(1.0), m(1.0), angle(0.0), dAngle(10.0) {
    }
    
-   void update(const Interface * pUI, const MovingObject & bigObj) {
-      double dt =  dilateTime(pUI->getDeltaTime());
+   void update(const Interface * pUI) {
+      double dt = dilateTime(pUI->getDeltaTime());
       v += a * dt;
       p += v * dt;
       rotate(dt);
-      applyGravity(bigObj, dt);
    }
    
    virtual void display() const { }
@@ -64,7 +63,7 @@ public:
     **************************************************/
    void applyGravity(const MovingObject & obj, double dt) {
       // obj: object with mass that is attracting this
-      a = ( forceDueToGravity(obj, *this) / getMass());;
+      a = forceDueToGravity(obj, *this) / getMass();
    }
 
 protected:

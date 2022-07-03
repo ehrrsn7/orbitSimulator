@@ -75,22 +75,28 @@ public:
     
    void update(const Interface * pUI) {
       // self
-      // std::cout << pUI->getDeltaTimeMs() << " ms\n";
       handleCollisions();
-      // applyGravity(pUI);
+      applyGravity(pUI);
       cleanUpZombies();
       
       // duck duck goose
       if (earth.isAlive()) earth.update(pUI);
-      if (ship.isAlive()) ship.update(pUI, earth);
+      if (ship.isAlive()) ship.update(pUI);
+      
       for (auto it = stars.begin(); it != stars.end(); ++it)
          it->update();
+      
       for (auto it = satellites.begin(); it != satellites.end(); ++it)
-         if ((*it)->isAlive()) (*it)->update(pUI, earth);
+         if ((*it)->isAlive())
+            (*it)->update(pUI);
+      
       for (auto it = fragments.begin(); it != fragments.end(); ++it)
-         if (it->isAlive()) it->update(pUI, earth);
+         if (it->isAlive())
+            it->update(pUI);
+      
       for (auto it = projectiles.begin(); it != projectiles.end(); ++it)
-         if (it->isAlive()) it->update(pUI, earth);
+         if (it->isAlive())
+            it->update(pUI);
    }
     
    void display() const {
@@ -176,18 +182,20 @@ private:
    }
    
    void applyGravity(const Interface * pUI) {
-      // earth -> moving objects
-      if (ship.isAlive()) ship.applyGravity(earth, pUI->getDeltaTime());
-      for (auto it : satellites)  if (it->isAlive())
-         it->applyGravity(earth, pUI->getDeltaTime());
-      for (auto it : fragments)   if (it.isAlive())
-         it.applyGravity(earth, pUI->getDeltaTime());
-      for (auto it : projectiles) if (it.isAlive())
-         it.applyGravity(earth, pUI->getDeltaTime());
+      if (ship.isAlive())
+         ship.applyGravity(earth, pUI->getDeltaTime());
       
-      // moving objects -> earth lol
+      for (auto it : satellites)
+         if (it->isAlive())
+            it->applyGravity(earth, pUI->getDeltaTime());
       
-      // moving objects to each other HAHAHA
+      for (auto it : fragments)
+         if (it.isAlive())
+            it.applyGravity(earth, pUI->getDeltaTime());
+      
+      for (auto it : projectiles)
+         if (it.isAlive())
+            it.applyGravity(earth, pUI->getDeltaTime());
    }
    
    void cleanUpZombies() {

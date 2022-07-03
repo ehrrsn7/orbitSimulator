@@ -25,8 +25,8 @@ public:
       setMass(1); // kg TODO: what should the mass be
    }
 
-   void update(const Interface * pUI, const MovingObject & bigObj) {
-      MovingObject::update(pUI, bigObj);
+   void update(const Interface * pUI) {
+      MovingObject::update(pUI);
       if (expirationTime > 0) expirationTime -= pUI->getDeltaTime();
       else setAlive(false);
    }
@@ -69,8 +69,8 @@ public:
       setRadius(Position().pixelsToMeters(10)); // px
    }
    
-   void update(const Interface * pUI, const MovingObject & bigObj) {
-      MovingObject::update(pUI, bigObj);
+   void update(const Interface * pUI) {
+      MovingObject::update(pUI);
       cooldownTimer -= pUI->getDeltaTime();
    }
    
