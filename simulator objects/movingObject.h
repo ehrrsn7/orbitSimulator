@@ -29,7 +29,10 @@ public:
       rotate(dt);
    }
    
-   virtual void display() const { }
+   virtual void display() const {
+      if (showHitboxes) drawCircle(p, r); // draw hitbox
+   }
+
    virtual void handleInput(const Interface * pUI) { }
    
    // setters
@@ -41,6 +44,8 @@ public:
    void setMass(double mass)                    { this->m = mass; }
    void setAngle(double angle)                  { this->angle = angle; }
    void setDAngle(double dAngle)                { this->dAngle = dAngle; }
+   static void setShowHitboxes(bool show)       { showHitboxes = show; }
+   static void toggleShowHitboxes()             { showHitboxes = !showHitboxes; }
    
    // getters
    Position getPosition()           const { return p; }
@@ -51,6 +56,7 @@ public:
    double getMass()                 const { return m; }
    double getAngle()                const { return angle; }
    double getDAngle()               const { return dAngle; }
+   static bool getShowHitboxes()          { return showHitboxes; }
    
    // adders
    void addAngle(double dAngle) { setAngle(getAngle() + dAngle); }
@@ -75,6 +81,8 @@ protected:
    double m;         // mass (kg)
    double angle;     // current angle to be drawn at
    double dAngle;    // dingle dangle, change my angle
+   
+   static bool showHitboxes;
    
    /**************************************************
     * private helper methods

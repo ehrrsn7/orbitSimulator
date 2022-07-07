@@ -137,6 +137,14 @@ void drawEarth(const Position& center, double rotation);
 void drawStar(const Position& point, unsigned char phase);
 
 /*************************************************************************
+ * DRAW CIRCLE
+ * idek, I just want to draw a circle at a given radius to provide a visual
+ * demonstration for the hitboxes
+ *    INPUT:   c : Center Position
+ *************************************************************************/
+void drawCircle(Position c, float r);
+
+/*************************************************************************
  * RANDOM
  * This function generates a random number.  The user specifies
  * The parameters 
@@ -145,5 +153,4 @@ void drawStar(const Position& point, unsigned char phase);
  *************************************************************************/
 int    random(int    min, int    max);
 double random(double min, double max);
-
 

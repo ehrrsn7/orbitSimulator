@@ -87,6 +87,7 @@ public:
    bool isSpace()    const { return isSpacePress;  };
    bool isEscape()   const { return isEscapePress; }; // (ELIJAH)
    bool isR()        const { return isRPress;      }; // (ELIJAH)
+   bool isB()        const { return isBPress;      }; // (ELIJAH)
    
    static void *p;                   // for client
    static void (*callBack)(const Interface *, void *);
@@ -104,7 +105,8 @@ private:
    static int           isRightPress;  //    "   right      "
    static bool          isSpacePress;  //    "   space      "
    static bool          isEscapePress; //    "   escape     " (ELIJAH)
-   static bool          isRPress;      //
+   static bool          isRPress;      //    "   r          " (ELIJAH)
+   static bool          isBPress;      //    "   b          " (ELIJAH)
    static timestamp     tn;            // `timestamp` for this frame (ELIJAH)
    static timestamp     t0;            // `timestamp` for last frame
    static seconds       deltaTime;     // `seconds` actual recorded change in time between frames

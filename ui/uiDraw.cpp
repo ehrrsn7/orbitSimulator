@@ -889,6 +889,25 @@ void drawStar(const Position& point, unsigned char phase)
    glEnd();
 }
 
+/*************************************************************************
+ * DRAW CIRCLE
+ * idek, I just want to draw a circle at a given radius to provide a visual
+ * demonstration for the hitboxes
+ *    INPUT:   cx, cy : Center X / Center Y OR p : center Position
+ *************************************************************************/
+void drawCircle(Position c, float r) {
+    r = Position().metersToPixels(r);
+    glBegin(GL_LINE_LOOP);
+    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
+    int num_segments = 32;
+    for (int i = 0; i < num_segments; i++)   {
+        float theta = 2.0f * 3.1415926f * float(i) / float(num_segments);//get the current angle
+        float x = r * cosf(theta);//calculate the x component
+        float y = r * sinf(theta);//calculate the y component
+        glVertex2f(x + c.getPixelsX(), y + c.getPixelsY());//output vertex
+    }
+    glEnd();
+}
 
 /*************************************************************************
  * RANDOM
@@ -922,8 +941,5 @@ double random(double min, double max)
 
    return num;
 }
-
-
-
 
 

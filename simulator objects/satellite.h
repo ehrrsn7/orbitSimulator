@@ -84,6 +84,7 @@ public:
    }
 
    void display() const override {
+      MovingObject::display();
       drawSputnik(p, angle);
    }
    
@@ -130,6 +131,7 @@ public:
    }
    
    void display() const override {
+      MovingObject::display();
       drawGPS(p, angle);
    }
    
@@ -155,7 +157,10 @@ public:
       setMass( 1630 / 3); // kg
    }
    
-   void display() const override { drawGPSCenter(p, angle); }
+   void display() const override {
+      MovingObject::display();
+      drawGPSCenter(p, angle);
+   }
    
    void setRotation(double rotation) { this->rotation = rotation; }
    
@@ -175,7 +180,10 @@ public:
       setMass(1630 / 3); // kg
    }
    
-   void display() const override { drawGPSLeft(p, offset, rotation); }
+   void display() const override {
+      MovingObject::display();
+      drawGPSLeft(p, offset, rotation);
+   }
    
    void setOffset(const Position& offset) { this->offset = offset; }
    void setRotation(double rotation) { this->rotation = rotation; }
@@ -196,7 +204,10 @@ public:
       setMass(1630 / 3);
    }
    
-   void display() const override { drawGPSLeft(p, offset, rotation); }
+   void display() const override {
+      MovingObject::display();
+      drawGPSLeft(p, offset, rotation);
+   }
    
    void setOffset(const Position& offset) { this->offset = offset; }
    void setRotation(double rotation) { this->rotation = rotation; }
@@ -230,6 +241,7 @@ public:
    }
 
    void display() const override {
+      MovingObject::display();
       drawHubble(p, angle);
    }
    
@@ -267,6 +279,7 @@ public:
    }
    
    void display() const override {
+      MovingObject::display();
       drawCrewDragon(p, angle);
    }
    
@@ -303,6 +316,7 @@ public:
    }
    
    void display() const override {
+      MovingObject::display();
       drawStarlink(p, angle);
    }
    
@@ -342,6 +356,7 @@ public:
    }
    
    void display() const override {
+      MovingObject::display();
       drawFragment(p, angle);
    }
 };

@@ -119,11 +119,13 @@ public:
             projectiles.push_back(newProjectile);
          }
       }
+      
+      // statics
+      if (pUI->isB()) MovingObject::toggleShowHitboxes();
 
       // do our rounds..
       if (earth.isAlive()) earth.handleInput(pUI);
-      // if (ship.isAlive()) ship.handleInput(pUI);
-      ship.handleInput(pUI);
+      if (ship.isAlive()) ship.handleInput(pUI);
       for (auto it : stars) it.handleInput(pUI);
       for (auto it : satellites)  if (it->isAlive()) it->handleInput(pUI);
       for (auto it : fragments)   if (it.isAlive())  it.handleInput(pUI);

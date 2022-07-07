@@ -31,7 +31,7 @@ public:
       else setAlive(false);
    }
    
-   void display() const override { drawProjectile(p); }
+   void display() const { drawProjectile(p); }
    
 private:
    double expirationTime;
@@ -76,6 +76,7 @@ public:
    
    // const Position& center, double rotation, bool thrust
    void display() const override {
+      MovingObject::display();
       drawShip(p, angle, drawThrust);
    }
    

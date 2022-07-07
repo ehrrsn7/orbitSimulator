@@ -193,6 +193,9 @@ void Interface::keyEvent(int key, bool fDown)
       case 27: // escape key
          isEscapePress = fDown;
          break;
+      case 98: // B key
+         isBPress = fDown;
+         break;
       case 114: // R key
          isRPress = fDown;
          break;
@@ -218,7 +221,9 @@ void Interface::keyEvent()
       isLeftPress++;
    if (isRightPress)
       isRightPress++;
-   isSpacePress = false;
+   // isSpacePress = false; // comment for machine gun (pew pew pew!!!)
+   isRPress = false;
+   isBPress = false;
 }
 
 /*************************************************************************
@@ -290,6 +295,7 @@ int            Interface::isRightPress    = 0;
 bool           Interface::isSpacePress    = false;
 bool           Interface::isEscapePress   = false;
 bool           Interface::isRPress        = false;
+bool           Interface::isBPress        = false;
 bool           Interface::initialized     = false;
 double         Interface::timePeriod      = 1.0 / 30; // 30 frames/s default
 unsigned long  Interface::nextTick        = 0;        // redraw now please
