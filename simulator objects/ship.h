@@ -22,9 +22,7 @@ class Projectile : public MovingObject {
 public:
    Projectile() : expirationTime(2 /* s */ ) {
       setRadius(Position().pixelsToMeters(.5)); // *diameter of 1px*
-      setAngle(0.0); // rad TODO: what should angle be
-      setDAngle(0.0); // rad TODO: what should dAngle be
-      setMass(1); // kg TODO: what should the mass be
+      setMass(1); // kg
    }
 
    void update(const Interface * pUI) {

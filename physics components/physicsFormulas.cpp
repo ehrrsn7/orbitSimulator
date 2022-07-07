@@ -259,6 +259,6 @@ double aToDy(const Acceleration& a, const Velocity& v0, double dt) {
 * velocity with constant acceleration
 **************************************************/
 Velocity aToV(const Acceleration& a, const Velocity& v0, const double dt) {
-//   return v0 + a * dt; // TODO: fix and uncomment
-  return Velocity(aToDx(a, v0, dt), aToDy(a, v0, dt));
+   // return v0 + a * dt;
+   return Velocity(aToDx(a, v0, dt), aToDy(a, v0, dt));
 }
