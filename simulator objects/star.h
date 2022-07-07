@@ -24,15 +24,14 @@ public:
    }
    
    void display() const {
-//      std::cout << (int)phase << " ";
-      drawStar(p, (unsigned char)phase);
+      drawStar(p, phase);
    }
    
    void handleInput(const Interface * pUI) { }
 
 private:
    Position p;
-   int phase;
+   unsigned char phase;
    
    /**************************************************
     * helper methods

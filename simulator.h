@@ -74,11 +74,6 @@ public:
    }
     
    void update(const Interface * pUI) {
-      // self
-      handleCollisions();
-      applyGravity(pUI);
-      cleanUpZombies();
-      
       // duck duck goose
       if (earth.isAlive()) earth.update(pUI);
       if (ship.isAlive()) ship.update(pUI);
@@ -97,6 +92,11 @@ public:
       for (auto it = projectiles.begin(); it != projectiles.end(); ++it)
          if (it->isAlive())
             it->update(pUI);
+      
+      // self
+      handleCollisions();
+      applyGravity(pUI);
+      cleanUpZombies();
    }
     
    void display() const {
@@ -175,6 +175,16 @@ private:
       for (auto it : projectiles) if (it.isAlive() && handleCollision(earth, it))   {it.hit();}
       
       // bullets and moving objects
+      for(auto it : projectiles){
+            for (auto Sit : satellites)  if (Sit->isAlive() && handleCollision(it, *Sit)){
+               it.hit();
+               Sit->hit();
+            }
+            for (auto Fit : fragments)   if (Fit.isAlive() && handleCollision(it, Fit)){
+               it.hit();
+               Fit.hit();
+            }
+      }
    }
    
    bool handleCollision(MovingObject & obj1, MovingObject & obj2) {

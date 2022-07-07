@@ -11,6 +11,8 @@
 #include "uiInteract.h"
 #include "uiDraw.h"
 
+#define FIRE_PROJECTILE_COOLDOWN .1 // s
+
 /**************************************************
  * Projectile
  * To be returned by Ship via the fire() method return value.
@@ -81,8 +83,11 @@ public:
    
    void handleInput(const Interface * pUI) override {
       // handle acceleration (down arroy key)
+      
       // down arrow will accelerate ship in direction it's facing at 30m/s/s
       if (pUI->isDown()) a.addPolar(30.0 /*m/s/s*/, getAngle());
+      
+      // draw flames when ship is 'accelerating'
       if (pUI->isDown()) drawThrust = true;
       else drawThrust = false;
       
@@ -99,7 +104,7 @@ public:
    Projectile fire() {
       // handle cooldown timer
       assert(timeToFireProjectile()); // never fire projectile if cooldownTimer has not finished
-      setCooldownTimer(.9); // s (about 3 frames)
+      setCooldownTimer(FIRE_PROJECTILE_COOLDOWN);
       
       Projectile projectile;
       projectile.setAngle(getAngle());
