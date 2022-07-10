@@ -68,7 +68,7 @@ public:
     * public helper methods
     **************************************************/
    void applyGravity(const MovingObject & obj, double dt) {
-      // obj: object with mass that is attracting this
+      // obj: object with mass that is attracting this (the earth)
       a = forceDueToGravity(obj, *this) / getMass();
    }
 

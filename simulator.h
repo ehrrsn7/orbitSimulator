@@ -154,43 +154,39 @@ private:
       if (ship.isAlive()) {
          
          // ship and smaller objects
-         for (auto it : satellites)  if (it->isAlive() && handleCollision(ship, *it))
+         for (auto it : satellites)  if (it->isAlive() && hasCollided(ship, *it))
          {
             ship.hit();
             it->hit();
          }
-         for (auto it : fragments)   if (it.isAlive() && handleCollision(ship, it))
+         for (auto it : fragments)   if (it.isAlive() && hasCollided(ship, it))
          {
             ship.hit();
             it.hit();
          }
          
          // ship and earth
-         if (handleCollision(ship, earth)) ship.hit();
+         if (hasCollided(ship, earth)) ship.hit();
          
          // ship and edge of screen
          if (abs(ship.getPosition().getX()) >= tr.getX() || abs(ship.getPosition().getY()) >= tr.getY()) ship.hit();
       }
       // everything to the earth
-      for (auto it : satellites)  if (it->isAlive() && handleCollision(earth, *it)) {it->hit();}
-      for (auto it : fragments)   if (it.isAlive() && handleCollision(earth, it))   {it.hit();}
-      for (auto it : projectiles) if (it.isAlive() && handleCollision(earth, it))   {it.hit();}
+      for (auto it : satellites)  if (it->isAlive() && hasCollided(earth, *it)) {it->hit();}
+      for (auto it : fragments)   if (it.isAlive() && hasCollided(earth, it))   {it.hit();}
+      for (auto it : projectiles) if (it.isAlive() && hasCollided(earth, it))   {it.hit();}
       
       // bullets and moving objects
-      for(auto it : projectiles){
-            for (auto Sit : satellites)  if (Sit->isAlive() && handleCollision(it, *Sit)){
+      for(auto it : projectiles) { // TODO: for some reason, the satellites are being destroyed but the bullets don't die on impact.
+            for (auto Sit : satellites)  if (Sit->isAlive() && hasCollided(it, *Sit)){
                it.hit();
                Sit->hit();
             }
-            for (auto Fit : fragments)   if (Fit.isAlive() && handleCollision(it, Fit)){
+            for (auto Fit : fragments)   if (Fit.isAlive() && hasCollided(it, Fit)){
                it.hit();
                Fit.hit();
             }
       }
-   }
-   
-   bool handleCollision(MovingObject & obj1, MovingObject & obj2) {
-      return (computeDistance(obj1.getPosition(), obj2.getPosition()) < obj1.getRadius() + obj2.getRadius());
    }
    
    void applyGravity(const Interface * pUI) {

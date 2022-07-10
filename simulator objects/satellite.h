@@ -312,7 +312,7 @@ public:
       v.set(5800.0, 0.0); // m/s
       fragmentAmount = 2;
       setRadius(Position().pixelsToMeters(6)); // px
-      setMass(260); // kg TODO: what should the mass be
+      setMass(260); // kg
    }
    
    void display() const override {

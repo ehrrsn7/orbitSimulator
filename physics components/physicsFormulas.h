@@ -36,6 +36,7 @@ double rad(double angleDegrees);
 double distance(const Position& pos1, const Position& pos2);
 double distance(const MovingObject& obj1, const MovingObject& obj2);
 double computeDistance(const Position& pos1, const Position& pos2);
+bool hasCollided(MovingObject & obj1, MovingObject & obj2);
 
 /**********************************************************************
  * Time Functions

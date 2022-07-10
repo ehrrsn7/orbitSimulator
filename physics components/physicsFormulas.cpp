@@ -7,6 +7,7 @@
 
 #include "physicsFormulas.h"  // header file
 #include "movingObject.h"     // for MovingObject
+#include "ship.h"             // for Projectile (for now)
 #include "earth.h"            // for Earth
 
 #include <cmath>              // for math functions
@@ -41,6 +42,29 @@ double rad(double angleDegrees) { return M_PI * angleDegrees / 180; }
 double computeDistance(const Position& pos1, const Position& pos2) {
   return sqrt((pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
               (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));
+}
+
+/**************************************************
+ * Has Collided
+ * param: obj1 : Moving Object
+ * param: obj2 : Moving Object
+ * return: bool : the objects have collided
+ * (aka distance between objects > too close
+ * where 'too close' == object1.radius + object2.radius)
+ **************************************************/
+bool hasCollided(MovingObject & obj1, MovingObject & obj2) {
+   if (typeid(obj1) == typeid(Projectile) || typeid(obj2) == typeid(Projectile)) {
+      if (computeDistance(obj1.getPosition(), obj2.getPosition())
+          < obj1.getRadius() + obj2.getRadius()) {
+         std::cout << "Too close: " << obj1.getRadius() + obj2.getRadius()
+                   << "| current distance: " << distance(obj1, obj2)
+                   << "| collided: "
+                   << (computeDistance(obj1.getPosition(), obj2.getPosition()) < obj1.getRadius() + obj2.getRadius())
+                   << "\n";
+      }
+   }
+   return (computeDistance(obj1.getPosition(), obj2.getPosition())
+           < obj1.getRadius() + obj2.getRadius());
 }
 
 /**************************************************
