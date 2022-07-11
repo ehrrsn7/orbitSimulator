@@ -29,7 +29,7 @@ public:
       setDAngle(0.3); // rad/s
    }
    
-   void update(const Interface * pUI) {
+   void update(const Interface * pUI) override {
       double dt =  dilateTime(pUI->getDeltaTime());
       v += a * dt;
       p += v * dt;

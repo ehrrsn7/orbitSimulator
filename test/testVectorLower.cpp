@@ -182,8 +182,6 @@ void TestVector::LowerEdgeCase::testGetAngleRadians() const {
    // setup
    Vector v(std::numeric_limits<double>::lowest(), std::numeric_limits<double>::lowest());
    // exercise
-   std::cout << v.getAngleRadians() << std::endl;
-   std::cout << -3 * M_PI / 4 << std::endl;
    // verify
    assert(v.getAngleRadians() == -3 * M_PI/4);
 }  // breakdown

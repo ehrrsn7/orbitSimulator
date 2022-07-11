@@ -19,10 +19,9 @@ class MovingObject {
     
 public:
    // constructors
-   MovingObject() : alive(true), r(1.0), m(1.0), angle(0.0), dAngle(10.0) {
-   }
+   MovingObject() : alive(true), r(1.0), m(1.0), angle(0.0), dAngle(10.0) { }
    
-   void update(const Interface * pUI) {
+   virtual void update(const Interface * pUI) {
       double dt = dilateTime(pUI->getDeltaTime());
       v += a * dt;
       p += v * dt;

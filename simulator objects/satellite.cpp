@@ -18,11 +18,10 @@
  * Fragments rotate wildly when they are created. They also retire randomly anywhere from 50 to 100 frames (2-3 seconds of simulator time) after they are created. Each fragment has a radius of 2 pixels.
  * ...
  **************************************************/
-std::vector<Fragment> Satellite::breakIntoFragments() {
-   std::vector<Fragment> newFragments;
+std::vector<Satellite *> Satellite::breakIntoFragments() {
+   std::vector<Satellite *> newFragments;
    for (int i = 0; i < fragmentAmount; i++)
-      newFragments.push_back(Fragment(p, v, 0.0));
-   // let Fragment Constructor randomize v
+      newFragments.push_back((Satellite *)new Fragment(p, v, 0.0));
    
    return newFragments;
    
@@ -34,42 +33,32 @@ std::vector<Fragment> Satellite::breakIntoFragments() {
  * Method: Break into Parts
  * Class: GPS
  **************************************************/
-std::vector<SatellitePart> GPS::breakIntoParts() {
+std::vector<Satellite *> GPS::breakIntoParts() {
+   // initialize
+   Position pOffset;
+   Velocity vOffset;
+   double idk = 5000; // offset in meters/second
+
    // When a GPS satellite comes into contact with another element in the simulation it breaks up into 3 pieces
-   std::vector<SatellitePart> parts;
-   Position center = this->getPosition();
-   
+
    // These pieces are:
    
    // The center: drawGPSCenter() at 7 pixels radius
-   GPSCenter pieceCenter; // (offset code copied from uiDraw.h)
-   pieceCenter.setPosition(center);
-   pieceCenter.setRadius(Position().pixelsToMeters(7)); // px
-   parts.push_back(pieceCenter);
+   Satellite * centerPart = new GPSCenter;
+   pOffset.setPolar(Position().pixelsToMeters(4), getAngle() + random(-2 * M_PI, 2 * M_PI));
+   vOffset.setPolar(idk, random(-2 * M_PI, 2 * M_PI));
+   centerPart->setPosition(getPosition() + pOffset);
+   centerPart->setVelocity(getVelocity() + vOffset);
    
    // The left solar array drawGPSLeft() at 8 pixel radius
-   GPSLeft pieceLeft;
-   Position posLeft;
-   posLeft.setPixelsX(0.0);
-   posLeft.setPixelsY(12.0);
-   pieceLeft.setOffset(posLeft);
-   posLeft.addPolar(center.getMagnitude(), this->angle);
-   pieceLeft.setPosition(posLeft);
-   pieceLeft.setRotation(getAngle());
-   pieceCenter.setRadius(Position().pixelsToMeters(8)); // px
-   parts.push_back(pieceLeft);
-   
+   Satellite * leftPart = new GPSLeft;
+
    // The right solar array drawGPSLeft() at 8 pixel radius
-   GPSRight pieceRight;
-   Position posRight;
-   posRight.setPixelsX(0.0);
-   posRight.setPixelsY(12.0);
-   pieceRight.setOffset(posRight);
-   posRight.addPolar(center.getMagnitude(), this->angle);
-   pieceRight.setPosition(posRight);
-   pieceRight.setRotation(getAngle());
-   pieceCenter.setRadius(Position().pixelsToMeters(8)); // px
-   parts.push_back(pieceRight);
-   
+   Satellite * rightPart = new GPSRight;
+
+   std::vector<Satellite *> parts;
+   parts.push_back(centerPart);
+   parts.push_back(leftPart);
+   parts.push_back(rightPart);
    return parts;
 }

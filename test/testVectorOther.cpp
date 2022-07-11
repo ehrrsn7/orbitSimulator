@@ -225,8 +225,6 @@ void TestVector::OtherTestCase::testSetPolar() const {
    // exercise
    v.setPolar(7, M_PI/3);
    // verify
-   cout << 7 * sin(M_PI/3) << endl; // quick print
-   cout << 7 * cos(M_PI/3) << endl;
    assert(v.x == 7 * sin(M_PI/3));
    assert(v.y == 7 * cos(M_PI/3));
 }  // breakdown

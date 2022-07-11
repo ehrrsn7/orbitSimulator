@@ -69,7 +69,7 @@ public:
       setRadius(Position().pixelsToMeters(10)); // px
    }
    
-   void update(const Interface * pUI) {
+   void update(const Interface * pUI) override {
       MovingObject::update(pUI);
       cooldownTimer -= pUI->getDeltaTime();
    }

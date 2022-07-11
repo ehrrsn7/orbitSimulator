@@ -31,6 +31,7 @@ void callBack(const Interface* pUI, void* p) {
    // single callback function in OpenGL.
    Simulator* pSim = (Simulator*)p;
    
+   // update game
    pSim->update(pUI);
    pSim->display();
    pSim->handleInput(pUI);

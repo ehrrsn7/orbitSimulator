@@ -53,16 +53,6 @@ double computeDistance(const Position& pos1, const Position& pos2) {
  * where 'too close' == object1.radius + object2.radius)
  **************************************************/
 bool hasCollided(MovingObject & obj1, MovingObject & obj2) {
-   if (typeid(obj1) == typeid(Projectile) || typeid(obj2) == typeid(Projectile)) {
-      if (computeDistance(obj1.getPosition(), obj2.getPosition())
-          < obj1.getRadius() + obj2.getRadius()) {
-         std::cout << "Too close: " << obj1.getRadius() + obj2.getRadius()
-                   << "| current distance: " << distance(obj1, obj2)
-                   << "| collided: "
-                   << (computeDistance(obj1.getPosition(), obj2.getPosition()) < obj1.getRadius() + obj2.getRadius())
-                   << "\n";
-      }
-   }
    return (computeDistance(obj1.getPosition(), obj2.getPosition())
            < obj1.getRadius() + obj2.getRadius());
 }

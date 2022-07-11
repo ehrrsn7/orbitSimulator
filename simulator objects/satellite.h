@@ -28,11 +28,11 @@ public:
    
    // helper method for Simulator (disabled if fragmentAmount == 0)
    // When a piece of a satellite breaks up (hits something), it can turn into one or more fragments and zero or more parts.
-   std::vector<Fragment> breakIntoFragments();
+   std::vector<Satellite *> breakIntoFragments();
    
    // different satellites break into parts differently, hence the virtual keyword
-   std::vector<SatellitePart> breakIntoParts() {
-      return std::vector<SatellitePart>(); // default: empty vector
+   virtual std::vector<Satellite *> breakIntoParts() {
+      return std::vector<Satellite *>(); // default: empty vector
    }
    
 protected:
@@ -52,13 +52,8 @@ protected:
  * They essentially behave just like satellites.
  **************************************************/
 class SatellitePart : public Satellite {
-public:
    // fragmentAmount/mass will vary depending on what part it is/what satellite it came from
-   
-   std::vector<SatellitePart> breakIntoParts() {
-      // parts don't break into smaller parts
-      return std::vector<SatellitePart>(); // return empty vector
-   }
+   // this will not return other satellite parts (inherit from parent)
 };
 
 /**************************************************
@@ -88,10 +83,7 @@ public:
       drawSputnik(p, angle);
    }
    
-   std::vector<SatellitePart> breakIntoParts() {
-      // Sputnik only drops fragments
-      return std::vector<SatellitePart>(); // return empty vector
-   }
+   // Sputnik only drops fragments -- no breakIntoParts implementation
 };
 
 /**************************************************
@@ -135,7 +127,7 @@ public:
       drawGPS(p, angle);
    }
    
-   std::vector<SatellitePart> breakIntoParts();
+   std::vector<Satellite *> breakIntoParts() override;
 
 private:
    class GPSCenter;
@@ -245,8 +237,8 @@ public:
       drawHubble(p, angle);
    }
    
-   std::vector<SatellitePart> breakIntoParts() {
-      std::vector<SatellitePart> parts;
+   std::vector<Satellite *> breakIntoParts() override {
+      std::vector<Satellite *> parts;
       // telescope (3 fragments)
       // computer module (2 fragments)
       // left solar array (2 fragments)
@@ -283,8 +275,8 @@ public:
       drawCrewDragon(p, angle);
    }
    
-   std::vector<SatellitePart> breakIntoParts() {
-      std::vector<SatellitePart> parts;
+   std::vector<Satellite *> breakIntoParts() override {
+      std::vector<Satellite *> parts;
       // center (radius 6px, 4 fragments)
       // left solar array (radius 6px, 2 fragments)
       // right solar array (radius 6px, 2 fragments)
@@ -320,8 +312,8 @@ public:
       drawStarlink(p, angle);
    }
    
-   std::vector<SatellitePart> breakIntoParts() {
-      std::vector<SatellitePart> parts;
+   std::vector<Satellite *> breakIntoParts() override {
+      std::vector<Satellite *> parts;
       // body (radius 2px, 3 fragments)
       // right solar array (radius 4px, 3 fragments)
       return parts;
@@ -339,24 +331,40 @@ public:
 
  * Fragments rotate wildly when they are created. They also retire randomly anywhere from 50 to 100 frames (2-3 seconds of simulator time) after they are created. Each fragment has a radius of 2 pixels.
  **************************************************/
-class Fragment : public MovingObject {
+class Fragment : public Satellite {
 public:
-   Fragment(Position parentP, Velocity parentV, double angle) {
+   Fragment(Position parentP, Velocity parentV, double collisionAngle) {
       setPosition(parentP);
       setVelocity(parentV);
       setRadius(Position().pixelsToMeters(2)); // px
-      setDAngle(dAngle * 2); // rad
+      setAngle(collisionAngle + random(-0.5 * M_PI, 0.5 * M_PI)); // rad
+      setDAngle(random(-2 * M_PI, 2 * M_PI)); // rad/s
       setMass(5); // kg
       
-      // randomize velocity here according to the description
+      // fragments rotate wildly when they are created
+      expirationTime = random(2, 3); // s
       
-      // offset position 4px here according to the description
+      // fragments and parts inherit their parents' velocity and add a kick
+      // (anywhere between 5,000 m/s and 9,000 m/s)
+      v.addPolar(random(5000, 9000) /* m/s */, angle);
       
-      // randomize angle here according to the description
+      // fragments and parts are placed 4 pixels from their point of
+      //creation -- in the direction of travel -- so they don't collide
+      // into each other
+      p.setPolar(Position().pixelsToMeters(4), angle);
    }
    
    void display() const override {
       MovingObject::display();
       drawFragment(p, angle);
    }
+   
+   void update(const Interface * pUI) override {
+      MovingObject::update(pUI);
+      if (expirationTime > 0) expirationTime -= pUI->getDeltaTime();
+      else setAlive(false);
+   }
+   
+private:
+   double expirationTime;
 };
