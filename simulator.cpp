@@ -71,6 +71,9 @@ void Simulator::handleCollision(Earth, Satellite * satellite) {
    if (!hasCollided(earth, *satellite)) return;
    std::cout << "handling collision between earth and satellite\n";
    satellite->hit();
+   for(auto frag : satellite->breakIntoFragments()){
+      std::cout << "f to break\n";
+      satellites.push_back(frag);}
 }
 
 void Simulator::handleCollision(SpaceShip, Satellite* satellite) {

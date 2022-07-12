@@ -32,7 +32,7 @@ public:
    
    // different satellites break into parts differently, hence the virtual keyword
    virtual std::vector<Satellite *> breakIntoParts() {
-      return std::vector<Satellite *>(); // default: empty vector
+      return std::vector<Satellite *> ();// default: empty vector
    }
    
 protected:
