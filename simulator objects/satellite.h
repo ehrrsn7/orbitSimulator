@@ -362,7 +362,9 @@ public:
    void update(const Interface * pUI) override {
       MovingObject::update(pUI);
       if (expirationTime > 0) expirationTime -= pUI->getDeltaTime();
-      else setAlive(false);
+      else{
+         std::cout << "frag died" << std::endl;
+         setAlive(false);}
    }
    
 private:

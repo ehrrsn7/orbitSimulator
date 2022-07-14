@@ -55,31 +55,28 @@ void Simulator::handleCollisions() {
 void Simulator::handleCollision(SpaceShip, Earth) {
    if (!ship.isAlive() || !earth.isAlive()) return;
    if (!hasCollided(ship, earth)) return;
-   std::cout << "handling collision between ship and earth\n";
+//   std::cout << "handling collision between ship and earth\n";
    ship.hit();
 }
 
 void Simulator::handleCollision(Earth, Projectile & projectile) {
    if (!earth.isAlive() || !projectile.isAlive()) return;
    if (!hasCollided(earth, projectile)) return;
-   std::cout << "handling collision between earth and projectile\n";
+//   std::cout << "handling collision between earth and projectile\n";
    projectile.hit();
 }
 
 void Simulator::handleCollision(Earth, Satellite * satellite) {
    if (!earth.isAlive() || !satellite->isAlive()) return;
    if (!hasCollided(earth, *satellite)) return;
-   std::cout << "handling collision between earth and satellite\n";
+//   std::cout << "handling collision between earth and satellite\n";
    satellite->hit();
-   for(auto frag : satellite->breakIntoFragments()){
-      std::cout << "f to break\n";
-      satellites.push_back(frag);}
 }
 
 void Simulator::handleCollision(SpaceShip, Satellite* satellite) {
    if (!ship.isAlive() || !satellite->isAlive()) return;
    if (!hasCollided(ship, *satellite)) return;
-   std::cout << "handling collision between ship and satellite\n";
+//   std::cout << "handling collision between ship and satellite\n";
 
    // set ship/satellite instances alive to false
    ship.hit();
@@ -105,7 +102,7 @@ void Simulator::handleCollision(SpaceShip, Satellite* satellite) {
 void Simulator::handleCollision(Projectile & projectile, Satellite * satellite) {
    if (!projectile.isAlive() || !satellite->isAlive()) return;
    if (!hasCollided(projectile, *satellite)) return;
-   std::cout << "handling collision between projectile and satellite\n";
+//   std::cout << "handling collision between projectile and satellite\n";
    
    projectile.hit();
    satellite->hit();
