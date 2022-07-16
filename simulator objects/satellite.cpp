@@ -63,3 +63,107 @@ std::vector<Satellite *> GPS::breakIntoParts() {
    parts.push_back(rightPart);
    return parts;
 }
+
+/**************************************************
+ * Method: Break into Parts
+ * Class: Hubble
+ **************************************************/
+std::vector<Satellite *> CrewDragon::breakIntoParts()
+{
+   // initialize
+   Position pOffset;
+   Velocity vOffset;
+
+   // When a CrewDragon satellite comes into contact with another element in the simulation it breaks up into 3 pieces
+   
+   // These pieces are:
+   
+   // The center
+   Satellite * centerPart = new CrewDragon::Center;
+   centerPart->addPosition(getPosition());
+   centerPart->addVelocity(getVelocity());
+   
+   // The left part
+   Satellite * leftPart = new CrewDragon::Left;
+   leftPart->addPosition(getPosition());
+   leftPart->addVelocity(getVelocity());
+
+   // The right part
+   Satellite * rightPart = new CrewDragon::Right;
+   rightPart->addPosition(getPosition());
+   rightPart->addVelocity(getVelocity());
+   
+   std::vector<Satellite *> parts;
+   parts.push_back(centerPart);
+   parts.push_back(leftPart);
+   parts.push_back(rightPart);
+   return parts;
+}
+/**************************************************
+ * Method: Break into Parts
+ * Class: Hubble
+ **************************************************/
+std::vector<Satellite *> Hubble::breakIntoParts()
+{
+   // initialize
+   Position pOffset;
+   Velocity vOffset;
+
+   // When a Hubble satellite comes into contact with another element in the simulation it breaks up into 3 pieces
+   
+   // These pieces are:
+   // The Telescope part
+   Satellite * telescope = new Hubble::Telescope;
+   telescope->addPosition(getPosition());
+   telescope->addVelocity(getVelocity());
+   
+   // The computer part
+   Satellite * computer = new Hubble::Computer;
+   computer->addPosition(getPosition());
+   computer->addVelocity(getVelocity());
+   
+   // The left part
+   Satellite * leftPart = new Hubble::Left;
+   leftPart->addPosition(getPosition());
+   leftPart->addVelocity(getVelocity());
+
+   // The right part
+   Satellite * rightPart = new Hubble::Right;
+   rightPart->addPosition(getPosition());
+   rightPart->addVelocity(getVelocity());
+   
+   std::vector<Satellite *> parts;
+   parts.push_back(telescope);
+   parts.push_back(computer);
+   parts.push_back(leftPart);
+   parts.push_back(rightPart);
+   return parts;
+}
+/**************************************************
+ * Method: Break into Parts
+ * Class: Starlink
+ **************************************************/
+std::vector<Satellite *> Starlink::breakIntoParts()
+{
+   // initialize
+   Position pOffset;
+   Velocity vOffset;
+
+   // When a Hubble satellite comes into contact with another element in the simulation it breaks up into 3 pieces
+   
+   // These pieces are:
+   // The body
+   Satellite * body = new Starlink::Body;
+   body->addPosition(getPosition());
+   body->addVelocity(getVelocity());
+   
+   // The array
+   Satellite * array = new Starlink::Array;
+   array->addPosition(getPosition());
+   array->addVelocity(getVelocity());
+   
+   std::vector<Satellite *> parts;
+   parts.push_back(body);
+   parts.push_back(array);
+   return parts;
+}

@@ -236,14 +236,11 @@ public:
       drawHubble(p, angle);
    }
    
-   std::vector<Satellite *> breakIntoParts() override {
-      std::vector<Satellite *> parts;
-      // telescope (3 fragments)
-      // computer module (2 fragments)
-      // left solar array (2 fragments)
-      // right solar array (2 fragments)
-      return parts;
-   }
+   std::vector<Satellite *> breakIntoParts() override;
+   // telescope (3 fragments)
+   // computer module (2 fragments)
+   // left solar array (2 fragments)
+   // right solar array (2 fragments)
 protected:
    class Computer;
    class Telescope;
@@ -346,13 +343,7 @@ public:
       drawCrewDragon(p, angle);
    }
    
-   std::vector<Satellite *> breakIntoParts() override {
-      std::vector<Satellite *> parts;
-      // center (radius 6px, 4 fragments)
-      // left solar array (radius 6px, 2 fragments)
-      // right solar array (radius 6px, 2 fragments)
-      return parts;
-   }
+   std::vector<Satellite *> breakIntoParts() override;
 protected:
    class Center;
    class Right;
@@ -437,12 +428,9 @@ public:
       drawStarlink(p, angle);
    }
    
-   std::vector<Satellite *> breakIntoParts() override {
-      std::vector<Satellite *> parts;
-      // body (radius 2px, 3 fragments)
-      // right solar array (radius 4px, 3 fragments)
-      return parts;
-   }
+   std::vector<Satellite *> breakIntoParts() override;
+   // body (radius 2px, 3 fragments)
+   // right solar array (radius 4px, 3 fragments)
 
 private:
    // parts
