@@ -12,6 +12,8 @@
 #include <vector>       // i wonder what it could be
 
 #define GPS_MASS 1630
+#define SPUTNIK_MASS 83.6
+#define HUBBLE_MASS 12246
 
 // forward declaration prototypes
 class SatellitePart;
@@ -60,13 +62,9 @@ class SatellitePart : public Satellite {
 public:
    SatellitePart() {
       // parts rotate wildly after a collision (on construction, in this case)
-      setDAngle(random(-2 * M_PI, 2 * M_PI)); // rad/s
-      
-      double positionOffset = pixelsToMeters(4);
-      double velocityOffset = random(5000, 9000);
-      
-      p.addPolar(positionOffset, random(-M_PI, M_PI));
-      v.addPolar(velocityOffset, random(-M_PI, M_PI));
+      setDAngle(random(-M_PI/4, M_PI/4)); // rad/s
+      p.addPolar(pixelsToMeters(4)  /* px */,  random(-M_PI, M_PI));
+      v.addPolar(random(5000, 9000) /* m/s */, random(-M_PI, M_PI));
    }
 };
 
@@ -89,7 +87,7 @@ public:
       v.set(2050.0, 2684.68); // m/s
       fragmentAmount = 4;
       setRadius(pixelsToMeters(4)); // px
-      setMass(83.6); // kg
+      setMass(SPUTNIK_MASS); // kg
    }
 
    void display() const override {
@@ -244,7 +242,7 @@ public:
       v.set(2050.0, 2684.68); // m/s
       fragmentAmount = 3;
       setRadius(pixelsToMeters(10)); // px
-      setMass(12246); // kg
+      setMass(HUBBLE_MASS); // kg
    }
 
    void display() const override {
@@ -253,22 +251,43 @@ public:
    }
    
    std::vector<Satellite *> breakIntoParts() override;
-   // telescope (3 fragments)
-   // computer module (2 fragments)
-   // left solar array (2 fragments)
-   // right solar array (2 fragments)
+   
 protected:
-   class Computer;
    class Telescope;
+   class Computer;
    class Left;
    class Right;
 };
 
 /**************************************************
  * NESTED CLASS
- * Hubble::Computer
- * 2 fragments
+ * Hubble::Telescope
  *
+ * "The telescope drawHubbleTelescope() at 10 pixels
+ * radius and breaking into 3 fragments"
+ **************************************************/
+class Hubble::Telescope : public SatellitePart {
+public:
+   Telescope() {
+      setRadius(pixelsToMeters(10));
+      setMass(HUBBLE_MASS / 4);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleTelescope(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
+
+/**************************************************
+ * NESTED CLASS
+ * Hubble::Computer Module
+ *
+ * "The computer module drawHubbleComputer() at 7
+ * pixel radius and breaking into 2 fragments"
  **************************************************/
 class Hubble::Computer : public SatellitePart {
 public:
@@ -289,27 +308,10 @@ private:
 
 /**************************************************
  * NESTED CLASS
- * Hubble::Telescope
- **************************************************/
-class Hubble::Telescope : public SatellitePart {
-public:
-   Telescope() {
-      setRadius(pixelsToMeters(10));
-      setMass(12246 / 4);
-   }
-   
-   void display() const override {
-      MovingObject::display();
-      drawHubbleTelescope(p, offset, angle);
-   }
-      
-private:
-   Position offset;
-};
-
-/**************************************************
- * NESTED CLASS
  * Hubble::Left Solar Array
+ *
+ * "The left solar array drawHubbleLeft() at 8 pixel
+ * radius and breaking into 2 fragments"
  **************************************************/
 class Hubble::Left : public SatellitePart {
 public:
@@ -330,6 +332,9 @@ private:
 /**************************************************
  * NESTED CLASS
  * Hubble::Right Solar Array
+ *
+ * "The right solar array drawHubbleRight() at 8 pixel
+ * radius and breaking into 2 fragments"
  **************************************************/
 class Hubble::Right : public SatellitePart {
 public:
