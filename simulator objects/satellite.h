@@ -261,6 +261,29 @@ protected:
 
 /**************************************************
  * NESTED CLASS
+ * Hubble::Computer
+ * 2 fragments
+ *
+ **************************************************/
+class Hubble::Computer : public SatellitePart {
+public:
+   Computer() {
+      setRadius(pixelsToMeters(7));
+      this->fragmentAmount = 2;
+      setMass(12246 / 4);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleComputer(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
+
+/**************************************************
+ * NESTED CLASS
  * Hubble::Telescope
  *
  * "The telescope drawHubbleTelescope() at 10 pixels
@@ -270,6 +293,7 @@ class Hubble::Telescope : public SatellitePart {
 public:
    Telescope() {
       setRadius(pixelsToMeters(10));
+      this->fragmentAmount = 3;
       setMass(HUBBLE_MASS / 4);
    }
    
@@ -292,8 +316,8 @@ private:
 class Hubble::Computer : public SatellitePart {
 public:
    Computer() {
-      setRadius(pixelsToMeters(10));
-      fragmentAmount = 2;
+      setRadius(pixelsToMeters(8));
+      this->fragmentAmount = 2;
       setMass(12246 / 4);
    }
    
@@ -316,7 +340,8 @@ private:
 class Hubble::Left : public SatellitePart {
 public:
    Left() {
-      setRadius(pixelsToMeters(10));
+      setRadius(pixelsToMeters(8));
+      this->fragmentAmount = 2;
       setMass(12246 / 4);
    }
    
@@ -339,7 +364,8 @@ private:
 class Hubble::Right : public SatellitePart {
 public:
    Right() {
-      setRadius(pixelsToMeters(10));
+      setRadius(pixelsToMeters(8));
+      this->fragmentAmount = 2;
       setMass(12246 / 4);
    }
    
@@ -381,6 +407,7 @@ public:
    }
    
    std::vector<Satellite *> breakIntoParts() override;
+
 protected:
    class Center;
    class Right;
@@ -394,13 +421,14 @@ protected:
 class CrewDragon::Center : public SatellitePart {
 public:
    Center() {
-      setRadius(pixelsToMeters(10));
+      setRadius(pixelsToMeters(6));
+      this->fragmentAmount = 4;
       setMass(12055 / 3);
    }
    
    void display() const override {
       MovingObject::display();
-      drawHubbleRight(p, offset, angle);
+      drawCrewDragonCenter(p, angle);
    }
       
 private:
@@ -412,13 +440,14 @@ private:
 class CrewDragon::Left : public SatellitePart {
 public:
    Left() {
-      setRadius(pixelsToMeters(10));
+      setRadius(pixelsToMeters(6));
+      this->fragmentAmount = 2;
       setMass(12055 / 3);
    }
    
    void display() const override {
       MovingObject::display();
-      drawHubbleRight(p, offset, angle);
+      drawCrewDragonLeft(p, offset, angle);
    }
       
 private:
@@ -430,13 +459,14 @@ private:
 class CrewDragon::Right : public SatellitePart {
 public:
    Right() {
-      setRadius(pixelsToMeters(10));
+      setRadius(pixelsToMeters(6));
+      this->fragmentAmount = 2;
       setMass(12055 / 3);
    }
    
    void display() const override {
       MovingObject::display();
-      drawHubbleRight(p, offset, angle);
+      drawCrewDragonRight(p, offset, angle);
    }
       
 private:
@@ -471,8 +501,6 @@ public:
    }
    
    std::vector<Satellite *> breakIntoParts() override;
-   // body (radius 2px, 3 fragments)
-   // right solar array (radius 4px, 3 fragments)
 
 protected:
    // parts
@@ -483,7 +511,8 @@ protected:
 class Starlink::Body : public SatellitePart {
 public:
    Body() {
-      setRadius(pixelsToMeters(8));
+      setRadius(pixelsToMeters(2));
+      this->fragmentAmount = 3;
       setMass(260 / 3);
    }
    
@@ -499,13 +528,14 @@ private:
 class Starlink::Array : public SatellitePart {
 public:
    Array() {
-      setRadius(pixelsToMeters(8));
+      setRadius(pixelsToMeters(4));
+      this->fragmentAmount = 3;
       setMass(260 / 3);
    }
    
    void display() const override {
       MovingObject::display();
-      drawStarlinkBody(p, offset, angle);
+      drawStarlinkArray(p, offset, angle);
    }
    
 private:
