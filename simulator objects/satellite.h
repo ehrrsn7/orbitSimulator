@@ -240,8 +240,8 @@ private:
 class Hubble : public Satellite {
 public:
    Hubble() {
-      p.set(-36515095.13, 21082000.0); // m
-      v.set(2050.0, 2684.68); // m/s
+      p.set(0.0, -42164000.0); // m
+      v.set(3100.0, 0.0); // m/s
       fragmentAmount = 3;
       setRadius(pixelsToMeters(10)); // px
       setMass(12246); // kg
