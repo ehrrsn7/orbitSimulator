@@ -353,6 +353,7 @@ public:
       // right solar array (radius 6px, 2 fragments)
       return parts;
    }
+   
 protected:
    class Center;
    class Right;
@@ -375,6 +376,7 @@ public:
 private:
    Position offset;
 };
+
 /**************************************************
 **************************************************/
 class CrewDragon::Left : public SatellitePart {
@@ -392,6 +394,7 @@ public:
 private:
    Position offset;
 };
+
 /**************************************************
 **************************************************/
 class CrewDragon::Right : public SatellitePart {
@@ -444,7 +447,7 @@ public:
       return parts;
    }
 
-private:
+protected:
    // parts
    class Body;
    class Array;
