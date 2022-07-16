@@ -14,6 +14,7 @@
 #define GPS_MASS 1630
 #define SPUTNIK_MASS 83.6
 #define HUBBLE_MASS 12246
+#define CREWDRAGON_MASS 12055
 
 // forward declaration prototypes
 class SatellitePart;
@@ -375,7 +376,7 @@ public:
       setVelocity(Velocity(-7900.0, 0.0)); // m/s
       fragmentAmount = 2;
       setRadius(pixelsToMeters(7)); // px
-      setMass(12055); // kg
+      setMass(CREWDRAGON_MASS); // kg
    }
    
    void display() const override {
@@ -394,13 +395,16 @@ protected:
 /**************************************************
  * NESTED CLASS
  * CrewDragon::Center
+ *
+ * "The center drawCrewDragonCenter() at 6 pixels
+ * radius and breaking into 4 fragments"
  **************************************************/
 class CrewDragon::Center : public SatellitePart {
 public:
    Center() {
       setRadius(pixelsToMeters(6));
       this->fragmentAmount = 4;
-      setMass(12055 / 3);
+      setMass(CREWDRAGON_MASS / 3);
    }
    
    void display() const override {
@@ -413,13 +417,18 @@ private:
 };
 
 /**************************************************
-**************************************************/
+ * NESTED CLASS
+ * CrewDragon::Left Solar Array
+ *
+ * "The left solar array drawCrewDragonLeft() at 6
+ * pixel radius and breaking into 2 fragments"
+ **************************************************/
 class CrewDragon::Left : public SatellitePart {
 public:
    Left() {
       setRadius(pixelsToMeters(6));
       this->fragmentAmount = 2;
-      setMass(12055 / 3);
+      setMass(CREWDRAGON_MASS / 3);
    }
    
    void display() const override {
@@ -432,13 +441,18 @@ private:
 };
 
 /**************************************************
-**************************************************/
+ * NESTED CLASS
+ * CrewDragon::Right Solar Array
+ *
+ * "The right solar array drawGPSLeft() at 6 pixel
+ * radius and breaking into 2 fragments"
+ **************************************************/
 class CrewDragon::Right : public SatellitePart {
 public:
    Right() {
       setRadius(pixelsToMeters(6));
       this->fragmentAmount = 2;
-      setMass(12055 / 3);
+      setMass(CREWDRAGON_MASS / 3);
    }
    
    void display() const override {
