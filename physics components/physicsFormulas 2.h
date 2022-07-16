@@ -5,10 +5,7 @@
 
 #pragma once
 
-#define FPS 30                // frames/s
-#define SECONDS_IN_DAY 86400  // s : 60s/min * 60min/hr * 24hr/d
-
-#include "vector.h" // for Vector/child classes 
+#include "vector.h"     // for ACCEL_DUE_TO_GRAVITY_EARTH and vector child classes
 
 /**************************************************
  * Prototypes
@@ -36,7 +33,6 @@ double rad(double angleDegrees);
 double distance(const Position& pos1, const Position& pos2);
 double distance(const MovingObject& obj1, const MovingObject& obj2);
 double computeDistance(const Position& pos1, const Position& pos2);
-bool hasCollided(MovingObject & obj1, MovingObject & obj2);
 
 /**********************************************************************
  * Time Functions
@@ -44,18 +40,11 @@ bool hasCollided(MovingObject & obj1, MovingObject & obj2);
 double timeDilation();
 double dilateTime(double dt);
 double timePerFrame();
-
-/**********************************************************************
- * Pixels to meters/reverse conversions
- **********************************************************************/
-double pixelsToMeters(double pixels);
-double metersToPixels(double meters);
  
 /**********************************************************************
  * Earth Functions
  **********************************************************************/
-double earthRotationSpeed();
-double earthRotationSpeed(double dt);
+double rotationSpeed();
 
 /**********************************************************************
 * Gravity Functions
@@ -66,7 +55,7 @@ double directionOfGravity(const Position& p1, const Position& p2);
 double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2);
 Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2);
 double calcGravity(double height);
-Acceleration calcGravityVector(const Position& p);
+Gravity calcGravityVector(const Position& p);
 
 /**********************************************************************
  * Motion

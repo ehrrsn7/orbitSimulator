@@ -1,0 +1,11 @@
+{
+   "files.associations": {
+      "*.csv": "csv",
+      "*.md": "markdown",
+      "*.html": "html",
+      "__split_buffer": "cpp",
+      "string": "cpp",
+      "vector": "cpp",
+      "limits": "cpp"
+   }
+}

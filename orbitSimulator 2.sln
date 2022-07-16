@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BC2D9236-3DB1-4FF3-8B22-6EFF9D5E4115}"
+	ProjectSection(SolutionItems) = preProject
+		main.cpp = main.cpp
+		simulator.h = simulator.h
+		physics components\acceleration.cpp = physics components\acceleration.cpp
+		physics components\force.cpp = physics components\force.cpp
+		physics components\gravity.cpp = physics components\gravity.cpp
+		physics components\physicsComponents.h = physics components\physicsComponents.h
+		physics components\physicsFormulas.cpp = physics components\physicsFormulas.cpp
+		physics components\position.cpp = physics components\position.cpp
+		physics components\position.h = physics components\position.h
+		physics components\vector.h = physics components\vector.h
+		physics components\velocity.cpp = physics components\velocity.cpp
+		simulator objects\earth.h = simulator objects\earth.h
+		simulator objects\geostationarySatellite.h = simulator objects\geostationarySatellite.h
+		simulator objects\movingObject.h = simulator objects\movingObject.h
+		simulator objects\star.h = simulator objects\star.h
+		test\test.cpp = test\test.cpp
+		test\test.h = test\test.h
+		test\testPosition.h = test\testPosition.h
+		ui\uiDraw.cpp = ui\uiDraw.cpp
+		ui\uiDraw.h = ui\uiDraw.h
+		ui\uiInteract.cpp = ui\uiInteract.cpp
+		ui\uiInteract.h = ui\uiInteract.h
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEB3354E-26E9-4E36-89F3-900D7B0CA15C}
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.StandardHeader = $1
+	EndGlobalSection
+EndGlobal

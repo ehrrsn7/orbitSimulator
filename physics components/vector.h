@@ -111,9 +111,9 @@ public:
    double getPixelsX() const { return getMetersX() / metersFromPixels; }
    double getPixelsY() const { return getMetersY() / metersFromPixels; }
    
-   double metersToPixels(double meters) const { return meters / metersFromPixels; }
-   double pixelsToMeters(double pixels) const { return pixels * metersFromPixels; }
-   
+   double metersToPixels(double meters) { return meters / Position::metersFromPixels; }
+   double pixelsToMeters(double pixels) { return pixels * Position::metersFromPixels; }
+
    void set(double x, double y) { Vector::set(x, y); }
    void set(const Position& p) { Vector::set(p.getX(), p.getY()); }
    void setMetersX(double xMeters) { setX(xMeters); }

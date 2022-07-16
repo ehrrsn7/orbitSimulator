@@ -47,3 +47,4 @@ Vector& Vector::operator+= (const Vector& rhs) {
    add(rhs.getX(), rhs.getY());
    return *this;
 }
+

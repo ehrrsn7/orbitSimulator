@@ -162,6 +162,18 @@ private:
    Satellite* createGPSObject(Position p, Velocity v);
    void createGPSObjects();
    Position randomPositionOnScreen() const;
+   
+   std::string getSatelliteName(const Satellite * s) {
+      if (typeid(*s) == typeid(SatellitePart))  return "SatellitePart";
+      if (typeid(*s) == typeid(Sputnik))        return "Sputnik";
+      if (typeid(*s) == typeid(GPS))            return "GPS";
+      if (typeid(*s) == typeid(Hubble))         return "Hubble";
+      if (typeid(*s) == typeid(CrewDragon))     return "CrewDragon";
+      if (typeid(*s) == typeid(Starlink))       return "Starlink";
+      if (typeid(*s) == typeid(Fragment))       return "Fragment";
+      else                                      return "unknown";
+   }
+
 };
 
 // helper function for callback(): if we want to restart our program in-game

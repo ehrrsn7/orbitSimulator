@@ -1,0 +1,31 @@
+﻿<Properties>
+  <Debugger.DebugSourceFolders />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x64" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="physics components/acceleration.cpp">
+    <Files>
+      <File FileName="main.cpp" Line="52" Column="2" />
+      <File FileName="physics components/acceleration.cpp" Line="1" Column="1" />
+      <File FileName="physics components/force.cpp" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="orbitSimulator" expanded="True">
+            <Node name="Solution Items" expanded="True">
+              <Node name="/Users/ehrrsn7/Documents/Code/CSE-231/orbitSimulator/physics components/position.cpp" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <AuthorInfo Name="James Helfrich" Email="" Copyright="" Company="" Trademark="" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
