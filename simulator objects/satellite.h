@@ -484,7 +484,7 @@ public:
       v.set(5800.0, 0.0); // m/s
       fragmentAmount = 2;
       setRadius(pixelsToMeters(6)); // px
-      setMass(260); // kg
+      setMass(STARLINK_MASS); // kg
    }
    
    void display() const override {
@@ -500,12 +500,19 @@ protected:
    class Array;
 };
 
+/**************************************************
+ * NESTED CLASS
+ * Starlink::Body
+ *
+ * "The body drawStarlinkBody() at 2 pixels radius
+ * and breaking into 3 fragments"
+ **************************************************/
 class Starlink::Body : public SatellitePart {
 public:
    Body() {
       setRadius(pixelsToMeters(2));
       this->fragmentAmount = 3;
-      setMass(260 / 3);
+      setMass(STARLINK_MASS / 2);
    }
    
    void display() const override {
@@ -517,12 +524,19 @@ private:
    Position offset;
 };
 
+/**************************************************
+ * NESTED CLASS
+ * Starlink::Right Solar Array
+ *
+ * "The right solar array drawStarlinkArray() at 4
+ * pixel radius and breaking into 3 fragments"
+ **************************************************/
 class Starlink::Array : public SatellitePart {
 public:
    Array() {
       setRadius(pixelsToMeters(4));
       this->fragmentAmount = 3;
-      setMass(260 / 3);
+      setMass(STARLINK_MASS / 2);
    }
    
    void display() const override {
