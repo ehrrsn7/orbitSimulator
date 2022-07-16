@@ -245,8 +245,80 @@ public:
       // right solar array (2 fragments)
       return parts;
    }
+protected:
+   class Computer;
+   class Telescope;
+   class Left;
+   class Right;
 };
-
+/**************************************************
+**************************************************/
+class Hubble::Computer : public SatellitePart {
+public:
+   Computer() {
+      setRadius(Position().pixelsToMeters(10));
+      setMass(12246 / 4);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleComputer(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
+/**************************************************
+**************************************************/
+class Hubble::Telescope : public SatellitePart {
+public:
+   Telescope() {
+      setRadius(Position().pixelsToMeters(10));
+      setMass(12246 / 4);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleTelescope(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
+/**************************************************
+**************************************************/
+class Hubble::Left : public SatellitePart {
+public:
+   Left() {
+      setRadius(Position().pixelsToMeters(10));
+      setMass(12246 / 4);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleLeft(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
+/**************************************************
+**************************************************/
+class Hubble::Right : public SatellitePart {
+public:
+   Right() {
+      setRadius(Position().pixelsToMeters(10));
+      setMass(12246 / 4);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleRight(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
 /**************************************************
  * SpaceX Crew Dragon
  *
@@ -282,7 +354,61 @@ public:
       // right solar array (radius 6px, 2 fragments)
       return parts;
    }
-
+protected:
+   class Center;
+   class Right;
+   class Left;
+};
+/**************************************************
+**************************************************/
+class CrewDragon::Center : public SatellitePart {
+public:
+   Center() {
+      setRadius(Position().pixelsToMeters(10));
+      setMass(12055 / 3);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleRight(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
+/**************************************************
+**************************************************/
+class CrewDragon::Left : public SatellitePart {
+public:
+   Left() {
+      setRadius(Position().pixelsToMeters(10));
+      setMass(12055 / 3);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleRight(p, offset, angle);
+   }
+      
+private:
+   Position offset;
+};
+/**************************************************
+**************************************************/
+class CrewDragon::Right : public SatellitePart {
+public:
+   Right() {
+      setRadius(Position().pixelsToMeters(10));
+      setMass(12055 / 3);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawHubbleRight(p, offset, angle);
+   }
+      
+private:
+   Position offset;
 };
 
 /**************************************************
@@ -318,8 +444,10 @@ public:
       // right solar array (radius 4px, 3 fragments)
       return parts;
    }
-
 };
+/**************************************************
+**************************************************/
+
 
 /**************************************************
  * Fragment
