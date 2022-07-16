@@ -37,32 +37,25 @@ std::vector<Satellite *> GPS::breakIntoParts() {
    // initialize
    Position pOffset;
    Velocity vOffset;
-   double idk = 5000; // offset in meters/second
 
    // When a GPS satellite comes into contact with another element in the simulation it breaks up into 3 pieces
-//   auto newman = getPosition().pixelsToMeters(4);
+   
    // These pieces are:
    
    // The center: drawGPSCenter() at 7 pixels radius
-   Satellite * centerPart = new GPSCenter;
-   pOffset.setPolar(pixelsToMeters(4), getAngle() + random(-2 * M_PI, 2 * M_PI));
-   vOffset.setPolar(idk, random(-2 * M_PI, 2 * M_PI));
-   centerPart->setPosition(getPosition() + pOffset);
-   centerPart->setVelocity(getVelocity() + vOffset);
+   Satellite * centerPart = new GPS::Center;
+   centerPart->addPosition(getPosition());
+   centerPart->addVelocity(getVelocity());
    
    // The left solar array drawGPSLeft() at 8 pixel radius
-   Satellite * leftPart = new GPSLeft;
-   pOffset.setPolar(getPosition().pixelsToMeters(4), getAngle() + random(-2 * M_PI, 2 * M_PI));
-   vOffset.setPolar(idk, random(-2 * M_PI, 2 * M_PI));
-   leftPart->setPosition(getPosition() + pOffset);
-   leftPart->setVelocity(getVelocity() + vOffset);
+   Satellite * leftPart = new GPS::Left;
+   leftPart->addPosition(getPosition());
+   leftPart->addVelocity(getVelocity());
 
    // The right solar array drawGPSLeft() at 8 pixel radius
-   Satellite * rightPart = new GPSRight;
-   pOffset.setPolar(getPosition().pixelsToMeters(4), getAngle() + random(-2 * M_PI, 2 * M_PI));
-   vOffset.setPolar(idk, random(-2 * M_PI, 2 * M_PI));
-   rightPart->setPosition(getPosition() + pOffset);
-   rightPart->setVelocity(getVelocity() + vOffset);
+   Satellite * rightPart = new GPS::Right;
+   rightPart->addPosition(getPosition());
+   rightPart->addVelocity(getVelocity());
 
    std::vector<Satellite *> parts;
    parts.push_back(centerPart);

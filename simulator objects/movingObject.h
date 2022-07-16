@@ -60,6 +60,7 @@ public:
    // adders
    void addAngle(double dAngle) { setAngle(getAngle() + dAngle); }
    void addPosition(Position dPosition) { setPosition(getPosition() + dPosition); }
+   void addVelocity(Velocity dVelocity) { setVelocity(getVelocity() + dVelocity); }
    
    // other
    void hit() { setAlive(false); }

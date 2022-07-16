@@ -54,6 +54,18 @@ protected:
 class SatellitePart : public Satellite {
    // fragmentAmount/mass will vary depending on what part it is/what satellite it came from
    // this will not return other satellite parts (inherit from parent)
+   
+public:
+   SatellitePart() {
+      // parts rotate wildly after a collision (on construction, in this case)
+      setDAngle(random(-2 * M_PI, 2 * M_PI)); // rad/s
+      
+      double positionOffset = pixelsToMeters(4);
+      double velocityOffset = random(5000, 9000);
+      
+      p.addPolar(positionOffset, random(-M_PI, M_PI));
+      v.addPolar(velocityOffset, random(-M_PI, M_PI));
+   }
 };
 
 /**************************************************
@@ -130,9 +142,9 @@ public:
    std::vector<Satellite *> breakIntoParts() override;
 
 protected:
-   class GPSCenter;
-   class GPSLeft;
-   class GPSRight;
+   class Center;
+   class Left;
+   class Right;
 };
 
 /**************************************************
@@ -141,9 +153,9 @@ protected:
  * from the GPS and have it act as its own component.
  * Class: GPS
  **************************************************/
-class GPS::GPSCenter : public SatellitePart {
+class GPS::Center : public SatellitePart {
 public:
-   GPSCenter() {
+   Center() {
       this->fragmentAmount = 3;
       setRadius(Position().pixelsToMeters(7)); // px
       setMass( 1630 / 3); // kg
@@ -153,20 +165,15 @@ public:
       MovingObject::display();
       drawGPSCenter(p, angle);
    }
-   
-   void setRotation(double rotation) { this->rotation = rotation; }
-   
-private:
-   double rotation;
 };
 
 /**************************************************
  * Nested Class: The Left Solar Array the GPS
  * Class: GPS
  **************************************************/
-class GPS::GPSLeft : public SatellitePart {
+class GPS::Left : public SatellitePart {
 public:
-   GPSLeft() {
+   Left() {
       this->fragmentAmount = 3;
       setRadius(Position().metersToPixels(8));
       setMass(1630 / 3); // kg
@@ -174,39 +181,31 @@ public:
    
    void display() const override {
       MovingObject::display();
-      drawGPSLeft(p, offset, rotation);
+      drawGPSLeft(p, offset, angle);
    }
-   
-   void setOffset(const Position& offset) { this->offset = offset; }
-   void setRotation(double rotation) { this->rotation = rotation; }
    
 private:
    Position offset;
-   double rotation;
 };
 
 /**************************************************
  * Nested Class: The Left Solar Array the GPS
  * Class: GPS
  **************************************************/
-class GPS::GPSRight : public SatellitePart {
+class GPS::Right : public SatellitePart {
 public:
-   GPSRight() {
+   Right() {
       setRadius(Position().pixelsToMeters(8));
       setMass(1630 / 3);
    }
    
    void display() const override {
       MovingObject::display();
-      drawGPSLeft(p, offset, rotation);
+      drawGPSLeft(p, offset, angle);
    }
-   
-   void setOffset(const Position& offset) { this->offset = offset; }
-   void setRotation(double rotation) { this->rotation = rotation; }
    
 private:
    Position offset;
-   double rotation;
 };
 
 /**************************************************
@@ -319,6 +318,42 @@ public:
       return parts;
    }
 
+private:
+   // parts
+   class Body;
+   class Array;
+};
+
+class Starlink::Body : public SatellitePart {
+public:
+   Body() {
+      setRadius(Position().pixelsToMeters(8));
+      setMass(260 / 3);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawStarlinkBody(p, offset, angle);
+   }
+   
+private:
+   Position offset;
+};
+
+class Starlink::Array : public SatellitePart {
+public:
+   Array() {
+      setRadius(Position().pixelsToMeters(8));
+      setMass(260 / 3);
+   }
+   
+   void display() const override {
+      MovingObject::display();
+      drawStarlinkBody(p, offset, angle);
+   }
+   
+private:
+   Position offset;
 };
 
 /**************************************************
