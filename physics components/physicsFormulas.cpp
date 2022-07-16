@@ -225,8 +225,6 @@ double directionOfGravity(const MovingObject & obj1, const MovingObject & obj2) 
  **************************************************/
 Gravity forceDueToGravity(const MovingObject& obj1, const MovingObject& obj2) {
    Gravity g;
-   //TODO: The distance of gravity should reflect of the surface of the earth,
-   // probably in pixels, " - (EARTH_RADIUS / 4) "
    g.setPolar(
       G * obj1.getMass() * obj2.getMass() / pow(distance(obj1, obj2), 2),
       directionOfGravity(obj1, obj2));
