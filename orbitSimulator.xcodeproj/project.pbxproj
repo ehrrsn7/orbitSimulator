@@ -69,7 +69,7 @@
 		14ABA89728626C2D00252E0C /* testVectorZeros.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testVectorZeros.cpp; sourceTree = "<group>"; };
 		14ABA89828626C2D00252E0C /* testVectorLower.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testVectorLower.cpp; sourceTree = "<group>"; };
 		14ABA89928626C2D00252E0C /* testVectorOther.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testVectorOther.cpp; sourceTree = "<group>"; };
-		14BAAA7C287CA11B0090E367 /* simulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = simulator.cpp; sourceTree = "<group>"; };
+		14BAAA7C287CA11B0090E367 /* simulator.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = simulator.cpp; sourceTree = "<group>"; tabWidth = 3; };
 		14C6D35B28773F1100C72405 /* movingObject.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = movingObject.cpp; sourceTree = "<group>"; };
 		14D1A6DC2847B21E0044DB45 /* earth.h */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = earth.h; sourceTree = "<group>"; tabWidth = 3; };
 		14D1A6DD2847B4240044DB45 /* physicsFormulas.cpp */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.cpp.cpp; path = physicsFormulas.cpp; sourceTree = "<group>"; tabWidth = 3; };

@@ -45,7 +45,7 @@ std::vector<Satellite *> GPS::breakIntoParts() {
    
    // The center: drawGPSCenter() at 7 pixels radius
    Satellite * centerPart = new GPSCenter;
-   pOffset.setPolar(Position().pixelsToMeters(4), getAngle() + random(-2 * M_PI, 2 * M_PI));
+   pOffset.setPolar(pixelsToMeters(4), getAngle() + random(-2 * M_PI, 2 * M_PI));
    vOffset.setPolar(idk, random(-2 * M_PI, 2 * M_PI));
    centerPart->setPosition(getPosition() + pOffset);
    centerPart->setVelocity(getVelocity() + vOffset);

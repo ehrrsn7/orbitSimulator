@@ -351,7 +351,7 @@ public:
       // fragments and parts are placed 4 pixels from their point of
       //creation -- in the direction of travel -- so they don't collide
       // into each other
-      p.setPolar(Position().pixelsToMeters(4), angle);
+      p.addPolar(Position().pixelsToMeters(4), angle);
    }
    
    void display() const override {

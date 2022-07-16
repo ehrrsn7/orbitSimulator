@@ -69,14 +69,16 @@ void Simulator::handleCollision(Earth, Projectile & projectile) {
 void Simulator::handleCollision(Earth, Satellite * satellite) {
    if (!earth.isAlive() || !satellite->isAlive()) return;
    if (!hasCollided(earth, *satellite)) return;
-   std::cout << "handling collision between earth and satellite\n";
+   std::cout << "handling collision between earth and satellite ("
+             << getSatelliteName(satellite) << ")\n";
    satellite->hit();
 }
 
 void Simulator::handleCollision(SpaceShip, Satellite* satellite) {
    if (!ship.isAlive() || !satellite->isAlive()) return;
    if (!hasCollided(ship, *satellite)) return;
-   std::cout << "handling collision between ship and satellite\n";
+   std::cout << "handling collision between ship and satellite ("
+             << getSatelliteName(satellite) << ")\n";
 
    // set ship/satellite instances alive to false
    ship.hit();
@@ -102,7 +104,8 @@ void Simulator::handleCollision(SpaceShip, Satellite* satellite) {
 void Simulator::handleCollision(Projectile & projectile, Satellite * satellite) {
    if (!projectile.isAlive() || !satellite->isAlive()) return;
    if (!hasCollided(projectile, *satellite)) return;
-   std::cout << "handling collision between projectile and satellite\n";
+   std::cout << "handling collision between projectile and satellite ("
+             << getSatelliteName(satellite) << ")\n";
    
    projectile.hit();
    satellite->hit();

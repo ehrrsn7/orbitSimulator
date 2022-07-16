@@ -101,6 +101,38 @@ double dilateTime(double dt) { return timeDilation() * dt; }
  *    timeDilation - "
  **************************************************/
 double timePerFrame() {return timeDilation() / FPS; }
+
+
+/**********************************************************************
+ * Pixels to meters/reverse conversions
+ **********************************************************************/
+/**************************************************
+ * PIXELS TO METERS
+ *
+ * takes parameter pixels and converts it to meters
+ * according to conversion constant (static double
+ * defined in Position class)
+ *
+ * param - pixels : double
+ * return - double
+ **************************************************/
+double pixelsToMeters(double pixels) {
+  return Position().pixelsToMeters(pixels);
+}
+
+/**************************************************
+ * METERS TO PIXELS
+ *
+ * takes parameter pixels and converts it to meters
+ * according to conversion constant (static double
+ * defined in Position class)
+ *
+ * param - meters : double
+ * return - double
+ **************************************************/
+double metersToPixels(double meters) {
+  return Position().metersToPixels(meters);
+}
  
 /**********************************************************************
  * Earth Functions

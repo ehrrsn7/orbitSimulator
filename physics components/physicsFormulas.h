@@ -44,6 +44,12 @@ bool hasCollided(MovingObject & obj1, MovingObject & obj2);
 double timeDilation();
 double dilateTime(double dt);
 double timePerFrame();
+
+/**********************************************************************
+ * Pixels to meters/reverse conversions
+ **********************************************************************/
+double pixelsToMeters(double pixels);
+double metersToPixels(double meters);
  
 /**********************************************************************
  * Earth Functions
