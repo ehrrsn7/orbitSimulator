@@ -15,6 +15,7 @@
 #define SPUTNIK_MASS 83.6
 #define HUBBLE_MASS 12246
 #define CREWDRAGON_MASS 12055
+#define STARLINK_MASS 260
 
 // forward declaration prototypes
 class SatellitePart;
