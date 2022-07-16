@@ -32,7 +32,7 @@ public:
    
    // different satellites break into parts differently, hence the virtual keyword
    virtual std::vector<Satellite *> breakIntoParts() {
-      return std::vector<Satellite *>(); // default: empty vector
+      return std::vector<Satellite *> ();// default: empty vector
    }
    
 protected:
@@ -362,7 +362,9 @@ public:
    void update(const Interface * pUI) override {
       MovingObject::update(pUI);
       if (expirationTime > 0) expirationTime -= pUI->getDeltaTime();
-      else setAlive(false);
+      else{
+         std::cout << "frag died" << std::endl;
+         setAlive(false);}
    }
    
 private:
