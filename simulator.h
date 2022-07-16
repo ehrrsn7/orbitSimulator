@@ -60,8 +60,8 @@ public:
       
       /// Broken Satellite Pieces (part of satellites[]) -- none at construction
       /// Fragments (part of satellites[]) -- none at construction
-      Fragment * frag = new Fragment(starlink->getPosition(), Velocity(), 0.0);
-      satellites.push_back(frag);
+//      Fragment * frag = new Fragment(Position(10000, 10000), Velocity(0,0), 0.0);
+//      satellites.push_back(frag);
       
       // projectiles[] -- none at construction
    }
