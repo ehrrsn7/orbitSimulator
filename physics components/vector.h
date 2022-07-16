@@ -187,10 +187,8 @@ public:
    }
    
    // operators
-   Velocity operator+ (const Velocity& rhs) { // rhs : Δt
-      Velocity newV = *this;
-      newV.add(rhs);
-      return newV;
+   Velocity operator+ (const Velocity& rhs) const { // rhs : Δt
+      return Velocity(x + rhs.x, y + rhs.y);
    }
    
    Velocity& operator+= (const Velocity& rhs) { // rhs : Δt
