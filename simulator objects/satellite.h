@@ -11,6 +11,8 @@
 #include "uiInteract.h" // for user Ship Interface methods
 #include <vector>       // i wonder what it could be
 
+#define GPS_MASS 1630
+
 // forward declaration prototypes
 class SatellitePart;
 class Fragment;
@@ -86,7 +88,7 @@ public:
       p.set(-36515095.13, 21082000.0); // m
       v.set(2050.0, 2684.68); // m/s
       fragmentAmount = 4;
-      setRadius(Position().pixelsToMeters(4)); // px
+      setRadius(pixelsToMeters(4)); // px
       setMass(83.6); // kg
    }
 
@@ -129,9 +131,9 @@ public:
 class GPS : public Satellite {
 public:
    GPS() {
-      fragmentAmount = 2;
-      setRadius(Position().pixelsToMeters(12)); // px
-      setMass(1630); // kg
+      setRadius(pixelsToMeters(12)); // px
+      this->fragmentAmount = 2;
+      setMass(GPS_MASS); // kg
    }
    
    void display() const override {
@@ -148,17 +150,22 @@ protected:
 };
 
 /**************************************************
- * Nested Class: The center part of the GPS
+ * NESTED CLASS
+ * GPS::Center Solar Array
+ *
  * After the GPS breaks apart, we need to separate it
  * from the GPS and have it act as its own component.
- * Class: GPS
+ *
+ * "The center: drawGPSCenter() at 7 pixels radius"
+ * "Each individual piece will then break into 3
+ * fragments if they come into contact with something."
  **************************************************/
 class GPS::Center : public SatellitePart {
 public:
    Center() {
+      setRadius(pixelsToMeters(7)); // px
       this->fragmentAmount = 3;
-      setRadius(Position().pixelsToMeters(7)); // px
-      setMass( 1630 / 3); // kg
+      setMass(GPS_MASS / 3); // kg
    }
    
    void display() const override {
@@ -168,15 +175,19 @@ public:
 };
 
 /**************************************************
- * Nested Class: The Left Solar Array the GPS
- * Class: GPS
+ * NESTED CLASS
+ * GPS::Left Solar Array
+ *
+ * "The left solar array drawGPSLeft() at 8 pixel radius"
+ * "Each individual piece will then break into 3
+ * fragments if they come into contact with something.
  **************************************************/
 class GPS::Left : public SatellitePart {
 public:
    Left() {
-      this->fragmentAmount = 3;
       setRadius(Position().metersToPixels(8));
-      setMass(1630 / 3); // kg
+      this->fragmentAmount = 3;
+      setMass(GPS_MASS / 3); // kg
    }
    
    void display() const override {
@@ -189,14 +200,19 @@ private:
 };
 
 /**************************************************
- * Nested Class: The Left Solar Array the GPS
- * Class: GPS
+ * NESTED CLASS
+ * GPS::Right Solar Array
+ *
+ * "The right solar array drawGPSLeft() at 8 pixel radius"
+ * "Each individual piece will then break into 3
+ * fragments if they come into contact with something."
  **************************************************/
 class GPS::Right : public SatellitePart {
 public:
    Right() {
-      setRadius(Position().pixelsToMeters(8));
-      setMass(1630 / 3);
+      setRadius(pixelsToMeters(8));
+      this->fragmentAmount = 3;
+      setMass(GPS_MASS / 3); // kg
    }
    
    void display() const override {
@@ -227,7 +243,7 @@ public:
       p.set(-36515095.13, 21082000.0); // m
       v.set(2050.0, 2684.68); // m/s
       fragmentAmount = 3;
-      setRadius(Position().pixelsToMeters(10)); // px
+      setRadius(pixelsToMeters(10)); // px
       setMass(12246); // kg
    }
 
@@ -250,12 +266,18 @@ protected:
    class Left;
    class Right;
 };
+
 /**************************************************
-**************************************************/
+ * NESTED CLASS
+ * Hubble::Computer
+ * 2 fragments
+ *
+ **************************************************/
 class Hubble::Computer : public SatellitePart {
 public:
    Computer() {
-      setRadius(Position().pixelsToMeters(10));
+      setRadius(pixelsToMeters(10));
+      fragmentAmount = 2;
       setMass(12246 / 4);
    }
    
@@ -267,12 +289,15 @@ public:
 private:
    Position offset;
 };
+
 /**************************************************
-**************************************************/
+ * NESTED CLASS
+ * Hubble::Telescope
+ **************************************************/
 class Hubble::Telescope : public SatellitePart {
 public:
    Telescope() {
-      setRadius(Position().pixelsToMeters(10));
+      setRadius(pixelsToMeters(10));
       setMass(12246 / 4);
    }
    
@@ -284,12 +309,15 @@ public:
 private:
    Position offset;
 };
+
 /**************************************************
-**************************************************/
+ * NESTED CLASS
+ * Hubble::Left Solar Array
+ **************************************************/
 class Hubble::Left : public SatellitePart {
 public:
    Left() {
-      setRadius(Position().pixelsToMeters(10));
+      setRadius(pixelsToMeters(10));
       setMass(12246 / 4);
    }
    
@@ -301,12 +329,15 @@ public:
 private:
    Position offset;
 };
+
 /**************************************************
-**************************************************/
+ * NESTED CLASS
+ * Hubble::Right Solar Array
+ **************************************************/
 class Hubble::Right : public SatellitePart {
 public:
    Right() {
-      setRadius(Position().pixelsToMeters(10));
+      setRadius(pixelsToMeters(10));
       setMass(12246 / 4);
    }
    
@@ -318,6 +349,7 @@ public:
 private:
    Position offset;
 };
+
 /**************************************************
  * SpaceX Crew Dragon
  *
@@ -337,7 +369,7 @@ public:
       setPosition(Position(0.0, 8000000.0)); // m
       setVelocity(Velocity(-7900.0, 0.0)); // m/s
       fragmentAmount = 2;
-      setRadius(Position().pixelsToMeters(7)); // px
+      setRadius(pixelsToMeters(7)); // px
       setMass(12055); // kg
    }
    
@@ -359,12 +391,15 @@ protected:
    class Right;
    class Left;
 };
+
 /**************************************************
-**************************************************/
+ * NESTED CLASS
+ * CrewDragon::Center
+ **************************************************/
 class CrewDragon::Center : public SatellitePart {
 public:
    Center() {
-      setRadius(Position().pixelsToMeters(10));
+      setRadius(pixelsToMeters(10));
       setMass(12055 / 3);
    }
    
@@ -382,7 +417,7 @@ private:
 class CrewDragon::Left : public SatellitePart {
 public:
    Left() {
-      setRadius(Position().pixelsToMeters(10));
+      setRadius(pixelsToMeters(10));
       setMass(12055 / 3);
    }
    
@@ -400,7 +435,7 @@ private:
 class CrewDragon::Right : public SatellitePart {
 public:
    Right() {
-      setRadius(Position().pixelsToMeters(10));
+      setRadius(pixelsToMeters(10));
       setMass(12055 / 3);
    }
    
@@ -431,7 +466,7 @@ public:
       p.set(0.0, -13020000.0); // m
       v.set(5800.0, 0.0); // m/s
       fragmentAmount = 2;
-      setRadius(Position().pixelsToMeters(6)); // px
+      setRadius(pixelsToMeters(6)); // px
       setMass(260); // kg
    }
    
@@ -456,7 +491,7 @@ protected:
 class Starlink::Body : public SatellitePart {
 public:
    Body() {
-      setRadius(Position().pixelsToMeters(8));
+      setRadius(pixelsToMeters(8));
       setMass(260 / 3);
    }
    
@@ -472,7 +507,7 @@ private:
 class Starlink::Array : public SatellitePart {
 public:
    Array() {
-      setRadius(Position().pixelsToMeters(8));
+      setRadius(pixelsToMeters(8));
       setMass(260 / 3);
    }
    
@@ -503,7 +538,7 @@ public:
    Fragment(Position parentP, Velocity parentV, double collisionAngle) {
       setPosition(parentP);
       setVelocity(parentV);
-      setRadius(Position().pixelsToMeters(2)); // px
+      setRadius(pixelsToMeters(2)); // px
       setAngle(collisionAngle + random(-0.5 * M_PI, 0.5 * M_PI)); // rad
       setDAngle(random(-2 * M_PI, 2 * M_PI)); // rad/s
       setMass(5); // kg
@@ -518,7 +553,7 @@ public:
       // fragments and parts are placed 4 pixels from their point of
       //creation -- in the direction of travel -- so they don't collide
       // into each other
-      p.addPolar(Position().pixelsToMeters(4), angle);
+      p.addPolar(pixelsToMeters(4), angle);
    }
    
    void display() const override {
