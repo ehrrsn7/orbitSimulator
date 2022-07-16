@@ -136,7 +136,7 @@ public:
    double getZoom() const { return metersFromPixels; }
    void setZoom(double metersFromPixels);
    
-   Position operator+ (const Position & rhs);
+   Position operator+ (const Position & rhs) const;
    Position& operator+= (const Position & rhs);
    
    Position operator- (const Position & rhs); // subtraction

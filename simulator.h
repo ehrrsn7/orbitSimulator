@@ -164,7 +164,7 @@ private:
    Position randomPositionOnScreen() const;
    
    std::string getSatelliteName(const Satellite * s) {
-      if (typeid(*s) == typeid(SatellitePart))  return "SatellitePart";
+      if (typeid(*s) == typeid(SatellitePart))  return "SatellitePart"; // change to SatellitePart AND children classes
       if (typeid(*s) == typeid(Sputnik))        return "Sputnik";
       if (typeid(*s) == typeid(GPS))            return "GPS";
       if (typeid(*s) == typeid(Hubble))         return "Hubble";

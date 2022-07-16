@@ -59,6 +59,7 @@ public:
    
    // adders
    void addAngle(double dAngle) { setAngle(getAngle() + dAngle); }
+   void addPosition(Position dPosition) { setPosition(getPosition() + dPosition); }
    
    // other
    void hit() { setAlive(false); }

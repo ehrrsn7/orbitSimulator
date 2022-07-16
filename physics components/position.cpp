@@ -63,10 +63,8 @@ Position & Position::operator = (const Position & rhs) {
  * class: Position
  * Adds another point to this* and returns it as a new Position
  **************************************************/
-Position Position::operator+ (const Position & rhs) {
-   Position newP;
-   newP.add(rhs);
-   return newP;
+Position Position::operator+ (const Position & rhs) const {
+   return Position(x + rhs.x, y + rhs.y);
 }
 
 /**************************************************
