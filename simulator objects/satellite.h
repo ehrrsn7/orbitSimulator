@@ -261,29 +261,6 @@ protected:
 
 /**************************************************
  * NESTED CLASS
- * Hubble::Computer
- * 2 fragments
- *
- **************************************************/
-class Hubble::Computer : public SatellitePart {
-public:
-   Computer() {
-      setRadius(pixelsToMeters(7));
-      this->fragmentAmount = 2;
-      setMass(12246 / 4);
-   }
-   
-   void display() const override {
-      MovingObject::display();
-      drawHubbleComputer(p, offset, angle);
-   }
-      
-private:
-   Position offset;
-};
-
-/**************************************************
- * NESTED CLASS
  * Hubble::Telescope
  *
  * "The telescope drawHubbleTelescope() at 10 pixels
@@ -316,9 +293,9 @@ private:
 class Hubble::Computer : public SatellitePart {
 public:
    Computer() {
-      setRadius(pixelsToMeters(8));
+      setRadius(pixelsToMeters(7));
       this->fragmentAmount = 2;
-      setMass(12246 / 4);
+      setMass(HUBBLE_MASS / 4);
    }
    
    void display() const override {
@@ -342,7 +319,7 @@ public:
    Left() {
       setRadius(pixelsToMeters(8));
       this->fragmentAmount = 2;
-      setMass(12246 / 4);
+      setMass(HUBBLE_MASS / 4);
    }
    
    void display() const override {
@@ -366,7 +343,7 @@ public:
    Right() {
       setRadius(pixelsToMeters(8));
       this->fragmentAmount = 2;
-      setMass(12246 / 4);
+      setMass(HUBBLE_MASS / 4);
    }
    
    void display() const override {
