@@ -110,7 +110,7 @@ public:
 
       // set to ship position + offset
       Position posOffset;
-      posOffset.addPolar(Position().metersToPixels(19), getAngle());
+      posOffset.addPolar(pixelsToMeters(19), getAngle());
       posOffset += this->getPosition();
       projectile.setPosition(posOffset);
 
