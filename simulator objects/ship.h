@@ -111,14 +111,12 @@ public:
       // set to ship position + offset
       Position posOffset;
       posOffset.addPolar(pixelsToMeters(19), getAngle());
-      posOffset += this->getPosition();
-      projectile.setPosition(posOffset);
+      projectile.setPosition(this->getPosition() + posOffset);
 
       // set to ship velocity + projectile speed
       Velocity velOffset;
       velOffset.addPolar(9000 /* m/s */, getAngle());
-      velOffset += this->getVelocity();
-      projectile.setVelocity(velOffset);
+      projectile.setVelocity(velOffset + this->getVelocity());
       
       return projectile;
    }
