@@ -23,12 +23,8 @@ void Simulator::applyGravity(const Interface * pUI) {
 
 
 void Simulator::handleCollisions() {
-   // TODO: for some reason, only one thing dies on impact.
-   //    for example, satellites die but bullets don't,
-   //    also the ship dies but the satellite doesn't
-      
    // ship and satellites
-   for (auto satellite : satellites)
+   for (Satellite * satellite : satellites)
       handleCollision(ship, satellite);
    
    // ship and earth
@@ -40,15 +36,15 @@ void Simulator::handleCollisions() {
       ship.hit();
    
    // everything to the earth
-   for (auto satellite  : satellites)
+   for (Satellite * satellite  : satellites)
       handleCollision(earth, satellite);
    
-   for (auto projectile : projectiles)
+   for (Projectile & projectile : projectiles)
       handleCollision(earth, projectile);
    
    // bullets and moving objects
-   for (auto projectile : projectiles)
-      for (auto satellite : satellites)
+   for (Projectile & projectile : projectiles)
+      for (Satellite * satellite : satellites)
          handleCollision(projectile, satellite);
 }
 
